@@ -1,0 +1,10 @@
+.register {
+  font-size: var(--small-font-size);
+  text-align: center;
+  color: var(--white-color);
+  font-weight: var(--font-medium);
+}
+
+.register:hover span {
+  text-decoration: underline;
+}
