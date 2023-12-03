@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 
-function Navbar() {
+function Navbar({ children }) {
   return (
     <div className={styles.navbar}>
       <div className={styles.logocontainer}>
@@ -9,6 +9,7 @@ function Navbar() {
           src="./src/components/Navbar/SOUQ 3QAZ.png"
         />
       </div>
+      {children}
 
       <ul className={styles.contents}>
         <li>HOME</li>
