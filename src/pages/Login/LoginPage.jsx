@@ -1,6 +1,11 @@
+import Login from "../../components/Login/Login";
 import styles from "./LoginPage.module.css";
-function Login() {
-  return <div className={styles.login}></div>;
+function LoginPage() {
+  return (
+    <div className={styles.loginpage}>
+      <Login />
+    </div>
+  );
 }
 
-export default Login;
+export default LoginPage;

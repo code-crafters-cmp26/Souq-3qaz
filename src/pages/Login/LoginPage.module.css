@@ -1,5 +1,6 @@
-.login {
+.loginpage {
   margin: 0;
+  padding-top: 100px;
   height: 100vh;
   background-image: url("camel.avif");
   background-size: cover;
