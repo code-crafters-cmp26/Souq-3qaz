@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>{/* <Route path="/" element={} /> */}</Routes>
-    </BrowserRouter>
+    <div>
+      <Navbar />
+    </div>
   );
 }
 

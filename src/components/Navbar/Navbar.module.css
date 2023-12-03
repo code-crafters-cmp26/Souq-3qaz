@@ -1,0 +1,33 @@
+.navbar {
+  height: 80px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c1c18;
+}
+.logocontainer {
+  margin-left: 50px;
+}
+.logo {
+  width: 200px;
+}
+.contents {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  justify-content: space-around;
+  margin-right: 30px;
+}
+.contents li {
+  color: #af8709;
+  transition: 0.5s;
+  font-size: 1.2em;
+}
+.contents li:hover {
+  color: #e0b21a;
+  text-shadow: 0px 0px 3px #efc53b;
+  cursor: pointer;
+}
