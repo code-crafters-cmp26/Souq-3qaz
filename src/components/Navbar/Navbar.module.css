@@ -1,0 +1,41 @@
+.navbar {
+  height: 60px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+.logocontainer {
+  margin-left: 50px;
+}
+.logo {
+  width: 230px;
+}
+.contents {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 40%;
+  justify-content: space-around;
+  margin-right: 30px;
+}
+.contents li {
+  color: #8f7009;
+  transition: 0.7s;
+  font-size: 1.3em;
+}
+.contents li:hover {
+  color: #e0b21a;
+  text-shadow: 0px 0px 4px #efc53b;
+  cursor: pointer;
+}
+.active {
+  color: #e0b21a;
+  text-shadow: 0px 0px 4px #efc53b;
+  cursor: pointer;
+}
