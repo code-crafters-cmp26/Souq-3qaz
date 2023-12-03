@@ -1,0 +1,7 @@
+.login {
+  margin: 0;
+  height: 100vh;
+  background-image: url("camel.avif");
+  background-size: cover;
+  background-position: center;
+}
