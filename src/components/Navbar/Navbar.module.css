@@ -5,13 +5,15 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(74, 51, 8);
+  width: 100%;
+  position: fixed;
+  top: 0;
 }
 .logocontainer {
   margin-left: 50px;
 }
 .logo {
-  width: 200px;
+  width: 230px;
 }
 .contents {
   list-style: none;
@@ -23,9 +25,9 @@
   margin-right: 30px;
 }
 .contents li {
-  color: #af8709;
+  color: #8f7009;
   transition: 0.7s;
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 .contents li:hover {
   color: #e0b21a;
