@@ -1,8 +1,9 @@
 import styles from "./Login.module.css";
-
+import Input from "../input/Input";
 function Login() {
   return (
     <form action="" className={styles.login__form}>
+      <Input text="Email" />
       <h1 className={styles.login__title}>Login</h1>
 
       <div className={styles.login__content}>
@@ -52,7 +53,7 @@ function Login() {
       </button>
 
       <p className={styles.login__register}>
-        Dont have an account? <a href="#">Register</a>
+        Dont have an account? <a>Register</a>
       </p>
     </form>
   );
