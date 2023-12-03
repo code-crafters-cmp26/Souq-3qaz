@@ -1,0 +1,44 @@
+.only__input {
+  width: 100%;
+  padding-block: 0.8rem;
+  background: none;
+  color: var(--white-color);
+  position: relative;
+  z-index: 1;
+}
+.box__input {
+  position: relative;
+}
+.only__label {
+  position: absolute;
+  left: 0;
+  top: 13px;
+  /* to make it appear like it is inside the input */
+  font-weight: var(--font-medium);
+  transition: top 0.3s, font-size 0.3s;
+  /* it has the transtion now but it is not connected to the focus 
+  and it will be connected above */
+}
+
+.outer__box {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  /* to make it one col that has the icon and the text*/
+  align-items: center;
+  column-gap: 0.75rem;
+  border-bottom: 2px solid var(--white-color);
+}
+
+/* when focus this input make the login label above */
+/* Input focus move up label */
+.only__input:focus + .only__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+/* this is to make the label above when there is text in the label  */
+/* Input focus sticky top label */
+.only__input:not(:placeholder-shown).only__input:not(:focus) + .only__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}

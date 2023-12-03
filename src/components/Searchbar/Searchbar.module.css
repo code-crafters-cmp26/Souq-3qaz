@@ -11,6 +11,9 @@
   border-color: #8f7009;
   border-width: 1px;
 }
+.searchbar :focus {
+  border-color: #8f7009;
+}
 .searchbar::placeholder {
   color: #8f7009;
 }
