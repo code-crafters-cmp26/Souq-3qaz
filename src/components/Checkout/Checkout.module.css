@@ -1,6 +1,7 @@
 .checkout {
-  position: relative;
+  position: fixed;
   top: 200px;
+  right: 75px;
   background-color: hsla(0, 0%, 10%, 0.1);
   border: 2px solid var(--white-color);
   margin-inline: 1.5rem;
@@ -12,5 +13,6 @@
 }
 
 .checkout button {
-  background-color: #1751d0;
+  background-color: #ce8240;
+  color: white;
 }
