@@ -4,3 +4,8 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.all_products {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
