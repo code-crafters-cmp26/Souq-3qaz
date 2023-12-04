@@ -5,8 +5,12 @@ function ProductCard() {
     <div className={styles.product_card}>
       <div className={styles.product_img}>
         <img src="./src/components/ProductCard/Iphone.jpeg" alt="Iphone" />
-        <Button type="button" text="🤍" />
-        <Button type="button" text="💗" />
+        <div className={styles.favicon}>
+          <Button type="button" text="🤍" />
+        </div>
+        <div className={styles.carticon}>
+          <Button type="button" text="🛒" />
+        </div>
       </div>
       <div className={styles.product_description}>
         <p>4.5 🌟🌟🌟🌟⭐</p>
@@ -15,7 +19,7 @@ function ProductCard() {
         <p>
           EGP <span>25,700</span>
         </p>
-        <p>⬇ Lowest price in 7 days</p>
+        <label>⬇ Lowest price in 7 days</label>
       </div>
     </div>
   );
