@@ -1,6 +1,7 @@
 .checkout {
+  color: black;
   position: fixed;
-  top: 200px;
+  top: 100px;
   right: 75px;
   background-color: hsla(0, 0%, 10%, 0.1);
   border: 2px solid var(--white-color);
@@ -8,11 +9,19 @@
   backdrop-filter: blur(8px);
   margin: auto;
   width: 432px;
-  padding: 4rem 3rem 0.5rem;
+  padding: 2.5rem 3rem 0.5rem;
   border-radius: 1.5rem;
 }
-
+.checkout h2 {
+  margin-bottom: 10px;
+  text-align: center;
+}
 .checkout button {
   background-color: #ce8240;
   color: white;
+}
+
+.checkout input {
+  border: none;
+  outline: none;
 }
