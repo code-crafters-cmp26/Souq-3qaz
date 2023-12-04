@@ -1,0 +1,36 @@
+.categories_bar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 20px;
+  color: var(--black-color);
+  background-color: var(--white-color);
+}
+
+.categories_bar span {
+  margin-left: 60px;
+}
+
+.by_price_input {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.by_price_input button {
+  border: 1px solid rgb(208, 207, 207);
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  padding: 0;
+}
+
+.by_price_input input {
+  width: 50px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  border-width: 1px;
+  margin-right: 2px;
+}
