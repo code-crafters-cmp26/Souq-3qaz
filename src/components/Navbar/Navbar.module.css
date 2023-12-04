@@ -9,6 +9,7 @@
   width: 100%;
   position: fixed;
   top: 0;
+  background-color: #2c1c18;
 }
 .logocontainer {
   margin-left: 50px;
@@ -26,13 +27,12 @@
   gap: 10px;
 }
 .contents li {
-  color: #8f7009;
+  color: #e0b21a;
   transition: 0.7s;
   font-size: 1.3em;
 }
 .contents li:hover {
-  color: #e0b21a;
-  text-shadow: 0px 0px 4px #efc53b;
+  text-shadow: 0px 0px 3px #ebd17c;
   cursor: pointer;
 }
 .active {
