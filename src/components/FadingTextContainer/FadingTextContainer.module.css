@@ -1,0 +1,45 @@
+.fading_text_container{
+    background-image: linear-gradient(135deg, #e5e7cc9a, #e5e7cc00 ) ;
+    margin-bottom:200px;
+    padding: 20px;
+    width : 60%;
+    animation: fadeIn 1s ease-in-out;
+    color: rgb(186, 194, 27);}
+.fading_text_container p{
+    font-size: 1.5em;
+    font-weight: 60;
+    margin-bottom: 10px;
+}
+.fading_text_container h1{
+    font-size: 3.5em;
+    font-weight: 600;
+}
+/* make odd children title on the right */
+.fading_text_container:nth-child(even) h1{
+    text-align: right;
+}
+.fading_text_container:nth-child(even) p{
+    text-align: right;
+}
+.fading_text_container:nth-child(even) {
+    /* align the container to the right */
+    margin-left: auto;
+    background-image: linear-gradient(135deg, #e5e7cc00, #e5e7cc9a ) ;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.fadeIn.is-visible {
+    opacity: 1;
+  }
+    .fadeIn.is-hidden {
+        opacity: 0;
+    }
