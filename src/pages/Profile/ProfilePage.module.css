@@ -1,0 +1,65 @@
+.profile_page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+ }
+.profile_page__left_panel {
+  /*stick this panel to the left */
+  position: fixed;
+  left: 0;
+  top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+  /* give it a nice border with a shadow on right side only*/
+  border-right: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  /* make it scrollable */
+  overflow-y: auto;
+  /* background-image: linear-gradient(90deg, #f0c600, #f0c600 10%, #e0a800 20%, #d08c00 30%, #c07000 40%, #b05400 50%, #a03800 60%, #902c00 70%, #802000 80%, #701400 90%, #600800 100%); */
+  background-color: #fff;
+  color: black;
+}
+
+
+.profile_page__left_panel__user_info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  color: #ce8240;
+  font-size: 1.5rem;
+}
+.profile_page__left_panel__user_info h3{
+  text-align: center;
+  margin-bottom: 10px;
+}
+.profile_page__left_panel__user_info h6{
+  text-align: left;
+  font-size: .85rem;
+  margin-bottom: 5px;
+}
+.profile_page__left_panel__profile_pic{
+  margin-top: 50px;
+  margin-bottom: 10px;
+  width: 40%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile_page__cards_grid{
+  margin-top: 60px;
+  width: 60%;
+  margin-right: 20%;
+  margin-left: 30%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5%;
+  padding: 20px;
+  margin-bottom: 20px;
+}

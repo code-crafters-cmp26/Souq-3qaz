@@ -35,4 +35,5 @@ body {
   color: var(--white-color);
   font-size: var(--normal-font-size);
   font-family: var(--body-font);
+  background-color: #f7f7f7;
 }
