@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ProfilePage.module.css";
 import DrawerItem from "../../components/DrawerItem/DrawerItem";
+import Card from "../../components/Card/Card";
 
 function ProfilePage() {
   return (
@@ -18,48 +19,15 @@ function ProfilePage() {
         <DrawerItem title="Logout" />
       </div>
       <div className={styles.profile_page__cards_grid}>
-        <div className={styles.profile_page__cards_grid__card}>
-          <img src="./src/pages/Profile/wish.svg" alt="wishlist" />
-          <div className={styles.profile_page__cards_grid__card__info}>
-            <h3>Whishlist</h3>
-            <p>Here are the items you've saved for later</p>
-          </div>
-        </div>
-        <div className={styles.profile_page__cards_grid__card}>
-          <img src="./src/pages/Profile/orders.svg" alt="orders" />
-          <div className={styles.profile_page__cards_grid__card__info}>
-            <h3>Orders</h3>
-            <p>Here are the items you've ordered</p>
-          </div>
-        </div>
-        <div className={styles.profile_page__cards_grid__card}>
-          <img src="./src/pages/Profile/settings.svg" alt="settings" />
-          <div className={styles.profile_page__cards_grid__card__info}>
-            <h3>Settings</h3>
-            <p>Here you can change your settings, username, ..etc</p>
-          </div>
-        </div>
-        <div className={styles.profile_page__cards_grid__card}>
-          <img src="./src/pages/Profile/transactions.svg" alt="Transactions" />
-          <div className={styles.profile_page__cards_grid__card__info}>
-            <h3>Transactions History</h3>
-            <p>Here are the transactions you've made</p>
-          </div>
-        </div>
-        <div className={styles.profile_page__cards_grid__card}>
-          <img src="./src/pages/Profile/balance.svg" alt="Recharge Balance" />
-          <div className={styles.profile_page__cards_grid__card__info}>
-            <h3>Recharge Balance</h3>
-            <p>Here you can recharge your balance</p>
-          </div>
-        </div>
-        <div className={styles.profile_page__cards_grid__card}>
-          <img src="./src/pages/Profile/contact.svg" alt="Contact Us" />
-          <div className={styles.profile_page__cards_grid__card__info}>
-            <h3>Contact Us</h3>
-            <p>Reach out to us for any questions</p>
-          </div>
-        </div>
+        
+        <Card img="./src/pages/Profile/orders.svg" title="Orders" description="Here are the orders you've made" />
+        <Card img="./src/pages/Profile/wish.svg" title="Wish List" description="Here are the items you've added to your wish list" />
+        <Card img="./src/pages/Profile/settings.svg" title="Settings" description="Here you can change your settings, username, ..etc" />
+        <Card img="./src/pages/Profile/address.svg" title="Addresses" description="Here are the addresses you've added" />
+        <Card img="./src/pages/Profile/balance.svg" title="Recharge Balance" description="Here you can recharge your balance" />
+        <Card img="./src/pages/Profile/contact.svg" title="Contact Us" description="Reach out to us for any questions" />
+
+
       </div>
     </div>
   );
