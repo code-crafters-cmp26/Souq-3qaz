@@ -1,0 +1,10 @@
+.checkoutpage {
+  color: black;
+  position: relative;
+  top: 100px;
+  display: flex;
+  width: 55%;
+  float: left;
+  flex-direction: column;
+  margin-left: 40px;
+}
