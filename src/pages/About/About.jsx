@@ -4,7 +4,9 @@ import FadingTextContainer from "../../components/FadingTextContainer/FadingText
 
 const About = () => {
   return (
-    <div className= {styles.about}>
+    <div className={styles.about}>
+      <div className={styles.cover}>
+      </div>
       <FadingTextContainer title="About Souq 3oqaz">
         <p>Welcome to Souq 3oqaz, your one-stop destination for all your online shopping needs. We are dedicated to providing you with the best shopping experience, offering a wide range of products at competitive prices.</p>
       </FadingTextContainer>
@@ -17,7 +19,7 @@ const About = () => {
       <FadingTextContainer title="Our Vision">
         <p>Our vision is to be the leading online shopping destination in the Middle East.</p>
       </FadingTextContainer>
-  
+
     </div>
   );
 };

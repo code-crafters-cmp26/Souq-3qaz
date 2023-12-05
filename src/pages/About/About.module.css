@@ -1,8 +1,8 @@
-
 .about {
-    /* Add your styles here */
-    margin-top:60px;
-    
+    margin-top: 60px;
+    background-image: url("desert2c.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+
 }
-
-
