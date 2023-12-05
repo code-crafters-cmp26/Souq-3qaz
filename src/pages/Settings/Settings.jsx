@@ -10,7 +10,6 @@ function Settings() {
                 <h2>Personal Info</h2>
                 <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" className={styles.avatar} />
                 <Input text="Change Picture" type="file" />
-                <Input text="Username" type="text" />
                 <Input text="First Name" type="text" />
                 <Input text="Last Name" type="text" />
                 <Input text="Email" type="email" />
@@ -29,15 +28,6 @@ function Settings() {
                 <Input text="Zip Code" type="number" />
                 <Button text="Save Changes" />
             </form>
-            <form className={styles.form}>
-                <h2>Payment Info</h2>
-                <Input text="Card Number" type="number" />
-                <Input text="Expiration Date" type="date" />
-                <Input text="CVV" type="password" />
-                <Button text="Save Changes" />
-            </form>
-
-            {/*Account Deletion*/}
             <form className={styles.form + " " + styles.delete}>
                 <h2>Account Deletion</h2>
                 <Input text="Password" type="password" />
