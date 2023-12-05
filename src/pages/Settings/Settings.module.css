@@ -51,3 +51,8 @@
 .form h2 {
     color: #4f4d4d;
 }
+
+.delete Button{
+    color:#ff0000;
+    background-color: #000000
+}

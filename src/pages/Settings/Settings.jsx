@@ -37,6 +37,14 @@ function Settings() {
                 <Button text="Save Changes" />
             </form>
 
+            {/*Account Deletion*/}
+            <form className={styles.form + " " + styles.delete}>
+                <h2>Account Deletion</h2>
+                <Input text="Password" type="password" />
+                <Input text="Confirm Password" type="password" />
+                <Button text="Delete Account" />
+            </form>
+
 
 
         </div>
