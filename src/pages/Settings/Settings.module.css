@@ -1,0 +1,53 @@
+.settings
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    height: 100%;
+    width: 100%;
+}
+.settings h1
+{
+    margin-top: 60px;
+    color: #4f4d4d;
+}
+
+.form
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 60px;
+    width: 80%;
+    height: auto;
+    margin: 10px;
+    padding: 30px;
+    background-image: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+    radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+    border-radius: 10px;
+}
+
+.form Input {
+    width: 100%;
+    height: auto;
+    border: 0px;
+    box-shadow: none;
+    margin-bottom: 0;
+    
+}
+.form Input:focus {
+    outline: none;
+}
+
+.form :first-child {
+    grid-column: 1 / span 2;
+}
+
+.form :last-child {
+    grid-column: 1 / span 2;
+}
+
+.form h2 {
+    color: #4f4d4d;
+}
