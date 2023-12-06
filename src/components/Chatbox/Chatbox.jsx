@@ -1,8 +1,30 @@
 import React from 'react'
 import styles from "./Chatbox.module.css";
 import Message from '../Message/Message';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function Chatbox() {
+    useEffect(() => {
+        //check for enter key
+        document.querySelector(`.${styles.input}`).addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                handleSend();
+            }
+        });
+    }, []);
+
+    function handleSend() {
+        const input = document.querySelector(`.${styles.input}`);
+        const message = input.value;
+        input.value = "";
+        if (message !== "") {
+            let messageElement = <Message color="#dbcb7c" message={message} drection="right" time="12:07 pm" />;
+            let messagesContainer = document.querySelector(`.${styles.messages}`);
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    }
   return (
     <div className={styles.chatbox}>
         <div className={styles.header}>
