@@ -6,7 +6,7 @@ function ChatCard({ name, message, time, pic }) {
         <div className={styles.chat_card}>
             <img src={pic} alt="profile" />
             <div className={styles.info}>
-                <h1>{name}</h1>
+                <h3>{name}</h3>
                 <p>{message}</p>
             </div>
             <div className={styles.time}>

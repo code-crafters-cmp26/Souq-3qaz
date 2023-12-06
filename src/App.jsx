@@ -6,6 +6,7 @@ import ProfilePage from "./pages/Profile/ProfilePage";
 import ProductsPage from "./pages/Products/ProductsPage";
 import ProductPage from "./pages/Product/ProductPage";
 import Chatbox from "./components/Chatbox/Chatbox";
+import ChatsNav from "./components/ChatsNav/ChatsNav";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/product" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
+      <ChatsNav />
       <Chatbox />
     </>
   );
