@@ -1,0 +1,22 @@
+.chat_card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: #efc53b;
+}
+.chat_card:hover{
+    background-color: #ad8500;
+}
+
+.info p{
+    color:#8b3902d3;
+}
+
+.time{
+    color: #9b9b9b;
+    font-size: 0.8rem;
+}

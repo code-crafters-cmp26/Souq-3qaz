@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 function Chatbox() {
     useEffect(() => {
-        //check for enter key
         document.querySelector(`.${styles.input}`).addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
                 handleSend();
@@ -25,10 +24,15 @@ function Chatbox() {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
     }
+    function handleClose() {
+        document.querySelector(`.${styles.chatbox}`).style.display = "none";
+    }
   return (
     <div className={styles.chatbox}>
         <div className={styles.header}>
-            <h2>3a4ry the Seller</h2>
+            <img className={styles.profile_pic} src="src/components/Chatbox/34ry.png" alt="profile" />
+            <h3>3a4ry the Seller</h3> 
+            <img className = {styles.close}src="src/components/Chatbox/close.svg" alt="close" onClick={handleClose} />
         </div>
         <div className={styles.messages}>
             <Message color="#685b1c" message="Hello" drection="left" time="12:00 pm" />

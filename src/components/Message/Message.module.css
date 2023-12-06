@@ -1,6 +1,8 @@
 .message{
     padding: 5px;
     border-radius: 10px;
+    width:fit-content;
+    min-width:60px;
     max-width: 80%;
     margin-bottom: 20px;
     position: relative;

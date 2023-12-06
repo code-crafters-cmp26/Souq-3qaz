@@ -1,7 +1,7 @@
 .chatbox{
     position: fixed;
     bottom: 10px;
-    right: 20px;
+    right: 340px;
     width: 300px;
     height: 400px;
     border-radius: 20px;
@@ -15,11 +15,35 @@
 }
 /* make header fixed at the top even when scrolled */
 .chatbox .header{
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-items: space-between;
+    align-items: center;
+    gap : 5px;
     position: sticky;
     top: 0;
     z-index: 105;
     background-color: #37211d;
     
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 106;
+    cursor: pointer;
+    width: 20px;
+    height: auto;
+}
+
+.profile_pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+    cursor: pointer;
 }
 
 /* width */
@@ -49,6 +73,8 @@
     padding: 10px;
     outline: none;
     font-size: 1rem;
+    background-color: #37211d69;
+    color: #efc53b;
 }
 .chatbox .input:focus{
     border: 1px solid #efc53b;
