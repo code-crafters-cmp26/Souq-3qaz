@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "e-commerce app with PERN stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon run server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bishoy Wadea",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.2"
+  }
+}
