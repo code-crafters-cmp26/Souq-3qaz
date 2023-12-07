@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const { format } = require('date-fns');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
-const is = require('is');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../models/userModel');
@@ -44,7 +43,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
 
   const {
     FName, LName, PhoneNumber, Email, Password, Gender, ApartmentNumber,
-    BuildingNumber, Country, City, Street } = req.body;
+    BuildingNumber, Country, City, Street, role, NId } = req.body;
 
   const image = 'default address';
   const balance = 0;
@@ -68,11 +67,30 @@ exports.createUser = catchAsync(async (req, res, next) => {
     return next(new AppError('Email is invalid', 400));
   }
 
+  if (!role || (role != 'Seller' && role != 'Customer')) {
+    return next(new AppError('role is invalid', 400));
+  }
+
+  if (role === 'Seller' && !('NId' in req.body)) {
+    return next(new AppError('NId is required for sellers', 400));
+  }
+
+  if ('NId' in req.body && !User.phoneCheck(NId)) {
+    return next(new AppError('NId must only contain numerical digits', 400));
+  }
+
   const hashedPassword = User.hashPassword(Password);
 
   const newUser = await db.query(`INSERT INTO "User" Values(DEFAULT, '${FName}', '${LName}', '${PhoneNumber}', '${image}',
     '${balance}', '${Email}', '${hashedPassword}', '${theme}', ${banned}, '${Gender}', ${ApartmentNumber}, ${BuildingNumber},
-    '${Country}', '${City}', '${Street}','${passwordChangedAt}','${passwordresettoken}','${passwordresetexpires}');`)
+    '${Country}', '${City}', '${Street}','${passwordChangedAt}','${passwordresettoken}','${passwordresetexpires}') RETURNING *;`)
+
+  if (role === 'Seller') {
+    await db.query(`INSERT INTO Seller Values('${newUser['rows'][0]['id']}','${NId}');`);
+  }
+  if (role === 'Customer') {
+    await db.query(`INSERT INTO Customer Values('${newUser['rows'][0]['id']}','Normal');`);
+  }
 
   createSendToken(newUser, 201, res);
 });
@@ -82,7 +100,6 @@ exports.login = catchAsync(async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  // 1) check if email & password exist
   if (!email || !password) {
     return next(new AppError('please provide email & password', 400));
   }
@@ -91,7 +108,6 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('incorrect email or password', 401));
   }
 
-  // 2) check if user exist & password is correct
   const user = await db.query(`SELECT password FROM "User" WHERE email = '${email}';`);
   const truePassword = user['rows'][0]['password'] + '';
   // @ts-ignore
@@ -101,6 +117,5 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('incorrect email or password', 401));
   }
 
-  // 3) check if everything ok, send token to the client 
   createSendToken(user, 200, res);
 });

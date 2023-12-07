@@ -11,4 +11,24 @@ router
   .route('/')
   .get(userController.getAllUsers);
 
+router
+  .route('/:id')
+  .get(userController.getUserById)
+
+router
+  .route('/Seller')
+  .get(userController.getAllSellers);
+
+router
+  .route('/Seller/:id')
+  .get(userController.getSellerById)
+
+router
+  .route('/Customer')
+  .get(userController.getAllCustomers);
+
+router
+  .route('/Customer/:id')
+  .get(userController.getCustomerById)
+
 module.exports = router;
