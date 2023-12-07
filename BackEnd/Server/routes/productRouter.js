@@ -4,6 +4,6 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(productController.testApi);
+  .get(productController.getAllProducts);
 
 module.exports = router;

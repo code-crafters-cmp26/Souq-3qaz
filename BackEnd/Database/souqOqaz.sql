@@ -48,6 +48,10 @@ Street VARCHAR(50) Not NULL,
 CONSTRAINT pk_User PRIMARY KEY(ID)
 );
 
+ALTER TABLE "User" ADD COLUMN passwordChangedAt timestamp;
+ALTER TABLE "User" ADD COLUMN passwordResetToken VARCHAR(150);
+ALTER TABLE "User" ADD COLUMN passwordResetExpires timestamp;
+
 
 
 CREATE TYPE Customer_type AS ENUM('Normal','Premium');

@@ -1,13 +1,17 @@
 const { request, param } = require('../app');
 const db = require('../db');
+const bcrypt = require('bcrypt');
+const catchAsync = require('../utils/catchAsync');
 
-exports.getAllProducts = async (req, res) => {
-  const x = await db.query('SELECT * FROM  product');
+
+
+exports.getAllUsers = catchAsync(async (req, res) => {
+  const x = await db.query('SELECT * FROM  "User"');
   try {
     res.status(200).json({
       status: 'success',
       count: x['count'],
-      products: x['rows']
+      users: x['rows']
     });
   } catch (error) {
     res.status(400).json({
@@ -15,4 +19,4 @@ exports.getAllProducts = async (req, res) => {
       message: "Error🎇"
     });
   }
-};
+});
