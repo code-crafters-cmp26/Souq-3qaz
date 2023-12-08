@@ -63,3 +63,8 @@
   padding: 20px;
   margin-bottom: 20px;
 }
+
+/* all grid children has 100 top margin */
+.profile_page__cards_grid > *{
+  margin-top: 100px;
+}
