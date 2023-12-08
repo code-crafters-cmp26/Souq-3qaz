@@ -1,6 +1,35 @@
 import styles from "./Navbar.module.css";
+import NotificationsContainer from "../NotificationsContainer/NotificationsContainer";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function Navbar({ children }) {
+  const [hovered, setHovered] = useState(false);
+  const [opened, setOpened] = useState(false);
+  useEffect(() => {
+    if (hovered) {
+      document.querySelector(`.${styles.notes} img`).src =
+        "./src/components/Navbar/glowyNotes.svg";
+    } else {
+      document.querySelector(`.${styles.notes} img`).src =
+        "./src/components/Navbar/notes.svg";
+    }
+  }
+  , [hovered]);
+  
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+  const handleClick = () => {
+    setOpened(!opened);
+  };
+
   return (
     <div className={styles.navbar}>
       <div className={styles.logocontainer}>
@@ -16,6 +45,8 @@ function Navbar({ children }) {
         <li>ABOUT</li>
         <li>SIGN UP</li>
         <li>LOGIN</li>
+        <li className={styles.notes} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleClick} ><img src="./src/components/Navbar/notes.svg" alt="Notifications" /></li>
+        <NotificationsContainer opened = {opened} />
       </ul>
     </div>
   );

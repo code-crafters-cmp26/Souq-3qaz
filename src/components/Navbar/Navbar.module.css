@@ -1,4 +1,5 @@
 .navbar {
+  background-color: #37211d;
   font-family: "Aladin";
   height: 60px;
   margin: 0;
@@ -7,9 +8,10 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  position: fixed;
+  position: sticky;
   top: 0;
   background-color: #37211d;
+  z-index: 1;
 }
 .logocontainer {
   margin-left: 50px;
@@ -21,6 +23,7 @@
   list-style: none;
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: 40%;
   justify-content: space-around;
   margin-right: 30px;
@@ -39,4 +42,14 @@
   color: #e0b21a;
   text-shadow: 0px 0px 4px #efc53b;
   cursor: pointer;
+}
+
+.notes img {
+  width: 35px;
+}
+
+.notes img:hover {
+  background-image: url("src/components/Navbar/glowyNotes.svg");
+  filter: drop-shadow(0px 0px 7px #efc53b);
+  transition: 0.5s;
 }

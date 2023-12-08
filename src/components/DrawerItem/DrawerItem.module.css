@@ -1,0 +1,42 @@
+.drawer_item {
+  color: #ffffff;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+    
+}
+
+
+
+.drawer_item {
+  transition: all 0.5s ease-in-out;
+}
+
+.drawer_item:hover {
+  animation: sandstorm 5s infinite alternate;
+}
+
+
+@keyframes sandstorm {
+  0% {
+    background-image: linear-gradient(to right, #f0c600, #f0c600 10%, #e0a800 20%, #d08c00 30%, #c07000 40%, #b05400 50%, #a03800 60%, #902c00 70%, #802000 80%, #701400 90%, #600800 100%);
+    background-position: 0 0;
+  }
+  100% {
+    background-image: linear-gradient(to right, #f0c600, #f0c600 10%, #e0a800 20%, #d08c00 30%, #c07000 40%, #b05400 50%, #a03800 60%, #902c00 70%, #802000 80%, #701400 90%, #600800 100%);
+    background-position: 100vw -100vh;
+  }
+}
+
+/*make last one at the bottom of its container*/
+.drawer_item:last-child {
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+
+}
+
+
+
+
