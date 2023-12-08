@@ -1,0 +1,22 @@
+.message{
+    padding: 5px;
+    border-radius: 10px;
+    width:fit-content;
+    min-width:60px;
+    max-width: 80%;
+    margin-bottom: 20px;
+    position: relative;
+}
+.message p{
+    margin-bottom: 12px;
+}
+
+
+.time{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 0.6rem;
+    margin:5px;
+    color: #9b9b9b;
+}
