@@ -3,7 +3,33 @@ import Input from "../input/Input";
 import Register from "../register/Register";
 import Button from "../Button/Button";
 import Checkbox from "../Checkbox/Checkbox";
+
 function Login() {
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("clicked");
+    fetch("http://localhost:3000/api/v1/user/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ email: "adham@g.com", password: "passwod123456" }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("Error: " + res.status); // Handle errors properly
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <form action="" className={styles.login__form}>
       <h1 className={styles.login__title}>Login</h1>
@@ -24,7 +50,7 @@ function Login() {
         </a>
       </div>
 
-      <Button text="Login" type="submit" />
+      <Button text="Login" type="submit" onClick={handleSubmit} />
 
       <Register />
     </form>

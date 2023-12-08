@@ -25,4 +25,4 @@ dist-ssr
 *.sw?
 
 
-BackEnd/Server/db/index.js
+./BackEnd/Server/db/index.js
