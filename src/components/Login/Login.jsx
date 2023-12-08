@@ -17,17 +17,13 @@ function Login() {
       body: JSON.stringify({ email: "adham@g.com", password: "passwod123456" }),
     })
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Error: " + res.status); // Handle errors properly
-        }
+        return res.json();
       })
       .then((data) => {
         console.log(data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
   }
   return (
