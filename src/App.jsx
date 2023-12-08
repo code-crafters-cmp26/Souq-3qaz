@@ -7,9 +7,11 @@ import Homepage from "./pages/Homepage/Homepage";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import ProductPage from "./pages/Product/ProductPage";
 import ProductsPage from "./pages/Products/ProductsPage";
-import Chatbox from "./components/Chatbox/Chatbox";
-import ChatsNav from "./components/ChatsNav/ChatsNav";
+// import Chatbox from "./components/Chatbox/Chatbox";
+// import ChatsNav from "./components/ChatsNav/ChatsNav";
 import Settings from "./pages/Settings/Settings";
+import Employee from "./pages/Employee/Employee";
+
 import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
 
@@ -30,6 +32,8 @@ function App() {
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/about" element={<About />} />
+          <Route path="/employee" element={<Employee />} />
+
         </Routes>
       </BrowserRouter>
       {/* <ChatsNav />
