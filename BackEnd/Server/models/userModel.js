@@ -1,12 +1,11 @@
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const is = require('is');
 const catchAsync = require('../utils/catchAsync');
 
-exports.checkPassword = function (candidatePassword, userPassword) {
+exports.checkPassword = catchAsync(async function (candidatePassword, userPassword) {
   return bcrypt.compare(candidatePassword, userPassword);
-};
+});
 
 exports.checkEmail = function (email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,6 +16,6 @@ exports.phoneCheck = function (PhoneNumber) {
   return /^\d+$/.test(PhoneNumber)
 };
 
-exports.hashPassword = function (password) {
-  return bcrypt.hash(password, 12)
-};
+exports.hashPassword = catchAsync(async function (password) {
+  return await bcrypt.hash(password, 12)
+});

@@ -1,6 +1,7 @@
 const db = require('../db');
 const jwt = require('jsonwebtoken');
 const { format } = require('date-fns');
+const { promisify } = require('util');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const catchAsync = require('../utils/catchAsync');
@@ -8,14 +9,17 @@ const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 
 const signToken = id => {
+  // console.log(id);
   // @ts-ignore
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
 };
 
-const createSendToken = (user, statusCode, res) => {
-  const token = signToken(user.id);
+const createSendToken = (user, userId, statusCode, res) => {
+  // console.log(user['rows'][0][]);
+  console.log(userId);
+  const token = signToken(userId);
   // console.log(Date.now().toString().slice(0, 10));
 
   const cookieOptions = {
@@ -27,8 +31,6 @@ const createSendToken = (user, statusCode, res) => {
     cookieOptions.secure = true;
 
   res.cookie('jwt', token, cookieOptions);
-
-  user.password = undefined;
 
   res.status(statusCode).json({
     status: 'success',
@@ -78,13 +80,12 @@ exports.createUser = catchAsync(async (req, res, next) => {
   if ('NId' in req.body && !User.phoneCheck(NId)) {
     return next(new AppError('NId must only contain numerical digits', 400));
   }
-
-  const hashedPassword = User.hashPassword(Password);
-
+  const hashedPassword = await bcrypt.hash(Password, 12);
   const newUser = await db.query(`INSERT INTO "User" Values(DEFAULT, '${FName}', '${LName}', '${PhoneNumber}', '${image}',
     '${balance}', '${Email}', '${hashedPassword}', '${theme}', ${banned}, '${Gender}', ${ApartmentNumber}, ${BuildingNumber},
     '${Country}', '${City}', '${Street}','${passwordChangedAt}','${passwordresettoken}','${passwordresetexpires}') RETURNING *;`)
 
+  const newUserId = await db.query(`SELECT id FROM "User" WHERE email = '${Email}';`);
   if (role === 'Seller') {
     await db.query(`INSERT INTO Seller Values('${newUser['rows'][0]['id']}','${NId}');`);
   }
@@ -92,7 +93,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
     await db.query(`INSERT INTO Customer Values('${newUser['rows'][0]['id']}','Normal');`);
   }
 
-  createSendToken(newUser, 201, res);
+  createSendToken(newUser, newUserId['rows'][0]['id'], 201, res);
 });
 
 
@@ -109,13 +110,45 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   const user = await db.query(`SELECT password FROM "User" WHERE email = '${email}';`);
+  const newUserId = await db.query(`SELECT id FROM "User" WHERE email = '${email}';`);
   const truePassword = user['rows'][0]['password'] + '';
   // @ts-ignore
-  const correct = User.checkPassword(password, truePassword);
+  const correct = await bcrypt.compare(password, truePassword);
+  console.log(correct);
   // @ts-ignore
   if (user['rowCount'] == 0 || !correct) {
     return next(new AppError('incorrect email or password', 401));
   }
 
-  createSendToken(user, 200, res);
+  createSendToken(user, newUserId['rows'][0]['id'], 200, res);
+});
+
+
+// @ts-ignore
+exports.protect = catchAsync(async (req, res, next) => {
+  let token;
+  console.log(req.headers);
+  // 1) getting the token and check if its there
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+  if (!token) {
+    return next(new AppError('you are not logged in', 401));
+  }
+  // 2) verification of the token
+  // @ts-ignore
+  console.log(token);
+  // @ts-ignore
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  console.log(decoded);
+  // 3) check if the user still exist
+  // @ts-ignore
+  const freshUser = await db.query(`SELECT * FROM "User" WHERE id = ${decoded.id}`);
+  console.log(freshUser);
+  if (!freshUser['rowCount']) {
+    return next(new AppError('you are no longer exist', 401));
+  }
+
+  req.user = freshUser;
+  next();
 });
