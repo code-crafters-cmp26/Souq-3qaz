@@ -14,8 +14,13 @@
   --small-font-size: 0.813rem;
   /*========== Font weight ==========*/
   --font-medium: 500;
+  --buttons-color: #ce8240;
 }
 
+hr {
+  margin: 10px 0px 20px;
+  border: 1px solid lightgray;
+}
 /* importing aladin font */
 @font-face {
   font-family: "Aladin";

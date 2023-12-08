@@ -10,6 +10,7 @@
   width: 100%;
   position: sticky;
   top: 0;
+  background-color: #37211d;
   z-index: 1;
 }
 .logocontainer {
@@ -29,13 +30,12 @@
   gap: 10px;
 }
 .contents li {
-  color: #8f7009;
+  color: #e0b21a;
   transition: 0.7s;
   font-size: 1.3em;
 }
 .contents li:hover {
-  color: #e0b21a;
-  text-shadow: 0px 0px 4px #efc53b;
+  text-shadow: 0px 0px 3px #ebd17c;
   cursor: pointer;
 }
 .active {
@@ -44,8 +44,8 @@
   cursor: pointer;
 }
 
-.notes img{
-  width:35px;
+.notes img {
+  width: 35px;
 }
 
 .notes img:hover {
