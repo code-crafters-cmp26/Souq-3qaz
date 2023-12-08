@@ -1,9 +1,9 @@
 import CategoriesBar from "../../components/CategoriesBar/CategoriesBar";
 import ProductsList from "../../components/ProductsList/ProductsList";
-import styles from "./ProductsPage.module.css";
-function ProductsPage() {
+import styles from "./AuctionsPage.module.css";
+function AuctionsPage() {
   return (
-    <div className={styles.products_page}>
+    <div className={styles.auctions_page}>
       <CategoriesBar />
       <div className={styles.all_products}>
         <ProductsList />
@@ -12,4 +12,4 @@ function ProductsPage() {
   );
 }
 
-export default ProductsPage;
+export default AuctionsPage;

@@ -47,7 +47,7 @@ exports.getSellerById = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     count: result['count'],
-    users: result['rows']
+    seller: result['rows']
   });
 });
 
@@ -70,6 +70,6 @@ exports.getCustomerById = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     count: result['count'],
-    users: result['rows']
+    customer: result['rows']
   });
 });
