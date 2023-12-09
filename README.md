@@ -155,12 +155,81 @@ headers
     "status": "fail",
     "message": "some required Fields are empty"
 }
+{
+    "status": "fail",
+    "message": "this eamil is already exists"
+}
+{
+    "status": "fail",
+    "message": "Phone number must only contain numerical digits"
+}
+```
+
+## LogIn User
+### Api Route 
+`
+Endpoint : 'Post /api/v1/user/login'
+`
+`
+Authorization: No auth needed
+`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/user/login'
+``
+### Headers
+```json
+headers
+{
+}
+```
+### Body
+```json
+{
+    "email":"bishoy@gmail.com",
+    "password":"Password123456"
+}
+```
+### Response Example:
+```json
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzgsImlhdCI6MTcwMjA4MDQxMiwiZXhwIjoxNzA5ODU2NDEyfQ.BfQ9aocaz_SKkeCj8ZUwyM-eyuGTUYdPpzDJuAyCADY",
+    "user": {
+        "id": 78,
+        "firstname": "new",
+        "lastname": "newF",
+        "phonenumber": "01204747568",
+        "image": "default address",
+        "balance": 0,
+        "email": "onebgbfbi@g.c",
+        "password": "$2b$12$1WzBorVdAY2xIVPfXd/f5u7XEk7ZDtDM/v16rxhsL0d48F6I2YE5C",
+        "theme": "Light",
+        "banned": false,
+        "gender": "Male",
+        "apartmentnumber": 1,
+        "buildingnumber": 1,
+        "country": "om eldonia",
+        "city": "cairo",
+        "street": "shoubra",
+        "passwordchangedat": "2023-12-09T00:06:52.000Z",
+        "passwordresettoken": "3165494",
+        "passwordresetexpires": "2023-12-09T00:06:52.000Z"
+    }
+}
 ```
 ### OR
 ```json
 {
     "status": "fail",
-    "message": "this eamil is already exists"
+    "message": "incorrect email or password"
+}
+{
+    "status": "fail",
+    "message": "please provide email & password"
+}
+{
+    "status": "error",
+    "message": "something went wrong"
 }
 ```
-
