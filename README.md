@@ -194,28 +194,11 @@ headers
 ```json
 {
     "status": "success",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzgsImlhdCI6MTcwMjA4MDQxMiwiZXhwIjoxNzA5ODU2NDEyfQ.BfQ9aocaz_SKkeCj8ZUwyM-eyuGTUYdPpzDJuAyCADY",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODcsImlhdCI6MTcwMjA4NDgzNiwiZXhwIjoxNzA5ODYwODM2fQ.5AYXchGt1dIYMmplY_fX3jyuYlHMGcieJaFWB-twKG4",
     "user": {
-        "id": 78,
-        "firstname": "new",
-        "lastname": "newF",
-        "phonenumber": "01204747568",
-        "image": "default address",
-        "balance": 0,
-        "email": "onebgbfbi@g.c",
-        "password": "$2b$12$1WzBorVdAY2xIVPfXd/f5u7XEk7ZDtDM/v16rxhsL0d48F6I2YE5C",
-        "theme": "Light",
-        "banned": false,
-        "gender": "Male",
-        "apartmentnumber": 1,
-        "buildingnumber": 1,
-        "country": "om eldonia",
-        "city": "cairo",
-        "street": "shoubra",
-        "passwordchangedat": "2023-12-09T00:06:52.000Z",
-        "passwordresettoken": "3165494",
-        "passwordresetexpires": "2023-12-09T00:06:52.000Z"
-    }
+        "password": "$2b$12$TBqyHKlY.0nNvVRV7G2d5eYUJNhkrSI513zUX//kFg.7LQcRlXQqW"
+    },
+    "role": "Customer"
 }
 ```
 ### OR
