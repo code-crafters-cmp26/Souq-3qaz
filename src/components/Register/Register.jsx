@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 import styles from "./Register.module.css";
 function Register() {
   return (
-    <p className={styles.register}>
-      Dont have an account? <span>Register</span>
-    </p>
+    <Link to="/signup">
+      <p className={styles.register}>
+        Dont have an account? <span>Register</span>
+      </p>
+    </Link>
   );
 }
 
