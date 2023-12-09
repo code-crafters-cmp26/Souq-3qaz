@@ -1,10 +1,10 @@
 import styles from "./ProductCard.module.css";
 import Button from "../Button/Button";
-function ProductCard(product) {
+function ProductCard({ product }) {
   return (
     <div className={styles.product_card}>
       <div className={styles.product_img}>
-        <img src="./src/components/ProductCard/Iphone.jpeg" alt="Iphone" />
+        <img src={product.image} alt="Iphone" />
         <div className={styles.favicon}>
           <Button type="button" text="🤍" />
         </div>
@@ -14,12 +14,18 @@ function ProductCard(product) {
       </div>
       <div className={styles.product_description}>
         <p>4.5 🌟🌟🌟🌟⭐</p>
-        <h4>Iphone 20 This Is The Best </h4>
-        <h4>Iphone In The World...</h4>
-        <p>
-          EGP <span>25,700</span>
-        </p>
-        <label>⬇ Lowest price in 7 days</label>
+        <h4>{product.name}</h4>
+        <h4>{product.description}</h4>
+        <p>EGP {product.price}</p>
+        <label>
+          Available{" "}
+          <span
+            style={{ color: product.quantity > 0 ? "rgb(0, 174, 0)" : "red" }}
+          >
+            {product.quantity}
+          </span>{" "}
+          in stock.
+        </label>
       </div>
     </div>
   );
