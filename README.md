@@ -1,7 +1,7 @@
 # SOUQ 3QAZ (API DOC)
 
 ## All Apis starts with http://127.0.0.1:3000
-# =======================================
+# =====================================
 
 ## Get All Products
 ### Api Route 
@@ -83,3 +83,84 @@ No Body Needed
     "message": "no product found by this id"
 }
 ```
+
+
+## SignUp user
+### Api Route 
+`
+Endpoint : 'Post /api/v1/user/signup'
+`
+`
+Authorization: No auth needed
+`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/user/signup'
+``
+### Headers
+```json
+headers
+{
+}
+```
+### Body
+```json
+{
+        "FName": "new",
+        "LName": "newF",
+        "PhoneNumber": "01204747568",
+        "Email": "one@g.c",
+        "Password": "Password123456",
+        "Gender": "Male",
+        "ApartmentNumber": 1,
+        "BuildingNumber":1,
+        "Country":"om eldonia",
+        "City":"cairo",
+        "Street":"shoubra",
+        "role":"Customer",   //enum of {'Seller','Customer'}
+        "NId":"189465"   // is required only in case of Customer
+}
+```
+### Response Example:
+```json
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzgsImlhdCI6MTcwMjA4MDQxMiwiZXhwIjoxNzA5ODU2NDEyfQ.BfQ9aocaz_SKkeCj8ZUwyM-eyuGTUYdPpzDJuAyCADY",
+    "user": {
+        "id": 78,
+        "firstname": "new",
+        "lastname": "newF",
+        "phonenumber": "01204747568",
+        "image": "default address",
+        "balance": 0,
+        "email": "onebgbfbi@g.c",
+        "password": "$2b$12$1WzBorVdAY2xIVPfXd/f5u7XEk7ZDtDM/v16rxhsL0d48F6I2YE5C",
+        "theme": "Light",
+        "banned": false,
+        "gender": "Male",
+        "apartmentnumber": 1,
+        "buildingnumber": 1,
+        "country": "om eldonia",
+        "city": "cairo",
+        "street": "shoubra",
+        "passwordchangedat": "2023-12-09T00:06:52.000Z",
+        "passwordresettoken": "3165494",
+        "passwordresetexpires": "2023-12-09T00:06:52.000Z"
+    }
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "some required Fields are empty"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "this eamil is already exists"
+}
+```
+
