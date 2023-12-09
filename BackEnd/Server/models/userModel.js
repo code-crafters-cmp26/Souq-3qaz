@@ -3,9 +3,13 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const catchAsync = require('../utils/catchAsync');
 
-exports.checkPassword = catchAsync(async function (candidatePassword, userPassword) {
-  return bcrypt.compare(candidatePassword, userPassword);
-});
+exports.checkPassword = async function (candidatePassword, userPassword) {
+  try {
+    return bcrypt.compare(candidatePassword, userPassword);
+  } catch (error) {
+    return -1;
+  }
+};
 
 exports.checkEmail = function (email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,6 +20,10 @@ exports.phoneCheck = function (PhoneNumber) {
   return /^\d+$/.test(PhoneNumber)
 };
 
-exports.hashPassword = catchAsync(async function (password) {
-  return await bcrypt.hash(password, 12)
-});
+exports.hashPassword = async function (password) {
+  try {
+    return await bcrypt.hash(password, 12)
+  } catch (error) {
+    return -1;
+  }
+};

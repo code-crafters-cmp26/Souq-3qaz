@@ -155,12 +155,64 @@ headers
     "status": "fail",
     "message": "some required Fields are empty"
 }
+{
+    "status": "fail",
+    "message": "this eamil is already exists"
+}
+{
+    "status": "fail",
+    "message": "Phone number must only contain numerical digits"
+}
+```
+
+## LogIn User
+### Api Route 
+`
+Endpoint : 'Post /api/v1/user/login'
+`
+`
+Authorization: No auth needed
+`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/user/login'
+``
+### Headers
+```json
+headers
+{
+}
+```
+### Body
+```json
+{
+    "email":"bishoy@gmail.com",
+    "password":"Password123456"
+}
+```
+### Response Example:
+```json
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODcsImlhdCI6MTcwMjA4NDgzNiwiZXhwIjoxNzA5ODYwODM2fQ.5AYXchGt1dIYMmplY_fX3jyuYlHMGcieJaFWB-twKG4",
+    "user": {
+        "password": "$2b$12$TBqyHKlY.0nNvVRV7G2d5eYUJNhkrSI513zUX//kFg.7LQcRlXQqW"
+    },
+    "role": "Customer"
+}
 ```
 ### OR
 ```json
 {
     "status": "fail",
-    "message": "this eamil is already exists"
+    "message": "incorrect email or password"
+}
+{
+    "status": "fail",
+    "message": "please provide email & password"
+}
+{
+    "status": "error",
+    "message": "something went wrong"
 }
 ```
-
