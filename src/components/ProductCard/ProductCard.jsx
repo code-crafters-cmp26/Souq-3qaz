@@ -1,6 +1,6 @@
 import styles from "./ProductCard.module.css";
 import Button from "../Button/Button";
-function ProductCard() {
+function ProductCard(product) {
   return (
     <div className={styles.product_card}>
       <div className={styles.product_img}>

@@ -1,32 +1,13 @@
 import ProductCard from "../ProductCard/ProductCard";
 import styles from "./ProductsList.module.css";
-function ProductsList() {
+function ProductsList(products) {
   return (
     <div className={styles.products_list}>
-      <div>
-        <ProductCard />
-      </div>
-      <div>
-        <ProductCard />
-      </div>
-      <div>
-        <ProductCard />
-      </div>
-      <div>
-        <ProductCard />
-      </div>
-      <div>
-        <ProductCard />
-      </div>
-      <div>
-        <ProductCard />
-      </div>
-      <div>
-        <ProductCard />
-      </div>
-      <div>
-        <ProductCard />
-      </div>
+      {/* {products.map((product) => (
+        <div key={product.id}>
+          <ProductCard product={product} />
+        </div>
+      ))} */}
     </div>
   );
 }
