@@ -11,7 +11,7 @@ exports.getAllUsers = catchAsync(async (req, res) => {
   const x = await db.query('SELECT * FROM  "User"');
   res.status(200).json({
     status: 'success',
-    count: x['count'],
+    count: x['rowCount'],
     users: x['rows']
   });
 });

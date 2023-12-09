@@ -9,6 +9,6 @@ router
 
 router
   .route('/:id')
-  .get(authController.protect, productController.getProductById);
+  .get(productController.getProductById);
 
 module.exports = router;

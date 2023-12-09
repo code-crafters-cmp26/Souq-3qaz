@@ -9,7 +9,7 @@ exports.getAllProducts = async (req, res) => {
   try {
     res.status(200).json({
       status: 'success',
-      count: x['count'],
+      count: x['rowCount'],
       products: x['rows']
     });
   } catch (error) {
@@ -27,7 +27,10 @@ exports.getProductById = catchAsync(async (req, res, next) => {
   }
   const result = await db.query(`SELECT * FROM  product WHERE id = ${id};`);
   if (result['rowCount'] === 0) {
-    return next(new AppError('no Product found', 404));
+    res.status(404).json({
+      status: 'fail',
+      message: 'no product found by this id'
+    });
   }
   res.status(200).json({
     status: 'success',
