@@ -216,3 +216,67 @@ headers
     "message": "something went wrong"
 }
 ```
+
+## Add Product
+### Api Route 
+`
+Endpoint : 'Post /api/v1/product'
+`
+`
+Authorization: Bearer JWT (for a Seller not Customer)  As a Header in Req
+`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/product'
+``
+### Headers
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+### Body
+```json
+{
+    "Name":"mfmdslkfnhj",
+    "Image":"https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
+    "PreRelease":true,
+    "Price":4561.5,
+    "Description":"elsisi r2esy",
+    "StoredIn":1,
+    "Quantity":1,
+    "Category":"Health"
+}
+```
+### Response Example:
+```json
+{
+    "status": "success",
+    "product": [
+        {
+            "id": 5,
+            "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
+            "name": "mfmdslkbbfnhj",
+            "prerelease": true,
+            "price": 4561.5,
+            "description": "elsisi r2esy",
+            "quantity": 1,
+            "sellerid": 3,
+            "putdate": "2023-12-15T05:28:17.000Z",
+            "category": "Health",
+            "storedin": 1
+        }
+    ]
+}
+```
+
+### OR
+```json
+{
+    "status": "fail",
+    "message": "Need Seller to Create Product"
+}
+```
+
+
