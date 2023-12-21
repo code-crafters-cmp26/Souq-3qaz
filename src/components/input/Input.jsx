@@ -1,5 +1,5 @@
 import styles from "./Input.module.css";
-function Input({ text, type, color }) {
+function Input({ text, type, color, value, handlevalue }) {
   return (
     <div
       className={styles.outer__box}
@@ -12,6 +12,8 @@ function Input({ text, type, color }) {
           required
           className={styles.only__input}
           placeholder=" "
+          value={value}
+          onChange={handlevalue}
         />
         <label className={styles.only__label}>{text}</label>
       </div>
