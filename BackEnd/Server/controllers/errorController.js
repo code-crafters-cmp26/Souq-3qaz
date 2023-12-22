@@ -46,8 +46,18 @@ const handleWrongEmailOrPass = err => {
 };
 
 const handleProductExistInWish = err => {
-  const message = "You Already Wished This Product";
+  const message = "You Already Have Done This Before";
   return new AppError(message, 409);
+};
+
+const handleNoProductFound = err => {
+  const message = "No Product With This Id Found";
+  return new AppError(message, 404);
+};
+
+const handleReviewNotInRage = err => {
+  const message = "rating must be between 0 and 5";
+  return new AppError(message, 404);
 };
 
 const sendErrorDev = (err, res) => {
@@ -95,6 +105,8 @@ module.exports = (err, req, res, next) => {
     if (error.message == 'please provide email & password"') error = handleNoEmailOrPass(error);
     if (error.message == 'incorrect email or password"') error = handleWrongEmailOrPass(error);
     if (error.detail.match(/Key \(.+?\) already exists/)) error = handleProductExistInWish(error);
+    if (/^Key.*is not present in table "product"\.$/.test(error.detail)) error = handleNoProductFound(error);
+    if (error.constraint == 'review_rating_check') error = handleReviewNotInRage(error);
     sendErrorProd(error, res);
   }
 }

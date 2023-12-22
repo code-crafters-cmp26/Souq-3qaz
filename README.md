@@ -315,7 +315,57 @@ headers
 ```json
 {
     "status": "fail",
-    "message": "You Already Wished This Product"
+    "message": "You Already Have Done This Before"
 }
 ```
+
+## Add Review To Product
+### Api Route 
+`
+Endpoint : 'Post /api/v1/review/id'
+`
+`
+Authorization: Bearer JWT (for a Customer)  As a Header in Req
+`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/review/3'
+``
+### Headers
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+### Body
+```json
+{
+    "rating":4.3,
+    "comment":"very good from api"
+}
+```
+### Response Example:
+```json
+{
+    "status": "success"
+}
+```
+
+### OR
+```json
+{
+    "status": "fail",
+    "message": "You Already Have Done This Before"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "rating must be between 0 and 5"
+}
+```
+
+
 
