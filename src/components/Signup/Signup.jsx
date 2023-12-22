@@ -2,6 +2,7 @@ import styles from "./Signup.module.css";
 import Input from "../../components/input/Input";
 import Button from "../Button/Button";
 import { useReducer } from "react";
+import { useLocation } from "react-router-dom";
 
 const initialState = {
   firstname: "",
@@ -10,6 +11,7 @@ const initialState = {
   password: "",
   confirmpassword: "",
   gender: "",
+  nationalid: "",
   phonenumber: "",
   country: "",
   city: "",
@@ -40,6 +42,9 @@ const reducer = (state, action) => {
 
 function Signup() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const location = useLocation();
+  const userType = new URLSearchParams(location.search).get("userType");
 
   const isFirstStageComplete = Object.values(state)
     .slice(0, 5)
@@ -159,6 +164,15 @@ function Signup() {
             value={state.gender}
             handlevalue={handleChange}
           />
+          {userType == "seller" && (
+            <Input
+              text="National ID"
+              type="number"
+              name="nationalid"
+              value={state.nationalid}
+              handlevalue={handleChange}
+            />
+          )}
           <Input
             text="Phone Number"
             type="number"
