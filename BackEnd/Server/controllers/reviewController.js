@@ -34,6 +34,9 @@ exports.deleteReview = catchAsync(async (req, res, next) => {
   const reviewOwner = await db.query(`SELECT customerid FROM review WHERE reviewid = ${reviewId};`);
 
   if (reviewOwner['rowCount'] == 0) {
+    return next(new AppError('No Review With This Id Found', 404));
+  }
+  if (reviewOwner['rows'][0]['customerid'] != customerId) {
     return next(new AppError('only review owner can delete it', 401));
   }
 

@@ -367,5 +367,59 @@ headers
 }
 ```
 
+## Delete Review By Id
+### Api Route 
+`
+Endpoint : 'Delete /api/v1/review/id'
+`
+`
+Authorization: Bearer JWT (for the owner of the review)  As a Header in Req
+`
+### Request Example:
+``
+Endpoint Ex: 'Delete /api/v1/review/3'
+``
+### Headers
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+### Body
+```json
+{
+}
+```
+### Response Example:
+```json
+{
+    "status": "success"
+}
+```
+
+### OR
+```json
+{
+    "status": "fail",
+    "message": "You Already Have Done This Before"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "No Review With This Id Found"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "only review owner can delete it"
+}
+```
+
+
 
 

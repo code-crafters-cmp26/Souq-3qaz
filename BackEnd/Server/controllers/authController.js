@@ -18,7 +18,6 @@ const signToken = id => {
 
 const createSendToken = (user, userId, role, statusCode, res) => {
   const token = signToken(userId);
-  // console.log(Date.now().toString().slice(0, 10));
 
   const cookieOptions = {
     // @ts-ignore
@@ -146,7 +145,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   // 3) check if the user still exist
   // @ts-ignore
   const freshUser = await db.query(`SELECT * FROM "User" WHERE id = ${decoded.id}`);
-  console.log(freshUser);
   if (!freshUser['rowCount']) {
     return next(new AppError('you are no longer exist', 401));
   }

@@ -55,6 +55,11 @@ const handleNoProductFound = err => {
   return new AppError(message, 404);
 };
 
+const handleNoReviewFound = err => {
+  const message = "No Review With This Id Found";
+  return new AppError(message, 404);
+};
+
 const handleReviewNotInRage = err => {
   const message = "rating must be between 0 and 5";
   return new AppError(message, 404);
@@ -75,7 +80,7 @@ const sendErrorDev = (err, res) => {
 }
 
 const sendErrorProd = (err, res) => {
-  console.log(err.message);
+  // console.log(err.message);
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
@@ -110,9 +115,10 @@ module.exports = (err, req, res, next) => {
     else if (error.message == 'please provide email & password"') error = handleNoEmailOrPass(error);
     else if (error.message == 'incorrect email or password"') error = handleWrongEmailOrPass(error);
     else if (error.message == 'only review owner can delete it') error = handleNotOwnerOfReview(error);
+    else if (error.message == 'No Review With This Id Found') error = handleNoReviewFound(error);
     else if (error.constraint && error.constraint == 'review_rating_check') error = handleReviewNotInRage(error);
     else if (error.detail && error.detail.match(/Key \(.+?\) already exists/)) error = handleProductExistInWish(error);
-    else if (error.detail && /^Key.*is not present in table "product"\.$/.test(error.detail)) error = handleNoProductFound(error);
+    else if (error.detail && /^Key.*is not present in table "product"\.$/.test(error.detail) || error.message == 'No Product With This Id Found') error = handleNoProductFound(error);
     sendErrorProd(error, res);
   }
 }
