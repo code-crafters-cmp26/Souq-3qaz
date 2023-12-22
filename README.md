@@ -244,7 +244,6 @@ headers
     "PreRelease":true,
     "Price":4561.5,
     "Description":"elsisi r2esy",
-    "StoredIn":1,
     "Quantity":1,
     "Category":"Health"
 }
