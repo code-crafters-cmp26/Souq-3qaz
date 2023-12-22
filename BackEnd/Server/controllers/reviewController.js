@@ -25,3 +25,29 @@ exports.reviewProduct = catchAsync(async (req, res, next) => {
   });
 
 });
+
+exports.deleteReview = catchAsync(async (req, res, next) => {
+
+  const reviewId = req.params.id;
+  const customerId = req.user['rows'][0]['id'];
+
+  const reviewOwner = await db.query(`SELECT customerid FROM review WHERE reviewid = ${reviewId};`);
+
+  if (reviewOwner['rowCount'] == 0) {
+    return next(new AppError('only review owner can delete it', 401));
+  }
+
+  const result = await db.query(`DELETE FROM review WHERE reviewid = ${reviewId};`);
+
+  if (result['rowCount'] === 0) {
+    res.status(500).json({
+      status: 'fail',
+      message: 'try again later'
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+  });
+
+});

@@ -187,6 +187,7 @@ exports.protectForSeller = catchAsync(async (req, res, next) => {
 
 // @ts-ignore
 exports.protectForCustomer = catchAsync(async (req, res, next) => {
+
   let token;
   // 1) getting the token and check if its there
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -195,12 +196,14 @@ exports.protectForCustomer = catchAsync(async (req, res, next) => {
   if (!token) {
     return next(new AppError('you are not logged in', 401));
   }
+
   // 2) verification of the token
   // @ts-ignore
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   // 3) check if the user still exist
   // @ts-ignore
   const freshUser = await db.query(`SELECT * FROM "User" WHERE id = ${decoded.id}`);
+
   if (!freshUser['rowCount']) {
     return next(new AppError('you are no longer exist', 401));
   }
