@@ -1,5 +1,5 @@
 .only__input {
-  width: 100%;
+  width: 150%;
   padding-block: 0.8rem;
   background: none;
   color: var(--white-color);
@@ -13,6 +13,7 @@
   position: absolute;
   left: 0;
   top: 13px;
+  width: 160%;
   /* to make it appear like it is inside the input */
   font-weight: var(--font-medium);
   transition: top 0.3s, font-size 0.3s;
