@@ -4,7 +4,8 @@
   "description": "e-commerce app with PERN stack",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon run server.js",
+    "startDev": "nodemon run server.js",
+    "startProd": "set NODE_ENV=production&& nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bishoy Wadea",
@@ -18,6 +19,7 @@
     "express": "^4.18.2",
     "is": "^3.3.0",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.2",
     "pg": "^8.11.3",

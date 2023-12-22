@@ -5,10 +5,12 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(productController.getAllProducts);
+  .get(productController.getAllProducts)
+  .post(authController.protectForSeller, productController.createProduct);
 
 router
   .route('/:id')
-  .get(authController.protect, productController.getProductById);
+  .get(productController.getProductById)
+  .post(authController.protectForCustomer, productController.AddToWishList);
 
 module.exports = router;

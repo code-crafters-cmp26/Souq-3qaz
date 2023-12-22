@@ -24,6 +24,4 @@ dist-ssr
 *.sln
 *.sw?
 
-
-./BackEnd/Server/db/index.js
 BackEnd/Server/db/index.js
