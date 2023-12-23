@@ -12,6 +12,7 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
+    "firebase": "^10.7.1",
     "react": "^18.2.0",
     "react-animate-on-scroll": "^2.1.7",
     "react-dom": "^18.2.0",
