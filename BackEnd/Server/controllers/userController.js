@@ -122,7 +122,7 @@ exports.upgradeToPremium = catchAsync(async (req, res, next) => {
 exports.updateInfo = catchAsync(async (req, res, next) => {
   const userId = req.user['rows'][0]['id'];
   const {
-    FName, LName, PhoneNumber, Email, Password, Gender, ApartmentNumber,
+    FName, LName, PhoneNumber, Password, Gender, ApartmentNumber,
     BuildingNumber, Country, City, Street, role, NId } = req.body;
 
   const image = 'default address';
@@ -135,7 +135,7 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
   const passwordresettoken = '3165494';
   const passwordresetexpires = formattedDate;
 
-  if (!FName || !LName || !PhoneNumber || !Email || !Password || !Gender || !ApartmentNumber || !BuildingNumber || !Country || !City || !Street) {
+  if (!FName || !LName || !PhoneNumber || !Password || !Gender || !ApartmentNumber || !BuildingNumber || !Country || !City || !Street) {
     return next(new AppError('some required Fields are empty', 409));
   }
 
@@ -143,9 +143,6 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
     return next(new AppError('Phone number must only contain numerical digits', 400));
   }
 
-  if (!User.checkEmail(Email)) {
-    return next(new AppError('Email is invalid', 400));
-  }
 
   if (!role || (role != 'Seller' && role != 'Customer')) {
     return next(new AppError('role is invalid', 400));

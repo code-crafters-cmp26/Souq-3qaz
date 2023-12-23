@@ -646,7 +646,8 @@ headers
             "upvotes": 0
         }
     ]
-}```
+}
+```
 
 ### OR
 ```json
@@ -719,7 +720,8 @@ No Body Needed
             "storedin": 1
         }
     ]
-}```
+}
+```
 ### OR
 ```json
 {
@@ -727,6 +729,76 @@ No Body Needed
     "message": "no product found by this name"
 }
 ```
+
+
+## update user info
+### Api Route 
+`Endpoint : 'POST /api/v1/user/updateInfo'`
+`Authorization: Bearer JWT As a Header in Req`
+### Request Example:
+``
+Endpoint Ex: 'POST /api/v1/user/updateInfo'
+``
+
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+```json
+{
+        "FName": "customizedesllllam",
+        "LName": "newF",
+        "PhoneNumber": "01204747568",
+        "Password": "Password123456",
+        "Gender": "Male",
+        "ApartmentNumber": -1,
+        "BuildingNumber":1,
+        "Country":"om eldonia",
+        "City":"cairo",
+        "Street":"shoubra",
+        "role":"Customer",
+        "NId":"189465"
+}
+```
+### Response Example:
+```json
+{
+    "status": "success",
+    "info": [
+        {
+            "id": 5,
+            "firstname": "customizedesllllam",
+            "lastname": "newF",
+            "phonenumber": "01204747568",
+            "image": "default address",
+            "balance": 0,
+            "email": "eslam@ggfdv.com",
+            "password": "$2b$12$fnaVG84UitLyzQyNH8/ZmOZeT5AscPRWJohOCkHjy4/6nqgemHe76",
+            "theme": "Light",
+            "banned": false,
+            "gender": "Male",
+            "appartmentnumber": -1,
+            "buildingnumber": 1,
+            "country": "om eldonia",
+            "city": "cairo",
+            "street": "shoubra",
+            "passwordchangedat": "2023-12-23T18:29:03.000Z",
+            "passwordresettoken": "3165494",
+            "passwordresetexpires": "2023-12-23T18:29:03.000Z"
+        }
+    ]
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": 'something went wrong'
+}
+```
+
 
 
 
