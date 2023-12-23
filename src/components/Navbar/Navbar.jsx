@@ -1,22 +1,14 @@
+import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import NotificationsContainer from "../NotificationsContainer/NotificationsContainer";
-import { useEffect } from "react";
 import { useState } from "react";
+import { useAuth } from "../AuthProvider/AuthProvider";
 
 function Navbar({ children }) {
   const [hovered, setHovered] = useState(false);
   const [opened, setOpened] = useState(false);
-  useEffect(() => {
-    if (hovered) {
-      document.querySelector(`.${styles.notes} img`).src =
-        "./src/components/Navbar/glowyNotes.svg";
-    } else {
-      document.querySelector(`.${styles.notes} img`).src =
-        "./src/components/Navbar/notes.svg";
-    }
-  }
-  , [hovered]);
-  
+
+  const { isLoggedIn } = useAuth();
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -27,7 +19,7 @@ function Navbar({ children }) {
   };
 
   const handleClick = () => {
-    setOpened(!opened);
+    setOpened((opened) => !opened);
   };
 
   return (
@@ -43,10 +35,27 @@ function Navbar({ children }) {
       <ul className={styles.contents}>
         <li>HOME</li>
         <li>ABOUT</li>
-        <li>SIGN UP</li>
-        <li>LOGIN</li>
-        <li className={styles.notes} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleClick} ><img src="./src/components/Navbar/notes.svg" alt="Notifications" /></li>
-        <NotificationsContainer opened = {opened} />
+        {!isLoggedIn && (
+          <li>
+            <Link to="/login">LOGIN</Link>
+          </li>
+        )}
+        <li
+          className={styles.notes}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={handleClick}
+        >
+          <img
+            src={
+              hovered
+                ? "./src/components/Navbar/glowynotes.svg"
+                : "./src/components/Navbar/notes.svg"
+            }
+            alt="Notifications"
+          />
+        </li>
+        <NotificationsContainer opened={opened} />
       </ul>
     </div>
   );

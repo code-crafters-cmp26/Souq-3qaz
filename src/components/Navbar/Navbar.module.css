@@ -13,6 +13,11 @@
   background-color: #37211d;
   z-index: 1;
 }
+
+.navbar a {
+  color: #e0b21a;
+}
+
 .logocontainer {
   margin-left: 50px;
 }
@@ -38,6 +43,7 @@
   text-shadow: 0px 0px 3px #ebd17c;
   cursor: pointer;
 }
+
 .active {
   color: #e0b21a;
   text-shadow: 0px 0px 4px #efc53b;

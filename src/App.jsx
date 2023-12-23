@@ -15,28 +15,33 @@ import Reports from "./pages/Reports/Reports";
 
 import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
+import SignupPage from "./pages/Signup/SignupPage";
+import AddProductPage from "./pages/AddProduct/AddProductPage";
 
 function App() {
   return (
     <>
-      <Navbar>
-        <Searchbar />
-      </Navbar>
       <BrowserRouter>
+        <Navbar>
+          <Searchbar />
+        </Navbar>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/product" element={<ProductPage />} />
+          {/* <Route path="/product" element={<ProductPage />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductPage />} />
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/about" element={<About />} />
           <Route path="/employee" element={<Employee />} />
           <Route path="employee/reports" element={<Reports />} />
 
-
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/addproduct" element={<AddProductPage />} />
+          {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
       </BrowserRouter>
       {/* <ChatsNav />

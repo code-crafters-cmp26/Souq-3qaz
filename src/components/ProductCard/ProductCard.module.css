@@ -48,6 +48,11 @@
   margin-bottom: 0;
 }
 
+.product_card span {
+  color: rgb(0, 174, 0);
+  font-weight: bolder;
+}
+
 .favicon {
   position: absolute;
   top: 15px;
