@@ -531,6 +531,53 @@ headers
 }
 ```
 
+## upgrade to permium
+### Api Route 
+`
+Endpoint : 'Post /api/v1/user/Customer/upgrade'
+`
+`
+Authorization: Bearer JWT (for a customer and normal not permium)  As a Header in Req
+`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/user/Customer/upgrade'
+``
+### Headers
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+### Body
+```json
+{
+}
+```
+### Response Example:
+```json
+{
+    "status": "success"
+}
+```
+
+### OR
+```json
+{
+    "status": "fail",
+    "message": "You Already Have Done This Before"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "not enough money in your balance"
+}
+```
+
+
 
 
 

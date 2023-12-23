@@ -32,6 +32,10 @@ router
   .post(authController.protectForCustomer, userController.rechargeBalance);
 
 router
+  .route('/Customer/upgrade')
+  .post(authController.protectForCustomer, userController.upgradeToPremium);
+
+router
   .route('/Customer/:id')
   .get(userController.getCustomerById)
 
