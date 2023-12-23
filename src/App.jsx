@@ -11,6 +11,7 @@ import ProductsPage from "./pages/Products/ProductsPage";
 // import ChatsNav from "./components/ChatsNav/ChatsNav";
 import Settings from "./pages/Settings/Settings";
 import Employee from "./pages/Employee/Employee";
+import Reports from "./pages/Reports/Reports";
 
 import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
@@ -36,6 +37,8 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/about" element={<About />} />
           <Route path="/employee" element={<Employee />} />
+          <Route path="employee/reports" element={<Reports />} />
+
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/addproduct" element={<AddProductPage />} />
           {/* <Route path="*" element={<AddProductPage />} /> */}
