@@ -42,7 +42,7 @@ exports.getProductById = catchAsync(async (req, res, next) => {
 
 exports.createProduct = catchAsync(async (req, res, next) => {
   const {
-    Name, Image, PreRelease, Price, Description, Quantity, Category } = req.body;
+    Name, Image, PreRelease, Price, Description, StoredIn, Quantity, Category } = req.body;
   const currentDate = new Date();
   const formattedDate = format(currentDate, 'yyyy-MM-dd HH:mm:ss');
 
@@ -51,16 +51,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 
   const result = await db.query(`SELECT * FROM product WHERE name = '${Name}' AND sellerId = ${sellerId};`);
 
-  const minn = await db.query(`SELECT w.id , w.maxquantity , COALESCE(SUM(p.quantity), 0) AS current_capacity FROM warehouse w
-                                  LEFT JOIN product p ON w.id = p.storedin
-                                  GROUP BY w.id
-                                  ORDER BY current_capacity ASC
-                                  LIMIT 1;`);
-
-  const StoredIn = minn['rows'][0]['id'];
-
   if (result['rowCount'] === 0) {
-
     const adding = await db.query(`INSERT INTO product VALUES(default,'${Image}','${Name}',${PreRelease},
       ${Price},'${Description}',${Quantity},${sellerId},'${formattedDate}','${Category}','${StoredIn}') RETURNING *;`);
 
@@ -72,9 +63,10 @@ exports.createProduct = catchAsync(async (req, res, next) => {
     }
     res.status(500).json({
       status: 'success',
-      message: adding['rows']
+      message: result['rows']
     });
   }
+
 
   const increase = await db.query(`UPDATE product SET quantity = ${Quantity + result['rows'][0]['quantity']} WHERE id = ${result['rows'][0]['id']};`);
 
@@ -84,7 +76,6 @@ exports.createProduct = catchAsync(async (req, res, next) => {
       message: 'try again later'
     });
   }
-
   res.status(200).json({
     status: 'success',
     product: result['rows']

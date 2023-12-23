@@ -73,26 +73,3 @@ exports.getCustomerById = catchAsync(async (req, res, next) => {
     customer: result['rows']
   });
 });
-
-exports.rechargeBalance = catchAsync(async (req, res, next) => {
-  const customerId = req.user['rows'][0]['id'];
-
-  const { money } = req.body;
-
-  if (!money) {
-    return next(new AppError('Money is required', 400));
-  }
-
-  if (money <= 0) {
-    return next(new AppError('Money money must be positive', 400));
-  }
-
-  const result = await db.query(`UPDATE "User" SET balance = balance + ${money} WHERE id = ${customerId};`);
-  const rows = result['rowCount'];
-  if (rows == 0) {
-    return next(new AppError('something went wrong', 500));
-  }
-  res.status(200).json({
-    status: 'success',
-  });
-});

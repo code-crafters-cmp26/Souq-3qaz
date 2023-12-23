@@ -142,7 +142,6 @@ CREATE Table Transaction (
   Returned Bool NOT NULL DEFAULT false,
   ShippedVia INTEGER NOT NULL,
   Quantity smallint NOT NULL,
-  shipmentId SERIAL NOT NULL,
   CONSTRAINT pk_Transaction PRIMARY KEY(TransactionId)
 );
 
@@ -236,7 +235,7 @@ ALTER TABLE Transaction ADD CONSTRAINT fk_ShippedVia_ShippingCompany FOREIGN KEY
 ---Review---
 ALTER TABLE Review ADD CONSTRAINT fk_ProductId_Product FOREIGN KEY (ProductId) REFERENCES Product(Id) ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE Review ADD CONSTRAINT fk_CustomerId_Customer FOREIGN KEY (CustomerId) REFERENCES Customer(Id) ON DELETE RESTRICT ON UPDATE CASCADE;
-ALTER TABLE review ADD CONSTRAINT unique_Product_Customer_Review UNIQUE (customerid, productid);
+ALTER TABLE review ADD CONSTRAINT unique_Product_Customer_Review UNIQUE (customerid, productid);
 
 ---WishList---
 ALTER TABLE WishList ADD CONSTRAINT fk_ProductId_Product FOREIGN KEY (ProductId) REFERENCES Product(Id) ON DELETE CASCADE ON UPDATE CASCADE;

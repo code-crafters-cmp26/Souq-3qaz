@@ -28,10 +28,6 @@ router
   .get(userController.getAllCustomers);
 
 router
-  .route('/Customer/recharge')
-  .post(authController.protectForCustomer, userController.rechargeBalance);
-
-router
   .route('/Customer/:id')
   .get(userController.getCustomerById)
 
