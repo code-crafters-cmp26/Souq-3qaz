@@ -6,12 +6,20 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getAllProducts = async (req, res) => {
-  const x = await db.query('SELECT * FROM  product');
+
+  const result = await db.query('SELECT * FROM  product');
+
+  for (let i = 0; i < result['rows'].length; i++) {
+    const sellerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][i]['sellerid']};`)
+    result['rows'][i]['sellerFName'] = sellerName['rows'][0]['firstname'];
+    result['rows'][i]['sellerLName'] = sellerName['rows'][0]['lastname'];
+  }
+
   try {
     res.status(200).json({
       status: 'success',
-      count: x['rowCount'],
-      products: x['rows']
+      count: result['rowCount'],
+      products: result['rows']
     });
   } catch (error) {
     res.status(400).json({
@@ -27,6 +35,9 @@ exports.getProductById = catchAsync(async (req, res, next) => {
     return next(new AppError('Id must only contain numerical digits', 400));
   }
   const result = await db.query(`SELECT * FROM  product WHERE id = ${id};`);
+  const sellerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][0]['sellerid']};`)
+  result['rows'][0]['sellerFName'] = sellerName['rows'][0]['firstname'];
+  result['rows'][0]['sellerLName'] = sellerName['rows'][0]['lastname'];
   if (result['rowCount'] === 0) {
     res.status(404).json({
       status: 'fail',

@@ -8,7 +8,7 @@ function Navbar({ children }) {
   const [hovered, setHovered] = useState(false);
   const [opened, setOpened] = useState(false);
 
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -20,6 +20,10 @@ function Navbar({ children }) {
 
   const handleClick = () => {
     setOpened((opened) => !opened);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -40,6 +44,7 @@ function Navbar({ children }) {
             <Link to="/login">LOGIN</Link>
           </li>
         )}
+        {isLoggedIn && <li onClick={handleLogout}>LOGOUT</li>}
         <li
           className={styles.notes}
           onMouseEnter={handleMouseEnter}
