@@ -2,10 +2,12 @@ import styles from "./ProfilePage.module.css";
 import DrawerItem from "../../components/DrawerItem/DrawerItem";
 import Card from "../../components/Card/Card";
 import { useState } from "react";
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
 
 function ProfilePage() {
   const [points, setPoints] = useState("");
   const [cardnumber, setCardNumber] = useState(0);
+  const { userData } = useAuth();
   const handleChangePoints = (e) => {
     setPoints(e.target.value);
   };
@@ -33,6 +35,7 @@ function ProfilePage() {
         console.log(error.message);
       });
   };
+
   return (
     <div className={styles.profile_page}>
       <div className={styles.profile_page__left_panel}>
@@ -100,11 +103,22 @@ function ProfilePage() {
                 handleClick(6);
               }}
             />
+            <Card
+              img="./src/pages/Profile/contact.svg"
+              title="Upgrade to premium"
+              description="Reach out to us for any questions"
+              onClick={() => {
+                handleClick(6);
+              }}
+            />
           </>
         )}
 
         {cardnumber === 5 && (
           <>
+            <div className={styles.balance}>
+              Your balance: {userData.balance}{" "}
+            </div>
             <Card
               img="./src/pages/Profile/balance.svg"
               title="Recharge Balance"

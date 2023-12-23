@@ -15,7 +15,7 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const { login, setUserType, setUserData } = useAuth();
+  const { login } = useAuth();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -47,11 +47,11 @@ function Login() {
         } else if (data.status === "success") {
           const token = data.token;
           localStorage.setItem("token", `Bearer ${token}`);
-          login();
-          console.log(localStorage.getItem("token"));
           const role = data.role;
-          setUserType(role);
-          setUserData(data.user);
+          localStorage.setItem("isLoggedIn", JSON.stringify(true));
+          localStorage.setItem("userType", JSON.stringify(role));
+          localStorage.setItem("userData", JSON.stringify(data.user));
+          login();
           navigate("/");
           //console.log(role);
         }
