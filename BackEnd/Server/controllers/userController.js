@@ -5,8 +5,6 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 
-
-
 exports.getAllUsers = catchAsync(async (req, res) => {
   const x = await db.query('SELECT * FROM  "User"');
   res.status(200).json({
@@ -92,6 +90,29 @@ exports.rechargeBalance = catchAsync(async (req, res, next) => {
   if (rows == 0) {
     return next(new AppError('something went wrong', 500));
   }
+  res.status(200).json({
+    status: 'success',
+  });
+});
+
+exports.upgradeToPremium = catchAsync(async (req, res, next) => {
+  const customerId = req.user['rows'][0]['id'];
+
+  const balance = await db.query(`SELECT balance FROM "User" WHERE id = ${customerId}`);
+  if (balance['rows'][0]['balance'] < 200) {
+    return next(new AppError('not enough money in your balance', 402));
+  }
+
+  const type = await db.query(`SELECT type FROM Customer WHERE id = ${customerId}`);
+
+  if (type['rows'][0]['type'] != 'Normal') {
+    return next(new AppError('You Already Have Done This Before', 409));
+  }
+
+  await db.query(`UPDATE "User" SET balance = balance - 200 WHERE id = ${customerId};`);
+  await db.query(`UPDATE Customer SET type = 'Premium' WHERE id = ${customerId};`);
+
+
   res.status(200).json({
     status: 'success',
   });
