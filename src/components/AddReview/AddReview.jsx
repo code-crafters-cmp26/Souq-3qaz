@@ -1,17 +1,21 @@
 import styles from './AddReview.module.css'
 import StarRating from "../../components/StarRating/StarRating";
+import Button from "../../components/Button/Button";
 import { useState } from 'react';
 import { useAuth } from '../AuthProvider/AuthProvider';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-function AddReview() {
+function AddReview({isSuccessfulSubmit}) {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
-
+    const [success, setSuccess] = useState(false);
+    const { id } = useParams();
+    const { isLoggedIn } = useAuth();
     function handleRatingChange(rating) {
         setRating(rating);
     }
     function handleSubmit() {
-        const { isLoggedIn } = useAuth();
         if (!isLoggedIn) {
             alert("Please login to add a review");
             return;
@@ -24,7 +28,7 @@ function AddReview() {
             alert("Please enter a comment");
             return;
         }
-        fetch("http://localhost:3000/api/v1/review", {
+        fetch(`http://localhost:3000/api/v1/review/${id}`, {
             method: "POST",
             headers: {
                 Authorization: localStorage.getItem("token"),
@@ -36,16 +40,23 @@ function AddReview() {
             })
         }).then(res => res.json())
             .then(data => {
-                if (data.status == 200) {
+                if (data.status == 'success') {
                     alert("Review added successfully");
+                    setSuccess(true);
                     window.location.reload();
                 }
                 else {
                     alert("Error adding review");
+                    console.log(data);
+                    setSuccess(false);
                 }
             })
     }
-    handleCommentChange = (e) => {
+    useEffect(() => {
+        isSuccessfulSubmit(success);
+    }, [success, isSuccessfulSubmit]);
+    
+    function handleCommentChange(e) {
         setComment(e.target.value);
     }
     return (
@@ -61,7 +72,7 @@ function AddReview() {
                     <textarea placeholder="Comment" value={comment} onChange={handleCommentChange}/>
                 </div>
                 <div className={styles.submit}>
-                    <button onClick={handleSubmit}>Submit</button>
+                    <Button text="Submit" onClick={handleSubmit} />
                 </div>
             </div>
         </div>

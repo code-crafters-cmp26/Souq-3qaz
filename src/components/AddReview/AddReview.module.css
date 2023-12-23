@@ -1,0 +1,23 @@
+.add_review{
+    margin-bottom:50px;
+}
+
+.comment textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Set a minimum height */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for the focused state */
+.comment textarea:focus {
+    border-color: #e3941e; /* Highlight border color on focus */
+    outline: none; /* Remove default focus outline */
+  }
