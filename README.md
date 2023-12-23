@@ -157,7 +157,7 @@ headers
 }
 {
     "status": "fail",
-    "message": "this eamil is already exists"
+    "message": "You Already Have Done This Before"
 }
 {
     "status": "fail",
@@ -418,6 +418,70 @@ headers
     "message": "only review owner can delete it"
 }
 ```
+
+## Buy Products
+### Api Route 
+`
+Endpoint : 'Post /api/v1/buy'
+`
+`
+Authorization: Bearer JWT (for a customer)  As a Header in Req
+`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/buy'
+``
+### Headers
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+### Body
+```json
+{
+	"cart":[
+        {
+            "productId":15,
+            "Quantity":3,
+            "shippedvia":1
+        },
+        {
+            "productId":13,
+            "Quantity":1,
+            "shippedvia":1
+        }
+    ]
+}
+```
+### Response Example:
+```json
+{
+    "status": "success"
+}
+```
+
+### OR
+```json
+{
+    "status": "fail",
+    "message": "not enough money in your balance"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "bad request"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "No Product With This Id Found"
+}```
 
 
 

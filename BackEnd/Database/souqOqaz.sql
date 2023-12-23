@@ -142,6 +142,7 @@ CREATE Table Transaction (
   Returned Bool NOT NULL DEFAULT false,
   ShippedVia INTEGER NOT NULL,
   Quantity smallint NOT NULL,
+  shipmentId SERIAL NOT NULL,
   CONSTRAINT pk_Transaction PRIMARY KEY(TransactionId)
 );
 
