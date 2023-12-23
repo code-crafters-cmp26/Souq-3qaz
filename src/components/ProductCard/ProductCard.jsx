@@ -1,12 +1,31 @@
 import styles from "./ProductCard.module.css";
 import Button from "../Button/Button";
 function ProductCard({ product }) {
+  const handleAddToWishlist = () => {
+    fetch(`http://localhost:3000/api/v1/product/${product.id}`, {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <div className={styles.product_card}>
       <div className={styles.product_img}>
         <img src={product.image} alt="Iphone" />
         <div className={styles.favicon}>
-          <Button type="button" text="🤍" />
+          <Button type="button" text="🤍" onClick={handleAddToWishlist} />
         </div>
         <div className={styles.carticon}>
           <Button type="button" text="🛒" />
