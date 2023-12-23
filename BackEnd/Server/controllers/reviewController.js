@@ -65,6 +65,12 @@ exports.getReviews = catchAsync(async (req, res, next) => {
 
   const result = await db.query(`SELECT * FROM review Where productid = ${productId}`);
 
+  for (let i = 0; i < result['rows'].length; i++) {
+    const customerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][i]['customerid']};`)
+    result['rows'][i]['customerFName'] = customerName['rows'][0]['firstname'];
+    result['rows'][i]['customerLName'] = customerName['rows'][0]['lastname'];
+  }
+
   res.status(200).json({
     status: 'success',
     reviews: result['rows']
