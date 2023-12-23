@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   // Check local storage on component mount
   useEffect(() => {
     let storedIsLoggedIn = false;
-    let storedUserType = false;
+    let storedUserType = "";
     if (localStorage.getItem("token")) {
       storedIsLoggedIn = localStorage.getItem("isLoggedIn");
       storedUserType = localStorage.getItem("userType");

@@ -47,10 +47,11 @@ function Login() {
         } else if (data.status === "success") {
           const token = data.token;
           localStorage.setItem("token", `Bearer ${token}`);
-          login();
-          console.log(localStorage.getItem("token"));
           const role = data.role;
           setUserType(role);
+          login();
+          console.log(localStorage.getItem("token"));
+          console.log(data.user);
           setUserData(data.user);
           navigate("/");
           //console.log(role);
