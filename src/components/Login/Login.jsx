@@ -5,11 +5,17 @@ import Button from "../Button/Button";
 import Checkbox from "../Checkbox/Checkbox";
 import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useAuth } from "../AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Error, setError] = useState(0);
+
+  const navigate = useNavigate();
+
+  const { login, setUserType } = useAuth();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -41,7 +47,12 @@ function Login() {
         } else if (data.status === "success") {
           const token = data.token;
           localStorage.setItem("token", `Bearer ${token}`);
+          login();
           console.log(localStorage.getItem("token"));
+          const role = data.role;
+          setUserType(role);
+          navigate("/");
+          //console.log(role);
         }
         //console.log(data);
       })
