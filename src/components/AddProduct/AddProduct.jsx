@@ -1,15 +1,14 @@
 import styles from "./AddProduct.module.css";
-import Button from "../Button/Button";
 import { useReducer } from "react";
 
 const initialState = {
   name: "",
   image: "",
   prerelease: false,
-  price: NaN,
+  price: "",
   discription: "",
-  storedin: 0,
-  quantity: NaN,
+  storedin: "1",
+  quantity: "",
   category: "",
 };
 
@@ -43,7 +42,8 @@ function AddProduct() {
     dispatch({ type: "CHANGE", payload: name, value: checked });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     fetch("http://localhost:3000/api/v1/product", {
       method: "POST",
       headers: {
