@@ -28,15 +28,17 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/product" element={<ProductPage />} />
+          {/* <Route path="/product" element={<ProductPage />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductPage />} />
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/about" element={<About />} />
           <Route path="/employee" element={<Employee />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/addproduct" element={<AddProductPage />} />
+          {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
       </BrowserRouter>
       {/* <ChatsNav />
