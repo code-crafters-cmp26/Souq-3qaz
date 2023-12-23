@@ -8,6 +8,8 @@ function Productpage() {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
 
+  const handleAddToWishlist = () => {};
+
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/product/${id}`, {
       method: "GET",
@@ -52,6 +54,7 @@ function Productpage() {
         </section>
         <section className={styles.purchase}>
           <div className={styles.date}>Date of releasing: {extractedDate}</div>
+          <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
           <Button text="Add to cart" />
           <Button text="Buy Now" />
         </section>
