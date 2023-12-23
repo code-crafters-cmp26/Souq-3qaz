@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import styles from "./Productpage.module.css";
 import { useEffect, useState } from "react";
-import StarRating from "../../components/StarRating/StarRating";
 
 function Productpage() {
   const { id } = useParams();
@@ -46,7 +45,6 @@ function Productpage() {
           <Button text="Buy Now" />
         </div>
       </div>
-      <StarRating />
     </div>
   );
 }
