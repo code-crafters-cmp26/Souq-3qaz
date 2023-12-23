@@ -70,6 +70,17 @@ const handleNotOwnerOfReview = err => {
   return new AppError(message, 401);
 };
 
+const handleNoMoney = err => {
+  const message = "Money is required";
+  return new AppError(message, 400);
+};
+
+
+const handleMoneyIsNegative = err => {
+  const message = "Money money must be positive";
+  return new AppError(message, 400);
+};
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -115,6 +126,8 @@ module.exports = (err, req, res, next) => {
     else if (error.message == 'please provide email & password"') error = handleNoEmailOrPass(error);
     else if (error.message == 'incorrect email or password"') error = handleWrongEmailOrPass(error);
     else if (error.message == 'only review owner can delete it') error = handleNotOwnerOfReview(error);
+    else if (error.message == 'Money is required') error = handleNoMoney(error);
+    else if (error.message == 'handleMoneyIsNegative') error = handleMoneyIsNegative(error);
     else if (error.message == 'No Review With This Id Found') error = handleNoReviewFound(error);
     else if (error.constraint && error.constraint == 'review_rating_check') error = handleReviewNotInRage(error);
     else if (error.detail && error.detail.match(/Key \(.+?\) already exists/)) error = handleProductExistInWish(error);
