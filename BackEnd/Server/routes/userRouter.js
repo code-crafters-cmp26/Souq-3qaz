@@ -31,6 +31,10 @@ router
   .route('/Customer/recharge')
   .post(authController.protectForCustomer, userController.rechargeBalance);
 
+// router
+//   .route('/Customer/updateInfo')
+//   .post(authController.protectForCustomer, userController.rechargeBalance);
+
 router
   .route('/Customer/upgrade')
   .post(authController.protectForCustomer, userController.upgradeToPremium);
