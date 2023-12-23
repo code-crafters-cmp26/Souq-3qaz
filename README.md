@@ -386,6 +386,13 @@ headers
     "message": "rating must be between 0 and 5"
 }
 ```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "This Action Need Customer Auth"
+}```
+
 
 ## Delete Review By Id
 ### Api Route 

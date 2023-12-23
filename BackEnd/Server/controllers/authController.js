@@ -211,7 +211,7 @@ exports.protectForCustomer = catchAsync(async (req, res, next) => {
   const isCustomer = await db.query(`SELECT * FROM Customer WHERE id = ${freshUser['rows'][0]['id']}`);
 
   if (!isCustomer['rowCount']) {
-    return next(new AppError('Need Customer to Add to Wish List', 403));
+    return next(new AppError('This Action Need Customer Auth', 403));
   }
 
   req.user = freshUser;
