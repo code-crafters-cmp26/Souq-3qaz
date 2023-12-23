@@ -20,10 +20,10 @@ import AddProductPage from "./pages/AddProduct/AddProductPage";
 function App() {
   return (
     <>
-      <Navbar>
-        <Searchbar />
-      </Navbar>
       <BrowserRouter>
+        <Navbar>
+          <Searchbar />
+        </Navbar>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LoginPage />} />

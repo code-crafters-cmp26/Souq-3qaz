@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import NotificationsContainer from "../NotificationsContainer/NotificationsContainer";
 import { useState } from "react";
+import { useAuth } from "../AuthProvider/AuthProvider";
 
 function Navbar({ children }) {
   const [hovered, setHovered] = useState(false);
   const [opened, setOpened] = useState(false);
+
+  const { isLoggedIn } = useAuth();
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -31,8 +35,11 @@ function Navbar({ children }) {
       <ul className={styles.contents}>
         <li>HOME</li>
         <li>ABOUT</li>
-        <li>SIGN UP</li>
-        <li>LOGIN</li>
+        {!isLoggedIn && (
+          <li>
+            <Link to="/login">LOGIN</Link>
+          </li>
+        )}
         <li
           className={styles.notes}
           onMouseEnter={handleMouseEnter}
