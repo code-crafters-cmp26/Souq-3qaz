@@ -14,6 +14,7 @@ import Employee from "./pages/Employee/Employee";
 
 import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
+import AddProductPage from "./pages/AddProduct/AddProductPage";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/about" element={<About />} />
           <Route path="/employee" element={<Employee />} />
-
+          <Route path="/addproduct" element={<AddProductPage />} />
         </Routes>
       </BrowserRouter>
       {/* <ChatsNav />
