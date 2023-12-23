@@ -14,7 +14,7 @@ function Login() {
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ email: "adham@g.com", password: "passwod123456" }),
+      body: JSON.stringify({ email: "bisy@g.c", password: "Password123456" }),
     })
       .then((res) => {
         return res.json();
