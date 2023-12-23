@@ -35,6 +35,13 @@
 .productpage button {
   background-color: var(--buttons-color);
   width: 60%;
+  transition: 0.6s;
+  color: white;
+}
+.productpage button:hover {
+  background-color: #ff8f2d;
+  box-shadow: 0px 0px 6px #ff8f2d;
+  text-shadow: 0px 0px 1px white;
 }
 
 .name {
@@ -56,4 +63,21 @@
   width: fit-content;
   padding: 5px;
   color: black;
+}
+
+.date {
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+section {
+  padding: 10px;
+}
+
+section:not(:last-child) {
+  content: "";
+  border-right: 2px solid; /* Adjust the color and style as needed */
+  margin-right: 10px; /* Adjust the spacing between items */
+  border-left: 2px solid;
+  border-color: lightgray;
 }

@@ -9,6 +9,10 @@ router
   .post(authController.protectForSeller, productController.createProduct);
 
 router
+  .route('/searchProduct')
+  .post(productController.getProductByName);
+
+router
   .route('/:id')
   .get(productController.getProductById)
   .post(authController.protectForCustomer, productController.AddToWishList);

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import NotificationsContainer from "../NotificationsContainer/NotificationsContainer";
 import { useState } from "react";
@@ -9,6 +9,8 @@ function Navbar({ children }) {
   const [opened, setOpened] = useState(false);
 
   const { isLoggedIn, logout } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -24,21 +26,22 @@ function Navbar({ children }) {
 
   const handleLogout = () => {
     logout();
+    navigate("/");
   };
 
   return (
     <div className={styles.navbar}>
       <div className={styles.logocontainer}>
-        <img
-          className={styles.logo}
-          src="./src/components/Navbar/SOUQ 3QAZ.png"
-        />
+        <Link to="/">
+          <img
+            className={styles.logo}
+            src="./src/components/Navbar/SOUQ 3QAZ.png"
+          />
+        </Link>
       </div>
       {children}
 
       <ul className={styles.contents}>
-        <li>HOME</li>
-        <li>ABOUT</li>
         {!isLoggedIn && (
           <li>
             <Link to="/login">LOGIN</Link>
@@ -61,6 +64,12 @@ function Navbar({ children }) {
           />
         </li>
         <NotificationsContainer opened={opened} />
+
+        {isLoggedIn && (
+          <li>
+            <Link to="/profile">PROFILE</Link>
+          </li>
+        )}
       </ul>
     </div>
   );

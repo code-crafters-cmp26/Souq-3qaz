@@ -11,28 +11,30 @@ export const AuthProvider = ({ children }) => {
   // Check local storage on component mount
   useEffect(() => {
     let storedIsLoggedIn = false;
-    let storedUserType = false;
+    let storedUserType = "";
+    let storedUserData = {};
     if (localStorage.getItem("token")) {
       storedIsLoggedIn = localStorage.getItem("isLoggedIn");
       storedUserType = localStorage.getItem("userType");
+      storedUserData = localStorage.getItem("userData");
     }
 
     if (storedIsLoggedIn) {
       setIsLoggedIn(JSON.parse(storedIsLoggedIn));
-    }
-
-    if (storedUserType) {
       setUserType(JSON.parse(storedUserType));
+      setUserData(JSON.parse(storedUserData));
     }
   }, []);
 
   const login = () => {
-    // Perform login logic
+    // Perform login logics
+    const storedUserData = localStorage.getItem("userData");
+    const storedUserType = localStorage.getItem("userType");
+    setUserType(JSON.parse(storedUserType));
     setIsLoggedIn(true);
+    setUserData(JSON.parse(storedUserData));
 
     // Store in local storage
-    localStorage.setItem("isLoggedIn", JSON.stringify(true));
-    localStorage.setItem("userType", JSON.stringify(userType));
   };
 
   const logout = () => {
@@ -43,6 +45,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userType");
     localStorage.removeItem("token");
+    localStorage.removeItem("userData");
   };
 
   return (
