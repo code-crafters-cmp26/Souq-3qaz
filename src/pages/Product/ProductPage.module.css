@@ -1,7 +1,7 @@
 .productpage {
   color: black;
   display: flex;
-  margin-top: 200px;
+  margin-top: 70px;
   column-gap: 20px;
   width: 100%;
 }
@@ -32,4 +32,19 @@
 }
 
 .productcontainer {
+}
+
+.seller {
+  margin: 40px;
+}
+
+.category {
+  float: right;
+  margin-bottom: 50px;
+  margin-left: auto;
+  background-color: rgb(204, 204, 204);
+  border-radius: 15px;
+  width: fit-content;
+  padding: 5px;
+  color: black;
 }

@@ -54,3 +54,20 @@ exports.deleteReview = catchAsync(async (req, res, next) => {
   });
 
 });
+
+exports.getReviews = catchAsync(async (req, res, next) => {
+
+  const productId = req.params.id;
+
+  if (!(/^\d+$/.test(productId)) || productId < 0) {
+    return next(new AppError('No Product With This Id Found', 400));
+  }
+
+  const result = await db.query(`SELECT * FROM review Where productid = ${productId}`);
+
+  res.status(200).json({
+    status: 'success',
+    reviews: result['rows']
+  });
+
+});

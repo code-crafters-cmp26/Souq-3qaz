@@ -15,7 +15,7 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const { login, setUserType } = useAuth();
+  const { login, setUserType, setUserData } = useAuth();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -51,6 +51,7 @@ function Login() {
           console.log(localStorage.getItem("token"));
           const role = data.role;
           setUserType(role);
+          setUserData(data.user);
           navigate("/");
           //console.log(role);
         }

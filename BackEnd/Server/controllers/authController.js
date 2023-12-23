@@ -106,6 +106,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('incorrect email or password', 401));
   }
 
+  const data = await db.query(`SELECT * FROM "User" WHERE email = '${email}';`);
   const user = await db.query(`SELECT password FROM "User" WHERE email = '${email}';`);
   const newUserId = await db.query(`SELECT id FROM "User" WHERE email = '${email}';`);
   const truePassword = user['rows'][0]['password'] + '';
@@ -120,11 +121,11 @@ exports.login = catchAsync(async (req, res, next) => {
   // @ts-ignore
   let roole = await db.query(`SELECT * FROM Seller WHERE id = ${newUserId['rows'][0]['id']};`);
   if (roole['rowCount'] != 0) {
-    createSendToken(user, newUserId['rows'][0]['id'], 'Seller', 200, res);
+    createSendToken(data, newUserId['rows'][0]['id'], 'Seller', 200, res);
   }
   roole = await db.query(`SELECT * FROM Customer WHERE id = ${newUserId['rows'][0]['id']};`);
   if (roole['rowCount'] != 0) {
-    createSendToken(user, newUserId['rows'][0]['id'], 'Customer', 200, res);
+    createSendToken(data, newUserId['rows'][0]['id'], 'Customer', 200, res);
   }
 });
 
@@ -185,6 +186,7 @@ exports.protectForSeller = catchAsync(async (req, res, next) => {
 
 // @ts-ignore
 exports.protectForCustomer = catchAsync(async (req, res, next) => {
+
 
   let token;
   // 1) getting the token and check if its there

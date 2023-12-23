@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
+  const [userData, setUserData] = useState(null);
 
   // Check local storage on component mount
   useEffect(() => {
@@ -41,11 +42,20 @@ export const AuthProvider = ({ children }) => {
     // Clear from local storage
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userType");
+    localStorage.removeItem("token");
   };
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, login, logout, userType, setUserType }}
+      value={{
+        isLoggedIn,
+        login,
+        logout,
+        userType,
+        setUserType,
+        userData,
+        setUserData,
+      }}
     >
       {children}
     </AuthContext.Provider>
