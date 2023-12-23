@@ -10,14 +10,14 @@ const initialState = {
   email: "",
   password: "",
   confirmpassword: "",
-  gender: "",
   nationalid: "",
+  gender: "",
   phonenumber: "",
   country: "",
   city: "",
   street: "",
   buildingnumber: "",
-  apartmentnumber: "",
+  apartmentnumber: -1,
   stage: 0,
 };
 
@@ -46,12 +46,17 @@ function Signup() {
   const location = useLocation();
   const userType = new URLSearchParams(location.search).get("userType");
 
-  const isFirstStageComplete = Object.values(state)
-    .slice(0, 5)
-    .every((value) => value !== "");
+  const isFirstStageComplete =
+    userType == "customer"
+      ? Object.values(state)
+          .slice(0, 5)
+          .every((value) => value !== "")
+      : Object.values(state)
+          .slice(0, 6)
+          .every((value) => value !== "");
 
   const isSecondStageComplete = Object.values(state)
-    .slice(5, 11)
+    .slice(6, 12)
     .every((value) => value !== "");
 
   const handleChange = (e) => {
@@ -70,6 +75,9 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("clicked");
+
+    const role = state.usertype === "seller" ? "Seller" : "Customer";
+
     fetch("http://localhost:3000/api/v1/user/signup", {
       method: "POST",
       headers: {
@@ -87,7 +95,8 @@ function Signup() {
         Country: state.country,
         City: state.city,
         Street: state.street,
-        role: "Customer", //enum of {'Seller','Customer'}
+        role: role, //enum of {'Seller','Customer'}
+        ...(state.type === "seller" && { NId: state.nationalid }),
       }),
     })
       .then((res) => {
@@ -204,7 +213,7 @@ function Signup() {
           />
           <Input
             text="Building Number"
-            type="text"
+            type="number"
             name="buildingnumber"
             value={state.buildingnumber}
             handlevalue={handleChange}

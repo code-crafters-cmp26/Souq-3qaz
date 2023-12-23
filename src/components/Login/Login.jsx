@@ -36,9 +36,14 @@ function Login() {
         return res.json();
       })
       .then((data) => {
-        if (data.error.statusCode == 401) {
+        if (data.error?.statusCode == 401) {
           setError(1);
+        } else if (data.status === "success") {
+          const token = data.token;
+          localStorage.setItem("token", `Bearer ${token}`);
+          console.log(localStorage.getItem("token"));
         }
+        //console.log(data);
       })
       .catch((error) => {
         console.log(error.message);
