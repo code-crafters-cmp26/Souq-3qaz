@@ -76,7 +76,7 @@ function Signup() {
     e.preventDefault();
     console.log("clicked");
 
-    const role = state.usertype === "seller" ? "Seller" : "Customer";
+    const role = userType === "seller" ? "Seller" : "Customer";
 
     fetch("http://localhost:3000/api/v1/user/signup", {
       method: "POST",
@@ -96,7 +96,7 @@ function Signup() {
         City: state.city,
         Street: state.street,
         role: role, //enum of {'Seller','Customer'}
-        ...(state.type === "seller" && { NId: state.nationalid }),
+        ...(userType === "seller" && { NId: state.nationalid }),
       }),
     })
       .then((res) => {
@@ -135,6 +135,15 @@ function Signup() {
             value={state.lastname}
             handlevalue={handleChange}
           />
+          {userType == "seller" && (
+            <Input
+              text="National ID"
+              type="number"
+              name="nationalid"
+              value={state.nationalid}
+              handlevalue={handleChange}
+            />
+          )}
           <Input
             text="Email"
             type="email"
@@ -173,15 +182,6 @@ function Signup() {
             value={state.gender}
             handlevalue={handleChange}
           />
-          {userType == "seller" && (
-            <Input
-              text="National ID"
-              type="number"
-              name="nationalid"
-              value={state.nationalid}
-              handlevalue={handleChange}
-            />
-          )}
           <Input
             text="Phone Number"
             type="number"
