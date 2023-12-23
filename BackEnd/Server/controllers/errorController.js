@@ -46,8 +46,39 @@ const handleWrongEmailOrPass = err => {
 };
 
 const handleProductExistInWish = err => {
-  const message = "You Already Wished This Product";
+  const message = "You Already Have Done This Before";
   return new AppError(message, 409);
+};
+
+const handleNoProductFound = err => {
+  const message = "No Product With This Id Found";
+  return new AppError(message, 404);
+};
+
+const handleNoReviewFound = err => {
+  const message = "No Review With This Id Found";
+  return new AppError(message, 404);
+};
+
+const handleReviewNotInRage = err => {
+  const message = "rating must be between 0 and 5";
+  return new AppError(message, 404);
+};
+
+const handleNotOwnerOfReview = err => {
+  const message = "only review owner can delete it";
+  return new AppError(message, 401);
+};
+
+const handleNoMoney = err => {
+  const message = "Money is required";
+  return new AppError(message, 400);
+};
+
+
+const handleMoneyIsNegative = err => {
+  const message = "Money money must be positive";
+  return new AppError(message, 400);
 };
 
 const sendErrorDev = (err, res) => {
@@ -60,7 +91,7 @@ const sendErrorDev = (err, res) => {
 }
 
 const sendErrorProd = (err, res) => {
-  // console.log(err.detail);
+  // console.log(err.message);
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
@@ -68,7 +99,7 @@ const sendErrorProd = (err, res) => {
     });
   }
   else {
-    // console.error('error is :::>', err);
+    console.error('error is :::>', err);
     res.status(500).json({
       status: 'error',
       message: 'something went wrong'
@@ -86,15 +117,21 @@ module.exports = (err, req, res, next) => {
   else if (process.env.NODE_ENV === 'production') {
     let error = err;
     if (error.message == 'some required Fields are empty') error = handleFieldsAreEmpty(error);
-    if (error.message == 'duplicate key value violates unique constraint \"unique_email\"') error = handleDublicateEmail(error);
-    if (error.message == 'Phone number must only contain numerical digits"') error = handlePhoneInvalid(error);
-    if (error.message == 'Email is invalid"') error = handleEmailInvalid(error);
-    if (error.message == 'role is invalid"') error = handleRoleInvalid(error);
-    if (error.message == 'NId is required for sellers"') error = handleNid(error);
-    if (error.message == 'NId must only contain numerical digits"') error = handleNidInvalid(error);
-    if (error.message == 'please provide email & password"') error = handleNoEmailOrPass(error);
-    if (error.message == 'incorrect email or password"') error = handleWrongEmailOrPass(error);
-    if (error.detail.match(/Key \(.+?\) already exists/)) error = handleProductExistInWish(error);
+    else if (error.message == 'duplicate key value violates unique constraint \"unique_email\"') error = handleDublicateEmail(error);
+    else if (error.message == 'Phone number must only contain numerical digits"') error = handlePhoneInvalid(error);
+    else if (error.message == 'Email is invalid"') error = handleEmailInvalid(error);
+    else if (error.message == 'role is invalid"') error = handleRoleInvalid(error);
+    else if (error.message == 'NId is required for sellers"') error = handleNid(error);
+    else if (error.message == 'NId must only contain numerical digits"') error = handleNidInvalid(error);
+    else if (error.message == 'please provide email & password"') error = handleNoEmailOrPass(error);
+    else if (error.message == 'incorrect email or password"') error = handleWrongEmailOrPass(error);
+    else if (error.message == 'only review owner can delete it') error = handleNotOwnerOfReview(error);
+    else if (error.message == 'Money is required') error = handleNoMoney(error);
+    else if (error.message == 'handleMoneyIsNegative') error = handleMoneyIsNegative(error);
+    else if (error.message == 'No Review With This Id Found') error = handleNoReviewFound(error);
+    else if (error.constraint && error.constraint == 'review_rating_check') error = handleReviewNotInRage(error);
+    else if (error.detail && error.detail.match(/Key \(.+?\) already exists/)) error = handleProductExistInWish(error);
+    else if (error.detail && /^Key.*is not present in table "product"\.$/.test(error.detail) || error.message == 'No Product With This Id Found') error = handleNoProductFound(error);
     sendErrorProd(error, res);
   }
 }
