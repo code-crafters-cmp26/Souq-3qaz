@@ -41,4 +41,9 @@ body {
   font-size: var(--normal-font-size);
   font-family: var(--body-font);
   background-color: #f7f7f7;
+  height: 100%;
+}
+
+html {
+  height: 100%;
 }

@@ -45,6 +45,11 @@ const handleWrongEmailOrPass = err => {
   return new AppError(message, 401);
 };
 
+const handleProductExistInWish = err => {
+  const message = "You Already Wished This Product";
+  return new AppError(message, 409);
+};
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -55,6 +60,7 @@ const sendErrorDev = (err, res) => {
 }
 
 const sendErrorProd = (err, res) => {
+  // console.log(err.detail);
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
@@ -62,7 +68,7 @@ const sendErrorProd = (err, res) => {
     });
   }
   else {
-    console.error('error is :::>', err);
+    // console.error('error is :::>', err);
     res.status(500).json({
       status: 'error',
       message: 'something went wrong'
@@ -88,6 +94,7 @@ module.exports = (err, req, res, next) => {
     if (error.message == 'NId must only contain numerical digits"') error = handleNidInvalid(error);
     if (error.message == 'please provide email & password"') error = handleNoEmailOrPass(error);
     if (error.message == 'incorrect email or password"') error = handleWrongEmailOrPass(error);
+    if (error.detail.match(/Key \(.+?\) already exists/)) error = handleProductExistInWish(error);
     sendErrorProd(error, res);
   }
 }

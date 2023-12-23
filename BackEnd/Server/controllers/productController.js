@@ -85,14 +85,9 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 
 exports.AddToWishList = catchAsync(async (req, res, next) => {
   const productId = req.params.id;
-  console.log(productId);
   const currentDate = new Date();
   const formattedDate = format(currentDate, 'yyyy-MM-dd HH:mm:ss');
-
   const customerId = req.user['rows'][0]['id'];
-
-
-
   const result = await db.query(`INSERT INTO wishList VALUES (${customerId} , ${productId} ,'${formattedDate}')`);
 
   if (result['rowCount'] === 0) {
@@ -104,7 +99,6 @@ exports.AddToWishList = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    product: result['rows']
   });
 
 });
