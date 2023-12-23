@@ -135,6 +135,15 @@ function Signup() {
             value={state.lastname}
             handlevalue={handleChange}
           />
+          {userType == "seller" && (
+            <Input
+              text="National ID"
+              type="number"
+              name="nationalid"
+              value={state.nationalid}
+              handlevalue={handleChange}
+            />
+          )}
           <Input
             text="Email"
             type="email"
@@ -173,15 +182,6 @@ function Signup() {
             value={state.gender}
             handlevalue={handleChange}
           />
-          {userType == "seller" && (
-            <Input
-              text="National ID"
-              type="number"
-              name="nationalid"
-              value={state.nationalid}
-              handlevalue={handleChange}
-            />
-          )}
           <Input
             text="Phone Number"
             type="number"
