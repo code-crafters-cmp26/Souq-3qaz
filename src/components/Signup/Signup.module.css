@@ -1,0 +1,151 @@
+.signup__form input {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+}
+
+.signup__form input {
+  border: none;
+  outline: none;
+}
+
+.signup__form a {
+  text-decoration: none;
+}
+
+.signup__form img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== signup ===============*/
+.signup {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+}
+.signup__img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.signup__form {
+  position: relative;
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  margin-inline: 1.5rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.signup__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-medium);
+  margin-bottom: 2rem;
+}
+.signup__content,
+.signup__box {
+  display: grid;
+}
+.signup__content {
+  row-gap: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.signup__icon,
+.signup__eye {
+  font-size: 1.25rem;
+}
+
+.signup__eye {
+  position: absolute;
+  right: 0;
+  top: 18px;
+  z-index: 10;
+  cursor: pointer;
+}
+.outer__box:nth-child(2) input {
+  padding-right: 1.8rem;
+}
+.signup__check,
+.signup__check__group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.signup__check {
+  margin-bottom: 1.5rem;
+}
+.signup__check__label,
+.signup__forgot {
+  font-size: var(--small-font-size);
+}
+.signup__check__group {
+  column-gap: 0.5rem;
+}
+.signup__check__input {
+  width: 16px;
+  height: 16px;
+}
+.signup__forgot {
+  color: var(--white-color);
+}
+.signup__forgot:hover {
+  text-decoration: underline;
+}
+
+.buttons {
+  display: flex;
+  column-gap: 25px;
+}
+
+.numbers > div {
+  height: 40px;
+  aspect-ratio: 1;
+  background-color: #e7e7e7;
+  color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.numbers {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.numbers .active {
+  background-color: #37211d;
+  color: #fff;
+}
+
+.done {
+  text-align: center;
+  margin: 30px;
+  color: #37211d;
+  font-size: larger;
+}
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .signup {
+    justify-content: center;
+  }
+  .signup__form {
+    width: 432px;
+    padding: 4rem 3rem 3.5rem;
+    border-radius: 1.5rem;
+  }
+  .signup__title {
+    font-size: 2rem;
+  }
+}

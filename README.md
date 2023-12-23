@@ -280,3 +280,42 @@ headers
 ```
 
 
+## Add Product To WishList
+### Api Route 
+`
+Endpoint : 'Post /api/v1/product/id'
+`
+`
+Authorization: Bearer JWT (for a Customer)  As a Header in Req
+`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/product/3'
+``
+### Headers
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+### Body
+```json
+{
+}
+```
+### Response Example:
+```json
+{
+    "status": "success"
+}
+```
+
+### OR
+```json
+{
+    "status": "fail",
+    "message": "You Already Wished This Product"
+}
+```
+
