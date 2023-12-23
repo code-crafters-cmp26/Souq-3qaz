@@ -19,10 +19,10 @@ import SignupPage from "./pages/Signup/SignupPage";
 function App() {
   return (
     <>
-      <Navbar>
-        <Searchbar />
-      </Navbar>
       <BrowserRouter>
+        <Navbar>
+          <Searchbar />
+        </Navbar>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -35,7 +35,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/employee" element={<Employee />} />
           <Route path="/signup" element={<SignupPage />} />
-
         </Routes>
       </BrowserRouter>
       {/* <ChatsNav />
