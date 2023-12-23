@@ -25,16 +25,16 @@ function Navbar({ children }) {
   return (
     <div className={styles.navbar}>
       <div className={styles.logocontainer}>
-        <img
-          className={styles.logo}
-          src="./src/components/Navbar/SOUQ 3QAZ.png"
-        />
+        <Link to="/">
+          <img
+            className={styles.logo}
+            src="./src/components/Navbar/SOUQ 3QAZ.png"
+          />
+        </Link>
       </div>
       {children}
 
       <ul className={styles.contents}>
-        <li>HOME</li>
-        <li>ABOUT</li>
         {!isLoggedIn && (
           <li>
             <Link to="/login">LOGIN</Link>
@@ -56,6 +56,10 @@ function Navbar({ children }) {
           />
         </li>
         <NotificationsContainer opened={opened} />
+
+        <li>
+          <Link to="/profile">PROFILE</Link>
+        </li>
       </ul>
     </div>
   );

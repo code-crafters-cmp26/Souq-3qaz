@@ -29,10 +29,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 40%;
-  justify-content: space-around;
   margin-right: 30px;
-  gap: 10px;
+  gap: 30px;
 }
 .contents li {
   color: #e0b21a;
