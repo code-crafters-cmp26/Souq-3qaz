@@ -130,7 +130,7 @@ module.exports = (err, req, res, next) => {
     else if (error.message == 'handleMoneyIsNegative') error = handleMoneyIsNegative(error);
     else if (error.message == 'No Review With This Id Found') error = handleNoReviewFound(error);
     else if (error.constraint && error.constraint == 'review_rating_check') error = handleReviewNotInRage(error);
-    else if (error.detail && error.detail.match(/Key \(.+?\) already exists/)) error = handleProductExistInWish(error);
+    else if ((error.detail && error.detail.match(/Key \(.+?\) already exists/)) || error.message == 'You Already Have Done This Before') error = handleProductExistInWish(error);
     else if (error.detail && /^Key.*is not present in table "product"\.$/.test(error.detail) || error.message == 'No Product With This Id Found') error = handleNoProductFound(error);
     sendErrorProd(error, res);
   }
