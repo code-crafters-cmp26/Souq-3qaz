@@ -54,13 +54,15 @@ exports.getProductById = catchAsync(async (req, res, next) => {
 exports.getProductByName = catchAsync(async (req, res, next) => {
   const name = req.body['productName'];
   const result = await db.query(`SELECT * FROM  product WHERE name LIKE '${name}%';`);
-  const sellerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][0]['sellerid']};`)
-  result['rows'][0]['sellerFName'] = sellerName['rows'][0]['firstname'];
-  result['rows'][0]['sellerLName'] = sellerName['rows'][0]['lastname'];
+  for (let i = 0; i < result['rows'].length; i++) {
+    const sellerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][i]['sellerid']};`)
+    result['rows'][i]['sellerFName'] = sellerName['rows'][0]['firstname'];
+    result['rows'][i]['sellerLName'] = sellerName['rows'][0]['lastname'];
+  }
   if (result['rowCount'] === 0) {
     res.status(404).json({
       status: 'fail',
-      message: 'no product found by this id'
+      message: 'no product found by this name'
     });
   }
   res.status(200).json({

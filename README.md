@@ -656,6 +656,77 @@ headers
 }
 ```
 
+## Get Product By name
+### Api Route 
+`
+Endpoint : 'POST /api/v1/product/searchProduct'
+Authorization: No Auth Needed
+`
+`
+Authorization: No Auth Needed
+`
+### Request Example:
+``
+Endpoint Ex: 'POST /api/v1/product/searchProduct'
+``
+```json
+No Body Needed
+```
+### Response Example:
+```json
+{
+    "status": "success",
+    "products": [
+        {
+            "id": 5,
+            "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
+            "name": "mfmdslkbbfnhj",
+            "prerelease": true,
+            "price": 4561.5,
+            "description": "elsisi r2esy",
+            "quantity": 1,
+            "sellerid": 3,
+            "putdate": "2023-12-15T05:28:17.000Z",
+            "category": "Health",
+            "storedin": 1,
+            "sellerFName": "new",
+            "sellerLName": "newF"
+        },
+        {
+            "id": 10,
+            "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
+            "name": "mfmdfnhj",
+            "prerelease": true,
+            "price": 4561.5,
+            "description": "elsisi r2esy",
+            "quantity": 1,
+            "sellerid": 5,
+            "putdate": "2023-12-15T05:50:53.000Z",
+            "category": "Health",
+            "storedin": 1
+        },
+        {
+            "id": 3,
+            "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
+            "name": "mfmdslkfnhj",
+            "prerelease": true,
+            "price": 4561.5,
+            "description": "elsisi r2esy",
+            "quantity": 2,
+            "sellerid": 3,
+            "putdate": "2023-12-13T09:01:13.000Z",
+            "category": "Health",
+            "storedin": 1
+        }
+    ]
+}```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "no product found by this name"
+}
+```
 
 
 
