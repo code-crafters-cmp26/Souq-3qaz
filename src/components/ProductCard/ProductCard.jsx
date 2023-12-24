@@ -31,9 +31,9 @@ function ProductCard({ product }) {
         <div className={styles.favicon}>
           <Button type="button" text="🤍" onClick={handleAddToWishlist} />
         </div>
-        <div className={styles.carticon}>
+        {/* <div className={styles.carticon}>
           <Button type="button" text="🛒" />
-        </div>
+        </div> */}
       </div>
       <Link to={`${product.id}`}>
         <div className={styles.product_description}>
