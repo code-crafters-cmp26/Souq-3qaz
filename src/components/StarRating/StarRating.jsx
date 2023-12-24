@@ -35,11 +35,13 @@ export default function StarRating({
   defaultRating = 0, //some ppl say we should never initialize states from props
   //but here np as we set at as initial value so np
   onSetRating,
+  isStatic = false,
 }) {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
   function handleRating(rating) {
+    if (isStatic) return;
     setRating(rating); //to set the internal rating
     onSetRating(rating); //to set the external rating
     //if the consumer need to access that right value to show it somewhere else

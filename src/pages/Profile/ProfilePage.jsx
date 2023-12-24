@@ -7,13 +7,35 @@ import { useAuth } from "../../components/AuthProvider/AuthProvider";
 function ProfilePage() {
   const [points, setPoints] = useState("");
   const [cardnumber, setCardNumber] = useState(0);
-  const { userData } = useAuth();
+  const { userData, setUserData } = useAuth();
   const handleChangePoints = (e) => {
     setPoints(e.target.value);
   };
   const handleClick = (i) => {
     setCardNumber(i);
   };
+
+  const updateUserBalance = () => {
+    fetch(`http://localhost:3000/api/v1/user/Customer/${userData.id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("userData", JSON.stringify(...data.customer));
+        const storedUserData = localStorage.getItem("userData");
+        setUserData(JSON.parse(storedUserData));
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   const handleRecharge = () => {
     fetch("http://localhost:3000/api/v1/user/Customer/recharge", {
       method: "POST",
@@ -30,6 +52,7 @@ function ProfilePage() {
       })
       .then((data) => {
         console.log(data);
+        updateUserBalance();
       })
       .catch((error) => {
         console.log(error.message);
