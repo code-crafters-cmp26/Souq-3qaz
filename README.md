@@ -852,7 +852,7 @@ headers
 ## get all auctions
 ### Api Route 
 `Endpoint : 'GET /api/v1/auction/'`
-`Authorization: NO Need
+`Authorization: NO Need`
 ### Request Example:
 ``
 Endpoint Ex: 'GET /api/v1/auction/'
@@ -885,6 +885,53 @@ body
 }
 ```
 
+
+
+## make barter
+### Api Route 
+`Endpoint : 'Post /api/v1/barter/'`
+`Authorization: Bearer JWT(Seller) AS a Header in Req`
+### Request Example:
+``
+Endpoint Ex: 'Post /api/v1/barter/'
+``
+
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+```json
+body
+{
+    "requestedSellerlD":5,
+    "offeredProductlD":19,
+    "requestedProductlD":20,
+    "offeredProductQuantity":5,
+    "requestedProductQuantity":5
+}
+```
+### Response Example:
+```json
+{
+    "status": "success"
+}
+```
+OR
+```json
+{
+    "status": "fail"
+    "message": "bad request"
+}
+```
+OR
+```json
+{
+    "status": "fail"
+    "message": "Product Quantity Is Not Enough"
+}
+```
 
 
 
