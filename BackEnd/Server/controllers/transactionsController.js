@@ -24,6 +24,13 @@ exports.buy = catchAsync(async (req, res, next) => {
     return next(new AppError('No Product With This Id Found', 404));
   }
 
+  for (const item of cart) {
+    const result = await db.query(`SELECT quantity FROM product WHERE id = ${item.productId}`);
+    if (result['rows'][0]['quantity'] < item.Quantity) {
+      return next(new AppError('Product Quantity Is Not Enough', 404));
+    }
+  }
+
   const balance = await db.query(`SELECT balance FROM "User" WHERE id = ${customerId}`);
 
   if (cost > balance['rows'][0]['balance']) {
@@ -31,8 +38,9 @@ exports.buy = catchAsync(async (req, res, next) => {
   }
 
   await db.query(`UPDATE "User" SET balance = ${balance['rows'][0]['balance'] - cost} WHERE id = ${customerId};`)
-
   for (const item of cart) {
+
+    await db.query(`UPDATE product SET quantity = quantity-${item.Quantity} WHERE id = ${item.productId};`);
     const result = await db.query(`INSERT INTO transaction VALUES (default,${customerId},${item.productId},'${formattedDate}',false, false,${item.shippedvia}, ${item.Quantity},${shipmentId['rows'][0]['last_value']} );`)
   };
 

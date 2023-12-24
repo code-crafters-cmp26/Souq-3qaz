@@ -806,6 +806,52 @@ headers
 ```
 
 
+## add new auction
+### Api Route 
+`Endpoint : 'POST /api/v1/auction/'`
+`Authorization: Bearer JWT(Seller) As a Header in Req`
+### Request Example:
+``
+Endpoint Ex: 'POST /api/v1/auction/'
+``
+
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+```json
+{
+    "productId":18,
+    "quantity":2,
+    "intialPrice":1500
+}
+```
+### Response Example:
+```json
+{
+    "status": "success"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "Product Quantity Is Not Enough"
+}
+```
+### OR
+```json
+{
+    "status": "fail",
+    "message": "You Must Have The Product To Use It"
+}
+```
+
+
+
+
 
 
 
