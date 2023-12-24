@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import styles from "./Productpage.module.css";
 import { useEffect, useState } from "react";
@@ -7,8 +7,32 @@ import ReviewsContainer from "../../components/ReviewsContainer/ReviewsContainer
 function Productpage() {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
+  const navigate = useNavigate();
 
-  const handleAddToWishlist = () => {};
+  const handleAddToWishlist = () => {
+    fetch(`http://localhost:3000/api/v1/product/${productData.id}`, {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  const handleGoToBuy = () => {
+    navigate(
+      `/checkout?name=${productData.name}&id=${productData.id}&price=${productData.price}`
+    );
+  };
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/product/${id}`, {
@@ -55,8 +79,7 @@ function Productpage() {
         <section className={styles.purchase}>
           <div className={styles.date}>Date of releasing: {extractedDate}</div>
           <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
-          <Button text="Add to cart" />
-          <Button text="Buy Now" />
+          <Button text="Buy Now" onClick={handleGoToBuy} />
         </section>
       </div>
       <ReviewsContainer />
