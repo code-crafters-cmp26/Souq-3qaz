@@ -805,7 +805,6 @@ headers
 }
 ```
 
-
 ## add new auction
 ### Api Route 
 `Endpoint : 'POST /api/v1/auction/'`
@@ -850,8 +849,41 @@ headers
 ```
 
 
+## get all auctions
+### Api Route 
+`Endpoint : 'GET /api/v1/auction/'`
+`Authorization: NO Need
+### Request Example:
+``
+Endpoint Ex: 'GET /api/v1/auction/'
+``
 
-
+```json
+headers
+{
+}
+```
+```json
+body
+{
+}
+```
+### Response Example:
+```json
+{
+    "status": "success",
+    "result": [
+        {
+            "acutionid": 1,
+            "sellerid": 5,
+            "productid": 18,
+            "date": "2023-12-24T03:55:25.000Z",
+            "intialprice": 1500,
+            "quantity": 2
+        }
+    ]
+}
+```
 
 
 

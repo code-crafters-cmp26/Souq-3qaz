@@ -4,6 +4,16 @@ const { format } = require('date-fns');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
+exports.getAllAuction = catchAsync(async (req, res, next) => {
+
+  const result = await db.query(`SELECT * FROM auction`);
+
+  res.status(200).json({
+    status: 'success',
+    result: result['rows']
+  });
+});
+
 exports.addAuction = catchAsync(async (req, res, next) => {
   const sellerId = req.user['rows'][0]['id'];
   const currentDate = new Date();

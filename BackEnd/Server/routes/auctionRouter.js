@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
   .route('/')
+  .get(auctionController.getAllAuction)
   .post(authController.protectForSeller, auctionController.addAuction)
 
 module.exports = router;
