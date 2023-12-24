@@ -4,6 +4,19 @@ const { format } = require('date-fns');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
+exports.getBarter = catchAsync(async (req, res, next) => {
+  const requestingSellerID = req.user['rows'][0]['id'];
+
+  const bendingBarters = await db.query(`SELECT * FROM barter WHERE requestingsellerid = ${requestingSellerID};`)
+  const offers = await db.query(`SELECT * FROM barter WHERE requestedsellerid = ${requestingSellerID};`)
+
+  res.status(200).json({
+    status: "success",
+    yourBendingBarters: bendingBarters['rows'],
+    offersToYou: offers['rows']
+  });
+});
+
 exports.barterProduct = catchAsync(async (req, res, next) => {
   const requestingSellerID = req.user['rows'][0]['id'];
 

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
   .route('/')
+  .get(authController.protectForSeller, barterController.getBarter)
   .post(authController.protectForSeller, barterController.barterProduct);
 
 module.exports = router;

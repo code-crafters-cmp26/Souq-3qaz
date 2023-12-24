@@ -935,3 +935,51 @@ OR
 
 
 
+## get Barters
+### Api Route 
+`Endpoint : 'GET /api/v1/barter/'`
+`Authorization: Bearer JWT(Seller) AS a Header in Req`
+### Request Example:
+``
+Endpoint Ex: 'GET /api/v1/barter/'
+``
+
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+```json
+body
+{
+}
+```
+### Response Example:
+```json
+{
+    "status": "success",
+    "yourBendingBarters": [
+        {
+            "barterid": 1,
+            "requestingsellerid": 3,
+            "requestedsellerid": 5,
+            "offeredproductid": 19,
+            "requistedproductid": 20,
+            "date": "2023-12-24T05:12:02.000Z",
+            "offeredproductidquantity": 5,
+            "requistedproductidquantity": 5
+        }
+    ],
+    "offersToYou": []
+}```
+OR
+```json
+{
+    "status": "fail"
+    "message": "bad request"
+}
+```
+
+
+
