@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import styles from "./Productpage.module.css";
 import { useEffect, useState } from "react";
-import StarRating from "../../components/StarRating/StarRating";
+import ReviewsContainer from "../../components/ReviewsContainer/ReviewsContainer";
 
 function Productpage() {
   const { id } = useParams();
@@ -82,7 +82,7 @@ function Productpage() {
           <Button text="Buy Now" onClick={handleGoToBuy} />
         </section>
       </div>
-      <StarRating />
+      <ReviewsContainer />
     </div>
   );
 }
