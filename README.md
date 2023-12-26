@@ -827,18 +827,17 @@ headers
 
 ```json
 {
-  "FName": "customizedesllllam",
-  "LName": "newF",
-  "PhoneNumber": "01204747568",
-  "Password": "Password123456",
-  "Gender": "Male",
-  "ApartmentNumber": -1,
-  "BuildingNumber": 1,
-  "Country": "om eldonia",
-  "City": "cairo",
-  "Street": "shoubra",
-  "role": "Customer",
-  "NId": "189465"
+       "FName": "customizedesllllam",
+        "LName": "newF",
+        "PhoneNumber": "01204747568",
+        "theme": "Light",
+        "image": "/,bvisdlvndl",
+        "Gender": "Male",
+        "ApartmentNumber": -1,
+        "BuildingNumber":1,
+        "Country":"om eldonia",
+        "City":"cairo",
+        "Street":"shoubra""
 }
 ```
 
@@ -849,14 +848,14 @@ headers
   "status": "success",
   "info": [
     {
-      "id": 5,
+      "id": 23,
       "firstname": "customizedesllllam",
       "lastname": "newF",
       "phonenumber": "01204747568",
-      "image": "default address",
+      "image": "/,bvisdlvndl",
       "balance": 0,
-      "email": "eslam@ggfdv.com",
-      "password": "$2b$12$fnaVG84UitLyzQyNH8/ZmOZeT5AscPRWJohOCkHjy4/6nqgemHe76",
+      "email": "skjgmbn@ggfdv.com",
+      "password": "$2b$12$Me9ckJ5Zv6QHP/axJkq/SOWsIkSc7N5UryrlEHL39xdNoKGRpdYzy",
       "theme": "Light",
       "banned": false,
       "gender": "Male",
@@ -865,9 +864,9 @@ headers
       "country": "om eldonia",
       "city": "cairo",
       "street": "shoubra",
-      "passwordchangedat": "2023-12-23T18:29:03.000Z",
+      "passwordchangedat": "2023-12-23T18:52:40.000Z",
       "passwordresettoken": "3165494",
-      "passwordresetexpires": "2023-12-23T18:29:03.000Z"
+      "passwordresetexpires": "2023-12-23T18:52:40.000Z"
     }
   ]
 }
@@ -881,3 +880,202 @@ headers
   "message": "something went wrong"
 }
 ```
+
+## add new auction
+
+### Api Route
+
+`Endpoint : 'POST /api/v1/auction/'`
+`Authorization: Bearer JWT(Seller) As a Header in Req`
+
+### Request Example:
+
+`Endpoint Ex: 'POST /api/v1/auction/'`
+
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+
+```json
+{
+  "productId": 18,
+  "quantity": 2,
+  "intialPrice": 1500
+}
+```
+
+### Response Example:
+
+```json
+{
+  "status": "success"
+}
+```
+
+### OR
+
+```json
+{
+  "status": "fail",
+  "message": "Product Quantity Is Not Enough"
+}
+```
+
+### OR
+
+```json
+{
+  "status": "fail",
+  "message": "You Must Have The Product To Use It"
+}
+```
+
+## get all auctions
+
+### Api Route
+
+`Endpoint : 'GET /api/v1/auction/'`
+`Authorization: NO Need`
+
+### Request Example:
+
+`Endpoint Ex: 'GET /api/v1/auction/'`
+
+```json
+headers
+{
+}
+```
+
+```json
+body
+{
+}
+```
+
+### Response Example:
+
+```json
+{
+  "status": "success",
+  "result": [
+    {
+      "acutionid": 1,
+      "sellerid": 5,
+      "productid": 18,
+      "date": "2023-12-24T03:55:25.000Z",
+      "intialprice": 1500,
+      "quantity": 2
+    }
+  ]
+}
+```
+
+## make barter
+
+### Api Route
+
+`Endpoint : 'Post /api/v1/barter/'`
+`Authorization: Bearer JWT(Seller) AS a Header in Req`
+
+### Request Example:
+
+`Endpoint Ex: 'Post /api/v1/barter/'`
+
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+
+```json
+body
+{
+    "requestedSellerlD":5,
+    "offeredProductlD":19,
+    "requestedProductlD":20,
+    "offeredProductQuantity":5,
+    "requestedProductQuantity":5
+}
+```
+
+### Response Example:
+
+```json
+{
+  "status": "success"
+}
+```
+
+OR
+
+```json
+{
+    "status": "fail"
+    "message": "bad request"
+}
+```
+
+OR
+
+```json
+{
+    "status": "fail"
+    "message": "Product Quantity Is Not Enough"
+}
+```
+
+## get Barters
+
+### Api Route
+
+`Endpoint : 'GET /api/v1/barter/'`
+`Authorization: Bearer JWT(Seller) AS a Header in Req`
+
+### Request Example:
+
+`Endpoint Ex: 'GET /api/v1/barter/'`
+
+```json
+headers
+{
+	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
+}
+```
+
+```json
+body
+{
+}
+```
+
+### Response Example:
+
+````json
+{
+    "status": "success",
+    "yourBendingBarters": [
+        {
+            "barterid": 1,
+            "requestingsellerid": 3,
+            "requestedsellerid": 5,
+            "offeredproductid": 19,
+            "requistedproductid": 20,
+            "date": "2023-12-24T05:12:02.000Z",
+            "offeredproductidquantity": 5,
+            "requistedproductidquantity": 5
+        }
+    ],
+    "offersToYou": []
+}```
+OR
+```json
+{
+    "status": "fail"
+    "message": "bad request"
+}
+````
