@@ -1,6 +1,6 @@
 .loginpage {
   margin: 0;
-  padding-top: 100px;
+  padding-top: 50px;
   height: 100vh;
   background-image: url("camel.png");
   background-size: cover;
@@ -10,6 +10,6 @@
 @supports (image-set: url("test.avif") 1x) {
   /* If AVIF is supported, update the background image */
   .loginpage {
-    background-image:url("camel.avif");
+    background-image: url("camel.avif");
   }
 }

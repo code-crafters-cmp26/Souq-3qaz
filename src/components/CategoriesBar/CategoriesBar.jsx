@@ -8,7 +8,7 @@ function CategoriesBar() {
         <p>Mobiles, Tablets, and Accessories</p>
         <p>Computers and Office Supplies</p>
         <p>TVs and Electronics</p>
-        <p>Women's Fasion</p>
+        <p>Womens Fasion</p>
         <span>Show more ⬇</span>
       </div>
       <div>

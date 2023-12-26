@@ -1,0 +1,16 @@
+.signuppage {
+  margin: 0;
+  padding-top: 50px;
+  background-image: url("camel.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+@supports (image-set: url("test.avif") 1x) {
+  /* If AVIF is supported, update the background image */
+  .signuppage {
+    background-image: url("camel.avif");
+  }
+}
