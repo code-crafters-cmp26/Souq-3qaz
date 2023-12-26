@@ -7,13 +7,13 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.getAllProducts = async (req, res) => {
 
-  const result = await db.query('SELECT * FROM  product');
-
-  for (let i = 0; i < result['rows'].length; i++) {
-    const sellerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][i]['sellerid']};`)
-    result['rows'][i]['sellerFName'] = sellerName['rows'][0]['firstname'];
-    result['rows'][i]['sellerLName'] = sellerName['rows'][0]['lastname'];
-  }
+  const result = await db.query(`
+  SELECT p.*, s.firstname, s.lastname, COUNT(r.rating) AS num_ratings, COALESCE(AVG(r.rating), -1) AS avg_rating
+  FROM product AS p
+  JOIN "User" AS s ON p.sellerid = s.id
+  LEFT JOIN review AS r ON r.productid = p.id
+  GROUP BY p.id, s.id;
+  `);
 
   try {
     res.status(200).json({
