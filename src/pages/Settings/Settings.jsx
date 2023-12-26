@@ -1,19 +1,7 @@
 import styles from "./Settings.module.css";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-import { useAuth } from "../../components/AuthProvider/AuthProvider";
-import { useState } from "react";
 function Settings() {
-
-  const { userData } = useAuth();
-  const [img, setImg] = useState(null);
-
-
-  const handleChange = (event) => {
-    setInput(event.target.value);
-  };
-
-
   return (
     <div className={styles.settings}>
       <h1>Settings</h1>
@@ -24,11 +12,11 @@ function Settings() {
           alt="Avatar"
           className={styles.avatar}
         />
-        <Input text="Change Picture" type="file"/>
-        <Input text="First Name" type="text" initialVal={userData?.firstname} />
-        <Input text="Last Name" type="text" initialVal={userData?.lastname} />
-        <Input text="Email" type="email" initialVal={userData?.email} />
-        <Input text="Phone Number" type="tel" initialVal={userData?.phonenumber} />
+        <Input text="Change Picture" type="file" />
+        <Input text="First Name" type="text" />
+        <Input text="Last Name" type="text" />
+        <Input text="Email" type="email" />
+        <Input text="Phone Number" type="tel" />
         <Input text="Password" type="password" />
         <Input text="Confirm Password" type="password" />
         <Button text="Save Changes" />
@@ -36,11 +24,11 @@ function Settings() {
 
       <form className={styles.form}>
         <h2>Address</h2>
-        <Input text="#Apt." type="text" initialVal={userData?.appartmentnumber} />
-        <Input text="#Building" type="text" initialVal={userData?.buildingnumber} />
-        <Input text="Country" type="text" initialVal={userData?.country} />
-        <Input text="City" type="text" initialVal={userData?.city} />
-        <Input text="Street" type="text" initialVal={userData?.street} />
+        <Input text="Address1" type="text" />
+        <Input text="Address2" type="text" />
+        <Input text="City" type="text" />
+        <Input text="State" type="text" />
+        <Input text="Zip Code" type="number" />
         <Button text="Save Changes" />
       </form>
       <form className={styles.form + " " + styles.delete}>
