@@ -1,10 +1,5 @@
 import styles from "./Input.module.css";
-import { useState } from "react";
-function Input({ text, type, color, value, handlevalue, name, initialVal}) {
-  const [input, setInput] = useState(initialVal ? initialVal : "");
-  const handleChange = (event) => {
-    setInput(event.target.value);
-  };
+function Input({ text, type, color, value, handlevalue, name }) {
   return (
     <div
       className={styles.outer__box}
@@ -18,8 +13,8 @@ function Input({ text, type, color, value, handlevalue, name, initialVal}) {
           required
           className={styles.only__input}
           placeholder=" "
-          value={initialVal? input: value}
-          onChange={handlevalue ? handlevalue : handleChange}
+          value={value}
+          onChange={handlevalue}
         />
         <label className={styles.only__label}>{text}</label>
       </div>
