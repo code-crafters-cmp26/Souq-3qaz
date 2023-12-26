@@ -827,18 +827,17 @@ headers
 
 ```json
 {
-  "FName": "customizedesllllam",
-  "LName": "newF",
-  "PhoneNumber": "01204747568",
-  "Password": "Password123456",
-  "Gender": "Male",
-  "ApartmentNumber": -1,
-  "BuildingNumber": 1,
-  "Country": "om eldonia",
-  "City": "cairo",
-  "Street": "shoubra",
-  "role": "Customer",
-  "NId": "189465"
+       "FName": "customizedesllllam",
+        "LName": "newF",
+        "PhoneNumber": "01204747568",
+        "theme": "Light",
+        "image": "/,bvisdlvndl",
+        "Gender": "Male",
+        "ApartmentNumber": -1,
+        "BuildingNumber":1,
+        "Country":"om eldonia",
+        "City":"cairo",
+        "Street":"shoubra""
 }
 ```
 
@@ -846,30 +845,30 @@ headers
 
 ```json
 {
-  "status": "success",
-  "info": [
-    {
-      "id": 5,
-      "firstname": "customizedesllllam",
-      "lastname": "newF",
-      "phonenumber": "01204747568",
-      "image": "default address",
-      "balance": 0,
-      "email": "eslam@ggfdv.com",
-      "password": "$2b$12$fnaVG84UitLyzQyNH8/ZmOZeT5AscPRWJohOCkHjy4/6nqgemHe76",
-      "theme": "Light",
-      "banned": false,
-      "gender": "Male",
-      "appartmentnumber": -1,
-      "buildingnumber": 1,
-      "country": "om eldonia",
-      "city": "cairo",
-      "street": "shoubra",
-      "passwordchangedat": "2023-12-23T18:29:03.000Z",
-      "passwordresettoken": "3165494",
-      "passwordresetexpires": "2023-12-23T18:29:03.000Z"
-    }
-  ]
+    "status": "success",
+    "info": [
+        {
+            "id": 23,
+            "firstname": "customizedesllllam",
+            "lastname": "newF",
+            "phonenumber": "01204747568",
+            "image": "/,bvisdlvndl",
+            "balance": 0,
+            "email": "skjgmbn@ggfdv.com",
+            "password": "$2b$12$Me9ckJ5Zv6QHP/axJkq/SOWsIkSc7N5UryrlEHL39xdNoKGRpdYzy",
+            "theme": "Light",
+            "banned": false,
+            "gender": "Male",
+            "appartmentnumber": -1,
+            "buildingnumber": 1,
+            "country": "om eldonia",
+            "city": "cairo",
+            "street": "shoubra",
+            "passwordchangedat": "2023-12-23T18:52:40.000Z",
+            "passwordresettoken": "3165494",
+            "passwordresetexpires": "2023-12-23T18:52:40.000Z"
+        }
+    ]
 }
 ```
 
