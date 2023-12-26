@@ -2,9 +2,9 @@ import styles from "./Settings.module.css";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import { useReducer } from "react";
-import { useAuth } from '../../components/AuthProvider/AuthProvider';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function Settings() {
   const { userData, userType } = useAuth();
@@ -38,7 +38,6 @@ function Settings() {
     theme: "",
     image: "",
     gender: "",
-
   };
 
   const reducer = (state, action) => {
@@ -51,12 +50,28 @@ function Settings() {
   };
   useEffect(() => {
     if (userData) {
-      dispatch({ type: "CHANGE", field: "firstname", value: userData.firstname });
+      dispatch({
+        type: "CHANGE",
+        field: "firstname",
+        value: userData.firstname,
+      });
       dispatch({ type: "CHANGE", field: "lastname", value: userData.lastname });
       dispatch({ type: "CHANGE", field: "email", value: userData.email });
-      dispatch({ type: "CHANGE", field: "phonenumber", value: userData.phonenumber });
-      dispatch({ type: "CHANGE", field: "appartmentnumber", value: userData.appartmentnumber });
-      dispatch({ type: "CHANGE", field: "buildingnumber", value: userData.buildingnumber });
+      dispatch({
+        type: "CHANGE",
+        field: "phonenumber",
+        value: userData.phonenumber,
+      });
+      dispatch({
+        type: "CHANGE",
+        field: "appartmentnumber",
+        value: userData.appartmentnumber,
+      });
+      dispatch({
+        type: "CHANGE",
+        field: "buildingnumber",
+        value: userData.buildingnumber,
+      });
       dispatch({ type: "CHANGE", field: "street", value: userData.street });
       dispatch({ type: "CHANGE", field: "city", value: userData.city });
       dispatch({ type: "CHANGE", field: "country", value: userData.country });
@@ -64,11 +79,6 @@ function Settings() {
       dispatch({ type: "CHANGE", field: "image", value: userData.image });
     }
   }, [userData]);
-
-
-
-
-
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const role = userType === "seller" ? "Seller" : "Customer";
@@ -86,6 +96,28 @@ function Settings() {
     }
     return true;
   };
+
+  const updateUserSettings = () => {
+    fetch(`http://localhost:3000/api/v1/user/Customer/${userData.id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("userData", JSON.stringify(...data.customer));
+        const storedUserData = localStorage.getItem("userData");
+        setUserData(JSON.parse(storedUserData));
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   const handleSubmit = (e) => {
     if (!checkPassword()) return;
     e.preventDefault();
@@ -116,7 +148,8 @@ function Settings() {
       .then((data) => {
         if (data.status == "success") {
           alert("User updated successfully");
-          window.location.reload();
+          //window.location.reload();
+          updateUserSettings();
         } else {
           alert("Error updating user");
           console.log(data);
@@ -135,21 +168,87 @@ function Settings() {
           className={styles.avatar}
         />
         <Input text="Change Picture" type="file" />
-        <Input text="First Name" type="text" name="firstname" value={state.firstname} handlevalue={handlevalue} />
-        <Input text="Last Name" type="text" name="lastname" value={state.lastname} handlevalue={handlevalue} />
-        <Input text="Email" type="email" name="email" value={state.email} handlevalue={handlevalue} />
-        <Input text="Phone Number" type="tel" name="phonenumber" value={state.phonenumber} handlevalue={handlevalue} />
-        <Input text="Password" type="password" name="password" value={state.password} handlevalue={handlevalue} />
-        <Input text="Confirm Password" type="password" name="confirmpassword" value={state.confirmpassword} handlevalue={handlevalue} />
+        <Input
+          text="First Name"
+          type="text"
+          name="firstname"
+          value={state.firstname}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="Last Name"
+          type="text"
+          name="lastname"
+          value={state.lastname}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="Email"
+          type="email"
+          name="email"
+          value={state.email}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="Phone Number"
+          type="tel"
+          name="phonenumber"
+          value={state.phonenumber}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="Password"
+          type="password"
+          name="password"
+          value={state.password}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="Confirm Password"
+          type="password"
+          name="confirmpassword"
+          value={state.confirmpassword}
+          handlevalue={handlevalue}
+        />
       </form>
 
       <form className={styles.form}>
         <h2>Address</h2>
-        <Input text="Apartment Number" type="number" name="appartmentnumber" value={state.appartmentnumber} handlevalue={handlevalue} />
-        <Input text="Building Number" type="number" name="buildingnumber" value={state.buildingnumber} handlevalue={handlevalue} />
-        <Input text="Street" type="text" name="street" value={state.street} handlevalue={handlevalue} />
-        <Input text="City" type="text" name="city" value={state.city} handlevalue={handlevalue} />
-        <Input text="Country" type="text" name="country" value={state.country} handlevalue={handlevalue} />
+        <Input
+          text="Apartment Number"
+          type="number"
+          name="appartmentnumber"
+          value={state.appartmentnumber}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="Building Number"
+          type="number"
+          name="buildingnumber"
+          value={state.buildingnumber}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="Street"
+          type="text"
+          name="street"
+          value={state.street}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="City"
+          type="text"
+          name="city"
+          value={state.city}
+          handlevalue={handlevalue}
+        />
+        <Input
+          text="Country"
+          type="text"
+          name="country"
+          value={state.country}
+          handlevalue={handlevalue}
+        />
       </form>
       <Button text="Save Changes" onClick={handleSubmit} />
       <form className={styles.form + " " + styles.delete}>
