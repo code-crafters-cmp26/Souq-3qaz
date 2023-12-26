@@ -199,6 +199,7 @@ CREATE Table Barter (
   Date timestamp  NOT NULL,
   OfferedProductIdQuantity smallint NOT NULL,
   RequistedProductIdQuantity smallint NOT NULL,
+  DoneTrading bool NOT NULL,
   CONSTRAINT pk_Barter PRIMARY KEY(BarterId)
 );
 
