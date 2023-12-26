@@ -123,9 +123,9 @@ exports.login = catchAsync(async (req, res, next) => {
   if (roole['rowCount'] != 0) {
     createSendToken(data, newUserId['rows'][0]['id'], 'Seller', 200, res);
   }
-  roole = await db.query(`SELECT * FROM Customer WHERE id = ${newUserId['rows'][0]['id']};`);
+  roole = await db.query(`SELECT type FROM Customer WHERE id = ${newUserId['rows'][0]['id']};`);
   if (roole['rowCount'] != 0) {
-    createSendToken(data, newUserId['rows'][0]['id'], 'Customer', 200, res);
+    createSendToken(data, newUserId['rows'][0]['id'], roole['rows'][0]['type'], 200, res);
   }
 });
 
