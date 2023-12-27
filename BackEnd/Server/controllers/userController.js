@@ -17,9 +17,15 @@ exports.getAllUsers = catchAsync(async (req, res) => {
 
 exports.getUserById = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const result = await db.query(`SELECT * FROM  "User" WHERE id = ${id};`);
-  if (result['rowCount'] == 0) {
-    next(new AppError('no user found', 404));
+  const result = await db.query(`SELECT * fROM "User" WHERE id = ${id};`);
+  if (result['rowCount'] != 0) {
+    result['rows'][0]['type'] = 'Seller'
+  }
+  else {
+    const result = await db.query(`SELECT c.type, u.* FROM Customer AS c, "User" AS u WHERE u.id = 17 AND c.id=${id};`);
+    if (result['rowCount'] == 0) {
+      next(new AppError('no user found', 404));
+    }
   }
   res.status(200).json({
     status: 'success',
@@ -28,8 +34,8 @@ exports.getUserById = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAllSellers = catchAsync(async (req, res) => {
-  const x = await db.query('SELECT * FROM  Seller');
+exports.getAllSellers = catchAsync(async (req, res, next) => {
+  const x = await db.query('SELECT * FROM Seller;');
   res.status(200).json({
     status: 'success',
     count: x['count'],

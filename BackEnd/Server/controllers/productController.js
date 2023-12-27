@@ -7,13 +7,13 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.getAllProducts = async (req, res) => {
 
-  const result = await db.query('SELECT * FROM  product');
-
-  for (let i = 0; i < result['rows'].length; i++) {
-    const sellerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][i]['sellerid']};`)
-    result['rows'][i]['sellerFName'] = sellerName['rows'][0]['firstname'];
-    result['rows'][i]['sellerLName'] = sellerName['rows'][0]['lastname'];
-  }
+  const result = await db.query(`
+  SELECT p.*, s.firstname, s.lastname, COUNT(r.rating) AS num_ratings, COALESCE(AVG(r.rating), -1) AS avg_rating
+  FROM product AS p
+  JOIN "User" AS s ON p.sellerid = s.id
+  LEFT JOIN review AS r ON r.productid = p.id
+  GROUP BY p.id, s.id;
+  `);
 
   try {
     res.status(200).json({
@@ -34,10 +34,15 @@ exports.getProductById = catchAsync(async (req, res, next) => {
   if (!Product.idCheck(id)) {
     return next(new AppError('Id must only contain numerical digits', 400));
   }
-  const result = await db.query(`SELECT * FROM  product WHERE id = ${id};`);
-  const sellerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][0]['sellerid']};`)
-  result['rows'][0]['sellerFName'] = sellerName['rows'][0]['firstname'];
-  result['rows'][0]['sellerLName'] = sellerName['rows'][0]['lastname'];
+  const result = await db.query(`
+    SELECT p.*, s.firstname, s.lastname, COUNT(r.rating) AS num_ratings, COALESCE(AVG(r.rating), -1) AS avg_rating
+    FROM product AS p
+    JOIN "User" AS s ON p.sellerid = s.id
+    LEFT JOIN review AS r ON r.productid = p.id
+    WHERE p.id = ${id}
+    GROUP BY p.id, s.id; 
+  `);
+
   if (result['rowCount'] === 0) {
     res.status(404).json({
       status: 'fail',
@@ -51,14 +56,45 @@ exports.getProductById = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getProductBySellerId = catchAsync(async (req, res, next) => {
+  const sellerId = req.params.id;
+  if (!Product.idCheck(sellerId)) {
+    return next(new AppError('Id must only contain numerical digits', 400));
+  }
+  const result = await db.query(`
+    SELECT p.*, s.firstname, s.lastname, COUNT(r.rating) AS num_ratings, COALESCE(AVG(r.rating), -1) AS avg_rating
+    FROM product AS p
+    JOIN "User" AS s ON p.sellerid = s.id
+    LEFT JOIN review AS r ON r.productid = p.id
+    WHERE p.sellerid = ${sellerId}
+    GROUP BY p.id, s.id; 
+  `);
+
+  if (result['rowCount'] === 0) {
+    res.status(404).json({
+      status: 'fail',
+      message: 'no product found by this id'
+    });
+  }
+  res.status(200).json({
+    status: 'success',
+    count: result['count'],
+    products: result['rows']
+  });
+});
+
+
 exports.getProductByName = catchAsync(async (req, res, next) => {
   const name = req.body['productName'];
-  const result = await db.query(`SELECT * FROM  product WHERE name LIKE '${name}%';`);
-  for (let i = 0; i < result['rows'].length; i++) {
-    const sellerName = await db.query(`SELECT firstname, lastname FROM "User" Where id = ${result['rows'][i]['sellerid']};`)
-    result['rows'][i]['sellerFName'] = sellerName['rows'][0]['firstname'];
-    result['rows'][i]['sellerLName'] = sellerName['rows'][0]['lastname'];
-  }
+  const result = await db.query(`
+    SELECT p.*, s.firstname, s.lastname, COUNT(r.rating) AS num_ratings, COALESCE(AVG(r.rating), -1) AS avg_rating
+    FROM product AS p
+    JOIN "User" AS s ON p.sellerid = s.id
+    LEFT JOIN review AS r ON r.productid = p.id
+    WHERE name LIKE '${name}%'
+    GROUP BY p.id, s.id; 
+  `);
+
   if (result['rowCount'] === 0) {
     res.status(404).json({
       status: 'fail',

@@ -25,21 +25,40 @@ No Body Needed
   "count": 1,
   "products": [
     {
-      "id": 5,
-      "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-      "name": "mfmdslkbbfnhj",
-      "prerelease": true,
-      "price": 4561.5,
-      "description": "elsisi r2esy",
-      "quantity": 1,
-      "sellerid": 3,
-      "putdate": "2023-12-15T05:28:17.000Z",
-      "category": "Health",
-      "storedin": 1,
-      "sellerFName": "new",
-      "sellerLName": "newF"
-    }
-  ]
+            "id": 16,
+            "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
+            "name": "fdd",
+            "prerelease": true,
+            "price": 4561.5,
+            "description": "elsisi r2esy",
+            "quantity": 212,
+            "sellerid": 13,
+            "putdate": "2023-12-22T23:54:07.000Z",
+            "category": "Health",
+            "storedin": 2,
+            "firstname": "new",
+            "lastname": "newF",
+            "num_ratings": "0",
+            "avg_rating": -1
+        },
+        {
+            "id": 3,
+            "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
+            "name": "mfmdslkfnhj",
+            "prerelease": true,
+            "price": 4561.5,
+            "description": "elsisi r2esy",
+            "quantity": 2,
+            "sellerid": 3,
+            "putdate": "2023-12-13T09:01:13.000Z",
+            "category": "Health",
+            "storedin": 1,
+            "firstname": "new",
+            "lastname": "newF",
+            "num_ratings": "0",
+            "avg_rating": -1
+        }
+          ]
 }
 ```
 
@@ -317,7 +336,7 @@ headers
 ```json
 {
   "status": "fail",
-  "message": "Need Seller to Create Product"
+  "message": "Need Seller Auth"
 }
 ```
 
