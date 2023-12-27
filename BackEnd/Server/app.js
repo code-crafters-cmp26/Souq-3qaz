@@ -33,7 +33,7 @@ const io = socketIO(server, {
 });
 
 io.on("connection", async (socket) => {
-  //console.log(socket);
+  // console.log(socket);
   const token = socket.handshake.query.jwt;
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   console.log(decoded.id);
@@ -44,13 +44,19 @@ io.on("connection", async (socket) => {
   );
 
   socket.on("notifyServer", () => {
-    console.log("Server received notification from client");
+    console.log("Server received notification from client", socket.id);
 
-    // Notify all connected clients
     io.emit(
       "notification",
       "Hello, clients! Something happened on the server!"
     );
+  });
+
+  socket.on("event1", async () => {
+    console.log("event1 rec");
+    const result = await db.query(`SELECT socketcode FROM "User" WHERE id=22;`)
+    console.log(result['rows'][0]['socketcode'])
+    io.to(result['rows'][0]['socketcode']).emit('eslam', 'Hello, client! This is a response.');
   });
 
   // Disconnect event
