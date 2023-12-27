@@ -2,7 +2,7 @@ import AuctionsList from "../../components/AuctionsList/AuctionsList";
 import styles from "./AuctionsPage.module.css";
 import { useState, useEffect } from "react";
 function AuctionsPage() {
-  const [auctions, setAuctions] = useState([]);
+  const [auctions, setAuctions] = useState([{}]);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/auction", {
@@ -14,6 +14,10 @@ function AuctionsPage() {
         console.log(data.result);
       });
   }, []);
+
+  useEffect(() => {
+    console.log(auctions);
+  }, [auctions]);
 
   return (
     <div className={styles.all_auctions}>

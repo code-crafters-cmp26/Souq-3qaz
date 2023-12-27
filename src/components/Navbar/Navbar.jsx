@@ -52,7 +52,7 @@ function Navbar({ children }) {
             <Link to="/myproducts">MY PRODUCTS</Link>
           </li>
         )}
-        {userType == "Customer" && (
+        {userType == "Normal" && (
           <li>
             <Link to="/auctions">AUCTIONS</Link>
           </li>
