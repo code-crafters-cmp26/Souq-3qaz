@@ -12,6 +12,7 @@ import ProductsPage from "./pages/Products/ProductsPage";
 import Settings from "./pages/Settings/Settings";
 import Employee from "./pages/Employee/Employee";
 import Reports from "./pages/Reports/Reports";
+import Barter from "./pages/Barter/Barter";
 
 import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/employee" element={<Employee />} />
           <Route path="employee/reports" element={<Reports />} />
+          <Route path="/barter" element={<Barter />} />
 
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/addproduct" element={<AddProductPage />} />
