@@ -93,7 +93,7 @@ function Productpage() {
         </section>
         <section className={styles.purchase}>
           <div className={styles.date}>Date of releasing: {extractedDate}</div>
-          {userType == "Customer" && (
+          {userType == "Normal" && (
             <>
               <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
               <Button text="Buy Now" onClick={handleGoToBuy} />
