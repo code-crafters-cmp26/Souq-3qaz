@@ -34,3 +34,11 @@
   border-width: 1px;
   margin-right: 2px;
 }
+
+.categories {
+  font-weight: bolder;
+}
+
+.categories div:hover {
+  cursor: pointer;
+}
