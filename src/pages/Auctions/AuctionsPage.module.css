@@ -1,11 +1,4 @@
-.auctions_page {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.all_products {
-  display: flex;
-  flex-direction: column;
+.all_auctions {
   width: 80%;
+  margin: auto;
 }

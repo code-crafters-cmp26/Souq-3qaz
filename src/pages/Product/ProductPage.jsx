@@ -4,11 +4,12 @@ import styles from "./Productpage.module.css";
 import { useEffect, useState } from "react";
 import ReviewsContainer from "../../components/ReviewsContainer/ReviewsContainer";
 import { useAuth } from "../../components/AuthProvider/AuthProvider";
+
 function Productpage() {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const navigate = useNavigate();
-  const {userType} = useAuth();
+  const { userType, userData } = useAuth();
 
   const handleAddToWishlist = () => {
     fetch(`http://localhost:3000/api/v1/product/${productData.id}`, {
@@ -34,11 +35,19 @@ function Productpage() {
       `/checkout?name=${productData.name}&id=${productData.id}&price=${productData.price}`
     );
   };
+
+  const handleAddToAuction = () => {
+    navigate(`/addauction/${id}`);
+  };
+
+  const handleDeleteProduct = () => {};
   const handleGoToBarter = () => {
     navigate(
-      `/barter?Sname=${productData.sellerFName + " "+ productData.sellerLName}&id=${productData.id}&price=${productData.price}`
+      `/barter?Sname=${
+        productData.sellerFName + " " + productData.sellerLName
+      }&id=${productData.id}&price=${productData.price}`
     );
-  }
+  };
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/product/${id}`, {
@@ -84,8 +93,25 @@ function Productpage() {
         </section>
         <section className={styles.purchase}>
           <div className={styles.date}>Date of releasing: {extractedDate}</div>
-          <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
-          <Button text= {userType === "customer" ? "Buy" : "Barter"} onClick={userType === "customer" ? handleGoToBuy : handleGoToBarter} />
+          {userType == "Customer" && (
+            <>
+              <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
+              <Button text="Buy Now" onClick={handleGoToBuy} />
+            </>
+          )}
+          {userType == "Seller" && (
+            <>
+              {userData.id == productData.id && (
+                <>
+                  <Button text="Add to Auction" onClick={handleAddToAuction} />
+                  <Button text="Delete Produt" onClick={handleDeleteProduct} />
+                </>
+              )}
+              {userData.id != productData.id && (
+                <Button text="Barter" onClick={handleGoToBarter} />
+              )}
+            </>
+          )}
         </section>
       </div>
       <ReviewsContainer />
