@@ -15,7 +15,7 @@ function ProductsPage({ ofseller }) {
   const { userData } = useAuth();
 
   useEffect(() => {
-    if (ofseller == 0) getProductsOfSeller();
+    if (ofseller == 1) getProductsOfSeller();
     else if (issearched != null) {
       fetch(`http://localhost:3000/api/v1/product/searchProduct`, {
         method: "POST",
