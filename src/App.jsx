@@ -18,7 +18,35 @@ import AuctionsPage from "./pages/Auctions/AuctionsPage";
 import SignupPage from "./pages/Signup/SignupPage";
 import AddProductPage from "./pages/AddProduct/AddProductPage";
 
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 function App() {
+  useEffect(() => {
+    const socket = io("http://127.0.0.1:3000", {
+      query: {
+        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAzNjU3OTczLCJleHAiOjE3MTE0MzM5NzN9.wfje26Seyb0D0r9L8nbIQYyZx5B-LF71skuYa2mhJ6w",
+      },
+    });
+
+    // Handle connection events
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from server");
+    });
+
+    // Listen for custom events from the server
+    socket.on("serverResponse", () => {
+      console.log("rec data");
+    });
+
+    // Clean up the socket connection when the component unmounts
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   return (
     <>
       <BrowserRouter>
