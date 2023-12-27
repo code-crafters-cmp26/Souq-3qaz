@@ -17,4 +17,8 @@ router
   .get(productController.getProductById)
   .post(authController.protectForCustomer, productController.AddToWishList);
 
+router
+  .route('/searchBySeller/:id')
+  .get(productController.getProductBySellerId)
+
 module.exports = router;
