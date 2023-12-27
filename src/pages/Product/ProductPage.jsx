@@ -3,11 +3,12 @@ import Button from "../../components/Button/Button";
 import styles from "./Productpage.module.css";
 import { useEffect, useState } from "react";
 import ReviewsContainer from "../../components/ReviewsContainer/ReviewsContainer";
-
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
 function Productpage() {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const navigate = useNavigate();
+  const {userType} = useAuth();
 
   const handleAddToWishlist = () => {
     fetch(`http://localhost:3000/api/v1/product/${productData.id}`, {
@@ -33,6 +34,11 @@ function Productpage() {
       `/checkout?name=${productData.name}&id=${productData.id}&price=${productData.price}`
     );
   };
+  const handleGoToBarter = () => {
+    navigate(
+      `/barter?Sname=${productData.sellerFName + " "+ productData.sellerLName}&id=${productData.id}&price=${productData.price}`
+    );
+  }
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/product/${id}`, {
@@ -79,7 +85,7 @@ function Productpage() {
         <section className={styles.purchase}>
           <div className={styles.date}>Date of releasing: {extractedDate}</div>
           <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
-          <Button text="Buy Now" onClick={handleGoToBuy} />
+          <Button text= {userType === "customer" ? "Buy" : "Barter"} onClick={userType === "customer" ? handleGoToBuy : handleGoToBarter} />
         </section>
       </div>
       <ReviewsContainer />
