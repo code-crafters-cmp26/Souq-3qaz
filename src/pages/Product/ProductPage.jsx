@@ -9,7 +9,7 @@ function Productpage() {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const navigate = useNavigate();
-  const { userType } = useAuth();
+  const { userType, userData } = useAuth();
 
   const handleAddToWishlist = () => {
     fetch(`http://localhost:3000/api/v1/product/${productData.id}`, {
@@ -92,7 +92,7 @@ function Productpage() {
               <Button text="Buy Now" onClick={handleGoToBuy} />
             </>
           )}
-          {userType == "Seller" && (
+          {userType == "Seller" && userData.id == productData.id && (
             <>
               <Button text="Add to Auction" onClick={handleAddToAuction} />
               <Button text="Delete Produt" onClick={handleDeleteProduct} />

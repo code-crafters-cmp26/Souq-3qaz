@@ -31,7 +31,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           {/* <Route path="/product" element={<ProductPage />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products" element={<ProductsPage ofseller={0} />} />
           <Route path="/products/:id" element={<ProductPage />} />
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/settings" element={<Settings />} />
@@ -42,6 +42,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/addproduct" element={<AddProductPage />} />
           <Route path="/addauction/:id" element={<AddAuctionPage />} />
+          <Route path="/myproducts" element={<ProductsPage ofseller={1} />} />
           {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
       </BrowserRouter>
