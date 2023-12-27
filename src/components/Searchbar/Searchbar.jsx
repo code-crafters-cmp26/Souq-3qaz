@@ -45,17 +45,12 @@ function Searchbar() {
   };
 
   const handleSearchProducts = () => {
-    const currentname = new URLSearchParams(location.search).get("name");
     const params = new URLSearchParams(location.search);
-    console.log(currentname);
-    if (currentname) {
+
+    if (searchtxt) {
       params.set("name", searchtxt);
     } else {
-      if (searchtxt) {
-        params.append("name", searchtxt);
-      } else {
-        params.delete("name"); //dont know thy need to click two times to delete
-      }
+      params.delete("name");
     }
 
     // Use navigate to replace the current URL with the updated query string
