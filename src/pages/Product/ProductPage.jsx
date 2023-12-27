@@ -99,10 +99,17 @@ function Productpage() {
               <Button text="Buy Now" onClick={handleGoToBuy} />
             </>
           )}
-          {userType == "Seller" && userData.id == productData.id && (
+          {userType == "Seller" && (
             <>
-              <Button text="Add to Auction" onClick={handleAddToAuction} />
-              <Button text="Delete Produt" onClick={handleDeleteProduct} />
+              {userData.id == productData.id && (
+                <>
+                  <Button text="Add to Auction" onClick={handleAddToAuction} />
+                  <Button text="Delete Produt" onClick={handleDeleteProduct} />
+                </>
+              )}
+              {userData.id != productData.id && (
+                <Button text="Barter" onClick={handleGoToBarter} />
+              )}
             </>
           )}
         </section>
