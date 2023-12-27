@@ -1,5 +1,5 @@
 import styles from "./Button.module.css";
-function Button({ type, text, onClick, isreq, disabled }) {
+function Button({ type, text, onClick, isreq, disabled, textColor, backgroundColor }) {
   return (
     <button
       type={type ? type : "submit"}
@@ -7,6 +7,7 @@ function Button({ type, text, onClick, isreq, disabled }) {
       onClick={onClick ? onClick : () => {}}
       {...(isreq ? { required: true } : {})}
       {...(disabled ? { disabled: disabled } : {})}
+      {...(backgroundColor ? { style: { backgroundColor: backgroundColor } } : {})}
     >
       {text}
     </button>

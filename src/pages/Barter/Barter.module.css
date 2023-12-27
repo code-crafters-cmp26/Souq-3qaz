@@ -9,7 +9,7 @@
 
 .barter__container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 80%;
@@ -18,6 +18,12 @@
     padding: 50px;
     border-radius: 10px;
     background-color: #F5EFE6;
+}
+.barter__container__inner{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .bartered__product {
@@ -51,4 +57,12 @@
     height: 100px;
     width: 100px;
     margin: 20px;
+}
+
+.exchange__text{
+    color:#C9A66B;
+}
+
+.barter__container__button{
+    padding: 20px;
 }

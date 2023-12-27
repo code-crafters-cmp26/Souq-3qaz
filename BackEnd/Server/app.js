@@ -22,42 +22,42 @@ const app = express();
 const server = http.createServer(app);
 app.use(cors());
 
-app.get("/socket.io.js", (req, res) => {
-  res.sendFile(__dirname + "/node_modules/socket.io-client/dist/socket.io.js");
-});
+// app.get("/socket.io.js", (req, res) => {
+//   res.sendFile(__dirname + "/node_modules/socket.io-client/dist/socket.io.js");
+// });
 
-const io = socketIO(server, {
-  cors: {
-    origin: "*",
-  },
-});
+// const io = socketIO(server, {
+//   cors: {
+//     origin: "*",
+//   },
+// });
 
-io.on("connection", async (socket) => {
-  //console.log(socket);
-  const token = socket.handshake.query.jwt;
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded.id);
-  console.log("A user connected", socket.id);
+// io.on("connection", async (socket) => {
+//   //console.log(socket);
+//   const token = socket.handshake.query.jwt;
+//   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+//   console.log(decoded.id);
+//   console.log("A user connected", socket.id);
 
-  const result = await db.query(
-    `Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';`
-  );
+//   const result = await db.query(
+//     `Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';`
+//   );
 
-  socket.on("notifyServer", () => {
-    console.log("Server received notification from client");
+//   socket.on("notifyServer", () => {
+//     console.log("Server received notification from client");
 
-    // Notify all connected clients
-    io.emit(
-      "notification",
-      "Hello, clients! Something happened on the server!"
-    );
-  });
+//     // Notify all connected clients
+//     io.emit(
+//       "notification",
+//       "Hello, clients! Something happened on the server!"
+//     );
+//   });
 
-  // Disconnect event
-  socket.on("disconnect", () => {
-    console.log("User disconnected");
-  });
-});
+//   // Disconnect event
+//   socket.on("disconnect", () => {
+//     console.log("User disconnected");
+//   });
+// });
 
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
