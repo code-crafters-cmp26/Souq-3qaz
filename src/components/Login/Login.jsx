@@ -46,6 +46,7 @@ function Login() {
           setError(1);
         } else if (data.status === "success") {
           const token = data.token;
+          console.log(token);
           localStorage.setItem("token", `Bearer ${token}`);
           const role = data.role;
           localStorage.setItem("isLoggedIn", JSON.stringify(true));

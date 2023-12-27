@@ -1,6 +1,8 @@
+//import { useEffect } from "react";
 import Button from "../../components/Button/Button";
 import styles from "./Homepage.module.css";
 import { Link } from "react-router-dom";
+//import io from "socket.io-client";
 function Homepage() {
   return (
     <div className={styles.homepage}>
