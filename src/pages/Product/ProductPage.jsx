@@ -41,6 +41,13 @@ function Productpage() {
   };
 
   const handleDeleteProduct = () => {};
+  const handleGoToBarter = () => {
+    navigate(
+      `/barter?Sname=${
+        productData.sellerFName + " " + productData.sellerLName
+      }&id=${productData.id}&price=${productData.price}`
+    );
+  };
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/product/${id}`, {
