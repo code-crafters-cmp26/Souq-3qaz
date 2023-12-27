@@ -45,7 +45,7 @@ function Productpage() {
     navigate(
       `/barter?Sname=${
         productData.sellerFName + " " + productData.sellerLName
-      }&id=${productData.id}&price=${productData.price}`
+      }&id=${productData.id}&sellerid=${productData.sellerid}`
     );
   };
 
