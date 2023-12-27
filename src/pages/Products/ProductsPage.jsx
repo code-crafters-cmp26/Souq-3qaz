@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 function ProductsPage() {
   const location = useLocation();
   const issearched = new URLSearchParams(location.search).get("name");
+  const categ = new URLSearchParams(location.search).get("categ");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -41,7 +42,7 @@ function ProductsPage() {
     <div className={styles.products_page}>
       <CategoriesBar />
       <div className={styles.all_products}>
-        <ProductsList products={products} />
+        <ProductsList products={products} category={categ} />
       </div>
     </div>
   );

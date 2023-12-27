@@ -30,7 +30,6 @@ function Searchbar() {
   };
 
   const handleEntered = () => {
-    navigate("/products");
     setOpened(true);
   };
 
@@ -46,7 +45,22 @@ function Searchbar() {
   };
 
   const handleSearchProducts = () => {
-    navigate(`/products?name=${searchtxt}`);
+    const currentname = new URLSearchParams(location.search).get("name");
+    const params = new URLSearchParams(location.search);
+    console.log(currentname);
+    if (currentname) {
+      params.set("name", searchtxt);
+    } else {
+      if (searchtxt) {
+        params.append("name", searchtxt);
+      } else {
+        params.delete("name"); //dont know thy need to click two times to delete
+      }
+    }
+
+    // Use navigate to replace the current URL with the updated query string
+    navigate({ search: params.toString() });
+    //navigate(`/products?name=${searchtxt}`);
     //what do we use to continur on the url ?
   };
 

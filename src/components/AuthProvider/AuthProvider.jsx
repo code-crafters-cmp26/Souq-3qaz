@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
   const [userData, setUserData] = useState(null);
+  const categories = ["Electronics", "Health", "Cosmetics", "Fashion"];
 
   // Check local storage on component mount
   useEffect(() => {
@@ -58,6 +59,7 @@ export const AuthProvider = ({ children }) => {
         setUserType,
         userData,
         setUserData,
+        categories,
       }}
     >
       {children}
