@@ -336,7 +336,7 @@ headers
 ```json
 {
   "status": "fail",
-  "message": "Need Seller to Create Product"
+  "message": "Need Seller Auth"
 }
 ```
 

@@ -46,8 +46,51 @@ exports.barterProduct = catchAsync(async (req, res, next) => {
     return next(new AppError('Product Quantity Is Not Enough', 404));
   }
 
+
+
   const result = await db.query(`INSERT INTO barter VALUES(default,${requestingSellerID},${requestedSellerlD},
-    ${offeredProductlD},${requestedProductlD},'${formattedDate}',${offeredProductQuantity},${requestedProductQuantity});`)
+    ${offeredProductlD},${requestedProductlD},'${formattedDate}',${offeredProductQuantity},${requestedProductQuantity},false);`)
+
+  res.status(200).json({
+    status: "success"
+  });
+});
+
+exports.approveBarter = catchAsync(async (req, res, next) => {
+  const requestedSellerID = req.user['rows'][0]['id'];
+
+  const { barterId } = req.body;
+
+  if (!barterId) {
+    return next(new AppError('some required Fields are empty', 400));
+  }
+
+  if (typeof barterId !== 'number') {
+    return next(new AppError('bad request', 400));
+  }
+
+  const barter = await db.query(`SELECT * FROM barter WHERE barterid = ${barterId};`)
+  if (barter['rowCount'] == 0) {
+    return next(new AppError('no Barter Found', 404));
+  }
+
+  if (barter['rows'][0]['requestedsellerid'] != requestedSellerID) {
+    return next(new AppError('only barter owner can approve it', 400));
+  }
+
+  if (barter['rows'][0]['donetrading']) {
+    return next(new AppError('You Already Have Done This Before', 409));
+  }
+
+  const offeredProduct = await db.query(`SELECT quantity FROM product WHERE id = ${barter['rows'][0]['offeredproductid']};`)
+  const requestedProduct = await db.query(`SELECT quantity FROM product WHERE id = ${barter['rows'][0]['requistedproductid']};`)
+
+  if (barter['rows'][0]['offeredproductidquantity'] > offeredProduct['rows'][0]['quantity'] ||
+    barter['rows'][0]['requistedproductidquantity'] > requestedProduct['rows'][0]['requestedProduct']) {
+    return next(new AppError('Product Quantity Is Not Enough', 404));
+  }
+
+  const result = await db.query(`UPDATE barter SET donetrading = true WHERE barterid = ${barterId};`)
 
   res.status(200).json({
     status: "success"

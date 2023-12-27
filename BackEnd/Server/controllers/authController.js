@@ -107,6 +107,9 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   const data = await db.query(`SELECT * FROM "User" WHERE email = '${email}';`);
+  if (data['rowCount'] == 0) {
+    return next(new AppError('incorrect email or password', 401));
+  }
   const user = await db.query(`SELECT password FROM "User" WHERE email = '${email}';`);
   const newUserId = await db.query(`SELECT id FROM "User" WHERE email = '${email}';`);
   const truePassword = user['rows'][0]['password'] + '';
@@ -177,7 +180,7 @@ exports.protectForSeller = catchAsync(async (req, res, next) => {
   const isSeller = await db.query(`SELECT * FROM Seller WHERE id = ${freshUser['rows'][0]['id']}`);
 
   if (!isSeller['rowCount']) {
-    return next(new AppError('Need Seller to Create Product', 403));
+    return next(new AppError('Need Seller Auth', 403));
   }
 
   req.user = freshUser;

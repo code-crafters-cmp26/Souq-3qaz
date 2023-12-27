@@ -8,4 +8,9 @@ router
   .get(authController.protectForSeller, barterController.getBarter)
   .post(authController.protectForSeller, barterController.barterProduct);
 
+router
+  .route('/Approve')
+  .post(authController.protectForSeller, barterController.approveBarter);
+
+
 module.exports = router;
