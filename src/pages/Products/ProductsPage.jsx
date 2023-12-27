@@ -3,16 +3,20 @@ import CategoriesBar from "../../components/CategoriesBar/CategoriesBar";
 import ProductsList from "../../components/ProductsList/ProductsList";
 import styles from "./ProductsPage.module.css";
 import { useLocation } from "react-router-dom";
-function ProductsPage() {
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
+
+function ProductsPage({ ofseller }) {
   const location = useLocation();
   const issearched = new URLSearchParams(location.search).get("name");
   const categ = new URLSearchParams(location.search).get("categ");
   const minprice = new URLSearchParams(location.search).get("min");
   const maxprice = new URLSearchParams(location.search).get("max");
   const [products, setProducts] = useState([]);
+  const { userData } = useAuth();
 
   useEffect(() => {
-    if (issearched != null) {
+    if (ofseller == 0) getProductsOfSeller();
+    else if (issearched != null) {
       fetch(`http://localhost:3000/api/v1/product/searchProduct`, {
         method: "POST",
         headers: {
@@ -39,6 +43,21 @@ function ProductsPage() {
         });
     }
   }, [issearched]);
+
+  const getProductsOfSeller = () => {
+    console.log(userData);
+    fetch(
+      `http://localhost:3000/api/v1/product/searchBySeller/${userData.id}`,
+      {
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.products);
+        console.log(data.products);
+      });
+  };
 
   return (
     <div className={styles.products_page}>

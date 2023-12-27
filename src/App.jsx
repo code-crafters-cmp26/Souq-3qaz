@@ -12,12 +12,13 @@ import ProductsPage from "./pages/Products/ProductsPage";
 import Settings from "./pages/Settings/Settings";
 import Employee from "./pages/Employee/Employee";
 import Reports from "./pages/Reports/Reports";
+import Barter from "./pages/Barter/Barter";
 
 import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
 import SignupPage from "./pages/Signup/SignupPage";
 import AddProductPage from "./pages/AddProduct/AddProductPage";
-
+import AddAuctionPage from "./pages/AddAuction/AddAuctionPage";
 function App() {
   return (
     <>
@@ -31,16 +32,19 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           {/* <Route path="/product" element={<ProductPage />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products" element={<ProductsPage ofseller={0} />} />
           <Route path="/products/:id" element={<ProductPage />} />
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/about" element={<About />} />
           <Route path="/employee" element={<Employee />} />
           <Route path="employee/reports" element={<Reports />} />
+          <Route path="/barter" element={<Barter />} />
 
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/addproduct" element={<AddProductPage />} />
+          <Route path="/addauction/:id" element={<AddAuctionPage />} />
+          <Route path="/myproducts" element={<ProductsPage ofseller={1} />} />
           {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
       </BrowserRouter>
