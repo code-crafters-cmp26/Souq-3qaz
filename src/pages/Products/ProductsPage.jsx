@@ -7,6 +7,8 @@ function ProductsPage() {
   const location = useLocation();
   const issearched = new URLSearchParams(location.search).get("name");
   const categ = new URLSearchParams(location.search).get("categ");
+  const minprice = new URLSearchParams(location.search).get("min");
+  const maxprice = new URLSearchParams(location.search).get("max");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -42,7 +44,12 @@ function ProductsPage() {
     <div className={styles.products_page}>
       <CategoriesBar />
       <div className={styles.all_products}>
-        <ProductsList products={products} category={categ} />
+        <ProductsList
+          products={products}
+          category={categ}
+          min={minprice}
+          max={maxprice}
+        />
       </div>
     </div>
   );
