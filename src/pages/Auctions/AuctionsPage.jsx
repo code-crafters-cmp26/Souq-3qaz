@@ -1,6 +1,7 @@
 import CategoriesBar from "../../components/CategoriesBar/CategoriesBar";
 import ProductsList from "../../components/ProductsList/ProductsList";
 import styles from "./AuctionsPage.module.css";
+import { useState, useEffect } from "react";
 function AuctionsPage() {
   const [auctions, setAuctions] = useState([{}]);
 

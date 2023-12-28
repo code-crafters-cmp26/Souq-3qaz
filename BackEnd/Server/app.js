@@ -32,36 +32,26 @@ app.use(cors());
 //   },
 // });
 
-io.on("connection", async (socket) => {
-  // console.log(socket);
-  const token = socket.handshake.query.jwt;
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded.id);
-  console.log("A user connected", socket.id);
+// io.on("connection", async (socket) => {
+//   //console.log(socket);
+//   const token = socket.handshake.query.jwt;
+//   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+//   console.log(decoded.id);
+//   console.log("A user connected", socket.id);
 
 //   const result = await db.query(
-//     `Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';`
+//     Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';
 //   );
 
-  socket.on("notifyServer", () => {
-    console.log("Server received notification from client", socket.id);
+//   socket.on("notifyServer", () => {
+//     console.log("Server received notification from client");
 
-    io.emit(
-      "notification",
-      "Hello, clients! Something happened on the server!"
-    );
-  });
-
-  //event1 is sent
-  socket.on("event1", async () => {
-    console.log("event1 rec");
-    const result = await db.query(`SELECT socketcode FROM "User" WHERE id=6;`); //listens now to the coming event (eslam)
-    console.log(result["rows"][0]["socketcode"]);
-    io.to(result["rows"][0]["socketcode"]).emit(
-      "eslam",
-      "Hello, client! This is a response."
-    );
-  });
+//     // Notify all connected clients
+//     io.emit(
+//       "notification",
+//       "Hello, clients! Something happened on the server!"
+//     );
+//   });
 
 //   // Disconnect event
 //   socket.on("disconnect", () => {
@@ -81,7 +71,7 @@ app.use("/api/v1/auction", auctionRouter);
 app.use("/api/v1/barter", barterRouter);
 
 app.all("*", (req, res, next) => {
-  next(new AppError(`can\'t find ${req.originalUrl} on this server`, 404));
+  next(new AppError(`can\t find ${req.originalUrl} on this server`, 404));
 });
 
 app.use(globalErrorHandler);
