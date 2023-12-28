@@ -3,11 +3,13 @@ import Button from "../../components/Button/Button";
 import styles from "./Productpage.module.css";
 import { useEffect, useState } from "react";
 import ReviewsContainer from "../../components/ReviewsContainer/ReviewsContainer";
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
 
 function Productpage() {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const navigate = useNavigate();
+  const { userType, userData } = useAuth();
 
   const handleAddToWishlist = () => {
     fetch(`http://localhost:3000/api/v1/product/${productData.id}`, {
