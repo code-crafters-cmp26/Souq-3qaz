@@ -7,7 +7,7 @@ import { useAuth } from "../../components/AuthProvider/AuthProvider";
 function ProfilePage() {
   const [points, setPoints] = useState("");
   const [cardnumber, setCardNumber] = useState(0);
-  const { userData, setUserData } = useAuth();
+  const { userType, userData, setUserData, setUserType } = useAuth();
   const handleChangePoints = (e) => {
     setPoints(e.target.value);
   };
@@ -15,7 +15,7 @@ function ProfilePage() {
     setCardNumber(i);
   };
 
-  const updateUserBalance = () => {
+  const updateUserData = () => {
     fetch(`http://localhost:3000/api/v1/user/Customer/${userData.id}`, {
       method: "GET",
       headers: {
@@ -52,29 +52,77 @@ function ProfilePage() {
       })
       .then((data) => {
         console.log(data);
-        updateUserBalance();
+        updateUserData();
       })
       .catch((error) => {
         console.log(error.message);
       });
   };
 
+  const handleUpgrade = () => {
+    if (userType != "Premium") {
+      fetch("http://localhost:3000/api/v1/user/Customer/upgrade", {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          money: points,
+        }),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          if (data.message == "not enough money in your balance") {
+            alert("Not enough money in your account");
+          } else if (data.message == "You Already Have Done This Before") {
+            alert("you are already a premium user");
+          } else {
+            console.log(data);
+            setUserType("Premium");
+            updateUserData();
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
+
   return (
     <div className={styles.profile_page}>
       <div className={styles.profile_page__left_panel}>
+        {userType == "Premium" && (
+          <h2 className={styles.premiummessage}>
+            Welcome Our Premium customer
+          </h2>
+        )}
         <img
           className={styles.profile_page__left_panel__profile_pic}
-          src="https://via.placeholder.com/150"
+          src={userData.image}
           alt="profile pic"
         />
         <div className={styles.profile_page__left_panel__user_info}>
-          <h3>John Doe</h3>
-          <h6>221 b Baker Street London, UK</h6>
-          <h6>+201234567890</h6>
-          <h6> JohnDoe@2ablnelawfala7t.nam </h6>
+          <h3>
+            {userData.firstname} {userData.lastname}
+          </h3>
+          <h6>
+            {userData.street}, {userData.country}, {userData.city}
+          </h6>
+          <h6>
+            <h6>building number: {userData.buildingnumber}</h6>
+          </h6>
+          {userData.apartmentnumber && (
+            <h6>Apartment number: {userData.apartmentnumber}</h6>
+          )}
+          <h6>{userData.phonenumber}</h6>
+          <h6> {userData.email} </h6>
         </div>
         <DrawerItem title="Logout" />
       </div>
+
       <div className={styles.profile_page__cards_grid}>
         {cardnumber === 0 && (
           <>
@@ -126,14 +174,38 @@ function ProfilePage() {
                 handleClick(6);
               }}
             />
+            {userType == "Normal" && (
+              <Card
+                img="./src/pages/Profile/636600.png"
+                title="Upgrade to premium"
+                description="Take benefits of permium users"
+                onClick={() => {
+                  handleClick(7);
+                }}
+              />
+            )}
+          </>
+        )}
+
+        {cardnumber === 7 && (
+          <>
+            <h3 className={styles.notifypremium}>
+              You need balance greater than 200 to upgrade to premium
+            </h3>
+            <div className={styles.balance}>
+              Your balance: {userData.balance}{" "}
+            </div>
             <Card
-              img="./src/pages/Profile/contact.svg"
+              img="./src/pages/Profile/636600.png"
               title="Upgrade to premium"
-              description="Reach out to us for any questions"
+              description="Take benefits of permium users"
               onClick={() => {
-                handleClick(6);
+                handleClick(0);
               }}
             />
+            <div className={styles.upgradebut}>
+              <button onClick={handleUpgrade}>Upgrade</button>
+            </div>
           </>
         )}
 
