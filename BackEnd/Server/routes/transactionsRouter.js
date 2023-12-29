@@ -6,10 +6,8 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(authController.protectForCustomer, transactionsController.buy);
-
-router
-  .route('/:id')
+  .post(authController.protectForCustomer, transactionsController.buy)
   .get(authController.protectForSeller, transactionsController.getTranscations);
+
 
 module.exports = router;
