@@ -293,3 +293,29 @@ exports.protectForAdmin = catchAsync(async (req, res, next) => {
 
   next();
 });
+
+exports.protectForEmployee = catchAsync(async (req, res, next) => {
+
+  let token;
+  // 1) getting the token and check if its there
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+  if (!token) {
+    return next(new AppError('you are not logged in', 401));
+  }
+
+  // 2) verification of the token
+  // @ts-ignore
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  // 3) check if the user still exist
+  // @ts-ignore
+  const freshUser = await db.query(`SELECT * FROM employee WHERE id = ${decoded.id}`);
+
+  if (!freshUser['rowCount']) {
+    return next(new AppError('This Action Need employee Auth', 403));
+  }
+
+  req.user = freshUser;
+  next();
+});
