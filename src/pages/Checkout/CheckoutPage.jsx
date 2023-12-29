@@ -27,10 +27,12 @@ function CheckoutPage() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setProductData(...data.products);
+        if (data.status == "success") setProductData(...data.products);
+        else alert(data.message);
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
   }, [productID]);
 

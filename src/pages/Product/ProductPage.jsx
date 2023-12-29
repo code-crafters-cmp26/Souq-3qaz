@@ -24,9 +24,11 @@ function Productpage() {
       })
       .then((data) => {
         console.log(data);
+        if (data.status != "success") alert(data.message);
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
   };
 
@@ -51,9 +53,11 @@ function Productpage() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (data.status != "success") alert(data.message);
       })
       .catch((error) => {
         console.log(error.message);
+        alert(data.message);
       });
   };
   const handleGoToBarter = () => {
@@ -74,10 +78,12 @@ function Productpage() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setProductData(...data.products);
+        if (data.status != "success") alert(data.message);
+        else setProductData(...data.products);
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
   }, [id]);
 
