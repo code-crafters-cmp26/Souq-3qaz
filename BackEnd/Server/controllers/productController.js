@@ -213,3 +213,15 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
     status: "success",
   });
 });
+
+exports.getWish = catchAsync(async (req, res) => {
+  const customerId = req.user['rows'][0]['id'];
+
+  console.log(customerId);
+  const result = await db.query(`SELECT * FROM wishlist WHERE customerid=${customerId};`);
+
+  res.status(200).json({
+    status: 'success',
+    result: result['rows']
+  });
+});

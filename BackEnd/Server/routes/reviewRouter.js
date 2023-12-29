@@ -7,7 +7,7 @@ const router = express.Router();
 router
   .route('/:id')
   .get(reviewController.getReviews)
-  .post(authController.protectForCustomer, reviewController.reviewProduct)
-  .delete(authController.protectForCustomer, reviewController.deleteReview);
+  .post(authController.protectFrombanned, authController.protectForCustomer, reviewController.reviewProduct)
+  .delete(authController.protectFrombanned, authController.protectForCustomer, reviewController.deleteReview);
 
 module.exports = router;

@@ -162,18 +162,8 @@ exports.getWish = catchAsync(async (req, res) => {
 exports.updateInfo = catchAsync(async (req, res, next) => {
   const userId = req.user["rows"][0]["id"];
   const {
-    FName,
-    LName,
-    PhoneNumber,
-    Gender,
-    ApartmentNumber,
-    BuildingNumber,
-    Country,
-    City,
-    Street,
-    theme,
-    image,
-  } = req.body;
+    FName, LName, PhoneNumber, Gender, ApartmentNumber,
+    BuildingNumber, Country, City, Street, theme, image, password } = req.body;
 
   const balance = 0;
 
@@ -193,6 +183,17 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
     return next(new AppError("some required Fields are empty", 409));
   }
 
+  let hashedpassword = '';
+  if (!password) {
+    const user = await db.query(`SELECT * FROM "User" Where id = ${userId};`)
+    hashedpassword = user['rows'][0]['password'];
+  }
+  else {
+    hashedpassword = await User.hashPassword(password);
+  }
+
+  
+
   if (!User.phoneCheck(PhoneNumber)) {
     return next(
       new AppError("Phone number must only contain numerical digits", 400)
@@ -205,6 +206,7 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
   firstname = '${FName}',
   lastname = '${LName}',
   phonenumber  = '${PhoneNumber}',
+  password  = '${hashedpassword}',
   image   = '${image}',
   balance = ${balance},
   theme  = '${theme}',
