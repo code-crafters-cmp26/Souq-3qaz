@@ -160,7 +160,13 @@ function Settings() {
       <form className={styles.form}>
         <h2>Personal Info</h2>
         <img src={state.image} alt="Avatar" className={styles.avatar} />
-        <Input text="Change Picture" type="file" handlevalue={handlevalue} />
+        <Input
+          name="image"
+          text="Change Picture"
+          type="text"
+          value={state.image}
+          handlevalue={handlevalue}
+        />
         <Input
           text="First Name"
           type="text"
@@ -243,13 +249,17 @@ function Settings() {
           handlevalue={handlevalue}
         />
       </form>
-      <Button text="Save Changes" onClick={handleSubmit} />
-      <form className={styles.form + " " + styles.delete}>
+      <Button
+        text="Save Changes"
+        onClick={handleSubmit}
+        backgroundColor="grey"
+      />
+      {/* <form className={styles.form + " " + styles.delete}>
         <h2>Account Deletion</h2>
         <Input text="Password" type="password" />
         <Input text="Confirm Password" type="password" />
         <Button text="Delete Account" />
-      </form>
+      </form> */}
     </div>
   );
 }
