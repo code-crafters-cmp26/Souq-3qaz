@@ -7,7 +7,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 function Settings() {
-  const { userData, userType } = useAuth();
+  const { userData, userType, setUserData } = useAuth();
+
   //TODO: stop here till the useAuth returns the user data
   const initialState = {
     firstname: "",
@@ -76,7 +77,8 @@ function Settings() {
     });
   };
   const checkPassword = () => {
-    if (state.password !== state.confirmpassword || state.password === "") {
+    if (state.password !== state.confirmpassword) {
+      //|| state.password === ""
       alert("Passwords do not match");
       return false;
     }
@@ -109,7 +111,10 @@ function Settings() {
   };
 
   const handleSubmit = (e) => {
-    //if (!checkPassword()) return;
+    if (!checkPassword()) {
+      //alert("two passwrods dont match try again");
+      return;
+    }
     e.preventDefault();
     console.log(state);
     //send post request to backend
@@ -124,7 +129,7 @@ function Settings() {
         LName: state.lastname,
         PhoneNumber: state.phonenumber,
         Gender: "Male",
-        //Password: state.password,
+        password: state.password,
         ApartmentNumber: state.appartmentnumber,
         BuildingNumber: state.buildingnumber,
         Country: state.country,
@@ -154,12 +159,8 @@ function Settings() {
       <h1>Settings</h1>
       <form className={styles.form}>
         <h2>Personal Info</h2>
-        <img
-          src="https://www.w3schools.com/howto/img_avatar.png"
-          alt="Avatar"
-          className={styles.avatar}
-        />
-        <Input text="Change Picture" type="file" />
+        <img src={state.image} alt="Avatar" className={styles.avatar} />
+        <Input text="Change Picture" type="file" handlevalue={handlevalue} />
         <Input
           text="First Name"
           type="text"

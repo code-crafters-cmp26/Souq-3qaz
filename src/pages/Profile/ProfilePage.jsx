@@ -3,6 +3,7 @@ import DrawerItem from "../../components/DrawerItem/DrawerItem";
 import Card from "../../components/Card/Card";
 import { useState } from "react";
 import { useAuth } from "../../components/AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
   //const [isloading, setIsLoading] = useState(true);
@@ -41,6 +42,7 @@ function ProfilePage() {
       });
   };
 
+  const navigate = useNavigate();
   const handleRecharge = () => {
     fetch("http://localhost:3000/api/v1/user/Customer/recharge", {
       method: "POST",
@@ -86,6 +88,7 @@ function ProfilePage() {
             alert("you are already a premium user");
           } else {
             console.log(data);
+            alert("Congrats, You upgraded to premium");
             setUserType("Premium");
             updateUserData();
           }
@@ -153,6 +156,7 @@ function ProfilePage() {
               title="Settings"
               description="Here you can change your settings, username, ..etc"
               onClick={() => {
+                navigate("/settings");
                 handleClick(3);
               }}
             />
@@ -168,10 +172,14 @@ function ProfilePage() {
             <Card
               img="./src/pages/Profile/balance.svg"
               title={
-                userType == "Normal" ? "Recharge Balance" : "Check your balance"
+                userType == "Normal" || userType == "Premium"
+                  ? "Recharge Balance"
+                  : "Check your balance"
               }
               description={
-                userType == "Normal" ? "Here you can recharge your balance" : ""
+                userType == "Normal" || userType == "Premium"
+                  ? "Here you can recharge your balance"
+                  : ""
               }
               onClick={() => {
                 handleClick(5);
@@ -229,17 +237,21 @@ function ProfilePage() {
             <Card
               img="./src/pages/Profile/balance.svg"
               title={
-                userType == "Normal" ? "Recharge Balance" : "Check your balance"
+                userType == "Normal" || userType == "Premium"
+                  ? "Recharge Balance"
+                  : "Check your balance"
               }
               description={
-                userType == "Normal" ? "Here you can recharge your balance" : ""
+                userType == "Normal" || userType == "Premium"
+                  ? "Here you can recharge your balance"
+                  : ""
               }
               onClick={() => {
                 handleClick(0);
               }}
             />
 
-            {userType == "Normal" && (
+            {(userType == "Normal" || userType == "Premium") && (
               <div className={styles.recharge_balance}>
                 <input
                   placeholder="Enter The Points"
