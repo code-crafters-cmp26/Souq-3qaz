@@ -6,7 +6,7 @@ const router = express.Router();
 router
   .route('/')
   .get(productController.getAllProducts)
-  .post(authController.protectForSeller, productController.createProduct);
+  .post(authController.protectFrombanned, authController.protectForSeller, productController.createProduct);
 
 router
   .route('/searchProduct')
@@ -15,7 +15,7 @@ router
 router
   .route('/:id')
   .get(productController.getProductById)
-  .post(authController.protectForCustomer, productController.AddToWishList)
+  .post(authController.protectFrombanned, authController.protectForCustomer, productController.AddToWishList)
   .delete(authController.protectFromCustomer, productController.deleteProduct);
 
 router

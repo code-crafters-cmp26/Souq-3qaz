@@ -130,7 +130,10 @@ exports.getWish = catchAsync(async (req, res) => {
   const customerId = req.user['rows'][0]['id'];
 
   console.log(customerId);
-  const result = await db.query(`SELECT * FROM wishlist WHERE customerid=${customerId};`);
+  const result = await db.query(`SELECT wishlist.*, product.*
+      FROM wishlist
+      JOIN product ON wishlist.productid = product.id
+      WHERE wishlist.customerid =${customerId};`);
 
   res.status(200).json({
     status: 'success',
@@ -142,12 +145,21 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
   const userId = req.user['rows'][0]['id'];
   const {
     FName, LName, PhoneNumber, Gender, ApartmentNumber,
-    BuildingNumber, Country, City, Street, theme, image } = req.body;
+    BuildingNumber, Country, City, Street, theme, image, password } = req.body;
 
   const balance = 0;
 
   if (!FName || !LName || !PhoneNumber || !theme || !image || !Gender || !ApartmentNumber || !BuildingNumber || !Country || !City || !Street) {
     return next(new AppError('some required Fields are empty', 409));
+  }
+
+  let hashedpassword = '';
+  if (!password) {
+    const user = await db.query(`SELECT * FROM "User" Where id = ${userId};`)
+    hashedpassword = user['rows'][0]['password'];
+  }
+  else {
+    hashedpassword = await User.hashPassword(password);
   }
 
   if (!User.phoneCheck(PhoneNumber)) {
@@ -160,6 +172,7 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
   firstname = '${FName}',
   lastname = '${LName}',
   phonenumber  = '${PhoneNumber}',
+  password  = '${hashedpassword}',
   image   = '${image}',
   balance = ${balance},
   theme  = '${theme}',

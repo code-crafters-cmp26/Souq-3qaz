@@ -7,4 +7,8 @@ router
   .route('/')
   .post(authController.protectForAdmin, employeeController.addTech)
 
+router
+  .route('/stat')
+  .get(authController.protectForEmployee, employeeController.getstats)
+
 module.exports = router;

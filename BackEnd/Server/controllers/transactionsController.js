@@ -53,7 +53,7 @@ exports.buy = catchAsync(async (req, res, next) => {
 
 exports.getTranscationsforSeller = catchAsync(async (req, res, next) => {
   const userId = req.user;
-  const result = await db.query(`SELECT transaction.*, product.name, product.price
+  const result = await db.query(`SELECT transaction.*, product.name, product.price, product.price
       FROM transaction
       JOIN product ON transaction.productid = product.id
       WHERE product.sellerid = ${userId['rows'][0]['id']};`)
@@ -68,9 +68,9 @@ exports.getTranscationsforSeller = catchAsync(async (req, res, next) => {
 exports.getTranscationsforCustomer = catchAsync(async (req, res, next) => {
   const userId = req.user;
   const result = await db.query(`SELECT transaction.*, product.name, product.price
-FROM transaction
-JOIN product ON transaction.productid = product.id
-WHERE transaction.customerid = ${userId['rows'][0]['id']};`)
+    FROM transaction
+    JOIN product ON transaction.productid = product.id
+    WHERE transaction.customerid = ${userId['rows'][0]['id']};`)
 
   res.status(200).json({
     "status": "success",
