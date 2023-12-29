@@ -13,6 +13,7 @@ router
 router
   .route('/:id')
   .get(userController.getUserById)
+  .patch(authController.protectForEmployee, userController.banUser);
 
 router
   .route('/Seller')
