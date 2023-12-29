@@ -54,6 +54,7 @@ exports.buy = catchAsync(async (req, res, next) => {
 exports.getTranscations = catchAsync(async (req, res, next) => {
   const userId = req.user;
 
+
   const result = await db.query(`SELECT transaction.*
       FROM transaction
       JOIN product ON transaction.productid = product.id
