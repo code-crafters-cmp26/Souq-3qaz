@@ -1,7 +1,7 @@
-const validator = require('validator');
+// const validator = require('validator');
 const bcrypt = require('bcrypt');
-const crypto = require('crypto');
-const catchAsync = require('../utils/catchAsync');
+// const crypto = require('crypto');
+// const catchAsync = require('../utils/catchAsync');
 
 exports.checkPassword = async function (candidatePassword, userPassword) {
   try {
