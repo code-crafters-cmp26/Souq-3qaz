@@ -2,28 +2,14 @@ import styles from "./Settings.module.css";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import { useReducer } from "react";
-import { useAuth } from '../../components/AuthProvider/AuthProvider';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function Settings() {
   const { userData, userType } = useAuth();
   //TODO: stop here till the useAuth returns the user data
   const initialState = {
-    // firstname: userData?.firstname,
-    // lastname: userData?.lastname,
-    // email: userData?.email,
-    // password: "",
-    // confirmpassword: "",
-    // phonenumber: userData?.phonenumber,
-    // appartmentnumber: userData?.appartmentnumber,
-    // buildingnumber: userData?.buildingnumber,
-    // street: userData?.street,
-    // city: userData?.city,
-    // country: userData?.country,
-    // theme: userData?.theme,
-    // image: userData?.image,
-    // gender: userData?.gender,\
     firstname: "",
     lastname: "",
     email: "",
@@ -38,7 +24,6 @@ function Settings() {
     theme: "",
     image: "",
     gender: "",
-
   };
 
   const reducer = (state, action) => {
@@ -56,7 +41,7 @@ function Settings() {
       dispatch({ type: "CHANGE", field: "email", value: userData.email });
       dispatch({ type: "CHANGE", field: "phonenumber", value: userData.phonenumber });
       dispatch({ type: "CHANGE", field: "appartmentnumber", value: userData.appartmentnumber });
-      dispatch({ type: "CHANGE", field: "buildingnumber", value: userData.buildingnumber });
+      dispatch({ type: "CHANGE",field: "buildingnumber",value: userData.buildingnumber});
       dispatch({ type: "CHANGE", field: "street", value: userData.street });
       dispatch({ type: "CHANGE", field: "city", value: userData.city });
       dispatch({ type: "CHANGE", field: "country", value: userData.country });
@@ -64,11 +49,6 @@ function Settings() {
       dispatch({ type: "CHANGE", field: "image", value: userData.image });
     }
   }, [userData]);
-
-
-
-
-
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const role = userType === "seller" ? "Seller" : "Customer";
@@ -86,8 +66,30 @@ function Settings() {
     }
     return true;
   };
+
+  const updateUserSettings = () => {
+    fetch(`http://localhost:3000/api/v1/user/Customer/${userData.id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("userData", JSON.stringify(...data.customer));
+        const storedUserData = localStorage.getItem("userData");
+        setUserData(JSON.parse(storedUserData));
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   const handleSubmit = (e) => {
-    if (!checkPassword()) return;
+    //if (!checkPassword()) return;
     e.preventDefault();
     console.log(state);
     //send post request to backend
@@ -102,21 +104,24 @@ function Settings() {
         LName: state.lastname,
         PhoneNumber: state.phonenumber,
         Gender: "Male",
-        Password: state.password,
+        //Password: state.password,
         ApartmentNumber: state.appartmentnumber,
         BuildingNumber: state.buildingnumber,
         Country: state.country,
         City: state.city,
         Street: state.street,
-        role: role,
-        NID: "123456789",
+        //role: role,
+        //NID: "123456789",
+        theme: state.theme,
+        image: state.image,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.status == "success") {
           alert("User updated successfully");
-          window.location.reload();
+          //window.location.reload();
+          updateUserSettings();
         } else {
           alert("Error updating user");
           console.log(data);

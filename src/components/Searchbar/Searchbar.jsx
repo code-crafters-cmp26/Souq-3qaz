@@ -62,7 +62,6 @@ function Searchbar() {
 
   const handleKeyDown = (e) => {
     // Check if the pressed key is "Enter"
-
     if (e.key === "Enter") {
       handleSearchProducts();
     }
