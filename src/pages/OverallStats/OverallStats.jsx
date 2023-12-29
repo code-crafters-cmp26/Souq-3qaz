@@ -12,7 +12,7 @@ function OverallStats() {
     const [seller, setseller] = useState(0)
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/v1/user", {
+        fetch("http://localhost:3000/api/v1/employee/stat", {
             method: "GET",
             headers: {
                 Authorization: localStorage.getItem("token"),
@@ -24,30 +24,17 @@ function OverallStats() {
                 return res.json();
             })
             .then((data) => {
-                console.log(data);
-                setusers([...data.customers, ...data.sellers])
-                console.log(users)
-                if(!loading)
-                 {setCounts()}
+                setnormal(data.normal)
+                setpremium(data.premium)
+                setseller(data.seller)
+                
                 setloading(false)
             })
             .catch((error) => {
                 console.log(error.message);
             });
     }, []);
-    function setCounts() {
-        users.map((user) => {
-            if (user.type == "normal") {
-                setnormal(normal + 1)
-            }
-            else if (user.type == "premium") {
-                setpremium(premium + 1)
-            }
-            else {
-                setseller(seller + 1)
-            }
-        })
-    }
+    
 
     return (
         <div className={styles.overall_stats}>
