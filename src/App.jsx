@@ -18,10 +18,8 @@ import AuctionsPage from "./pages/Auctions/AuctionsPage";
 import SignupPage from "./pages/Signup/SignupPage";
 import AddProductPage from "./pages/AddProduct/AddProductPage";
 
-import AddAuctionPage
-
-import { useEffect } from "react";
-import { io } from "socket.io-client";
+//import { useEffect } from "react";
+//import { io } from "socket.io-client";
 function App() {
   // useEffect(() => {
   //   const socket = io("http://127.0.0.1:3000", {
