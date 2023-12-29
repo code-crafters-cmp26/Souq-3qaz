@@ -46,15 +46,15 @@ function Review({ review }) {
           width="30px"
           height="30px"
        needs api // />  */}
-        <p>{review.upvotes}</p>
+        {/* <p>{review.upvotes}</p> */}
         {(userData?.id == review.customerid ||
           userType == "Admin" ||
           userType == "Tech Support") && (
           <img
-            src="src/components/Review/del.svg"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQupei2BVvuo4wbPCRS6jkhuIRyV53_q1bUT6o68Taxtw&s"
             alt="delete"
-            width="20px"
-            height="20px"
+            width="40px"
+            height="40px"
             onClick={deleteReview}
           />
         )}

@@ -91,8 +91,6 @@ function App() {
           <Route path="/sellerstats" element={<SellerStats />} />
           <Route path="/customerstats" element={<CustomerStats />} />
           <Route path="/overallstats" element={<OverallStats />} />
-
-
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/addproduct" element={<AddProductPage />} />
           <Route path="/addauction/:id" element={<AddAuctionPage />} />
