@@ -10,7 +10,10 @@ router
   .route("/")
   .get(authController.protectForEmployee, userController.getAllUsers);
 
-router.route("/:id").get(userController.getUserById);
+router
+  .route("/:id")
+  .get(userController.getUserById)
+  .patch(authController.protectForEmployee, userController.banUser);
 
 router.route("/Seller").get(userController.getAllSellers);
 
