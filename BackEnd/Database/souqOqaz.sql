@@ -76,7 +76,7 @@ CREATE Table Employee(
   LastName VARCHAR(20) NOT NULL,
   start_working_date Date NOT NULL,
   Position Employee_type NOT NULL,
-  Email VARCHAR(100) NOT NULL,
+  Email VARCHAR(100) NOT NULL UNIQUE,
   Password VARCHAR(60) NOT NULL,
   Gender Gender_type Not NULL,
   PhoneNumber VARCHAR(20) NOT NULL,

@@ -179,3 +179,30 @@ exports.AddToWishList = catchAsync(async (req, res, next) => {
   });
 
 });
+
+exports.deleteProduct = catchAsync(async (req, res, next) => {
+  const productId = req.params.id;
+  const userId = req.user;
+  if (userId != -1) {
+    const prod = await db.query(`SELECT * FROM product WHERE id = ${productId}`);
+    if (!prod['rowCount']) {
+      return next(new AppError('No Product With This Id Found', 404));
+    }
+    if (prod['rows'][0]['sellerid'] != userId) {
+      return next(new AppError('only product owner can delete it', 403));
+    }
+  }
+  const result = await db.query(`UPDATE product SET quantity = -1 WHERE id = ${productId}`);
+
+  if (result['rowCount'] === 0) {
+    res.status(500).json({
+      status: 'fail',
+      message: 'try again later'
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+  });
+
+});
