@@ -11,13 +11,13 @@ const initialState = {
   password: "",
   confirmpassword: "",
   nationalid: "",
-  gender: "",
+  gender: "Male",
   phonenumber: "",
   country: "",
   city: "",
   street: "",
   buildingnumber: "",
-  apartmentnumber: -1,
+  apartmentnumber: "",
   stage: 0,
 };
 
@@ -46,7 +46,7 @@ function Signup() {
   const location = useLocation();
   const userType = new URLSearchParams(location.search).get("userType");
 
-  const isFirstStageComplete =
+  let isFirstStageComplete =
     userType == "customer"
       ? Object.values(state)
           .slice(0, 5)
@@ -54,7 +54,14 @@ function Signup() {
       : Object.values(state)
           .slice(0, 6)
           .every((value) => value !== "");
+  isFirstStageComplete =
+    isFirstStageComplete && state.password == state.confirmpassword;
 
+  let isValid = /^[A-Za-z]+$/.test(state.firstname);
+  isFirstStageComplete = isFirstStageComplete && isValid;
+
+  isValid = /^[A-Za-z]+$/.test(state.lastname);
+  isFirstStageComplete = isFirstStageComplete && isValid;
   const isSecondStageComplete = Object.values(state)
     .slice(6, 12)
     .every((value) => value !== "");
@@ -103,7 +110,10 @@ function Signup() {
         return res.json();
       })
       .then((data) => {
+        console.log(state.gender);
         console.log(data);
+        if (data.status != "success") alert(data.message);
+        else alert("You signed up successfully");
       })
       .catch((error) => {
         console.log(error.message);
@@ -127,6 +137,8 @@ function Signup() {
             type="text"
             value={state.firstname}
             handlevalue={handleChange}
+            // pattern="[A-Za-z]+"
+            // title="Only alphabetical characters are allowed"
           />
           <Input
             text="Lastname"
@@ -175,13 +187,11 @@ function Signup() {
   gender: "", */}
       {state.stage == 1 && (
         <div className={styles.signup__content}>
-          <Input
-            text="gender"
-            type="text"
-            name="gender"
-            value={state.gender}
-            handlevalue={handleChange}
-          />
+          <label>Gender:</label>
+          <select name="gender" value={state.gender} onChange={handleChange}>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
           <Input
             text="Phone Number"
             type="number"
@@ -229,7 +239,8 @@ function Signup() {
       )}
       {state.stage == 2 && (
         <div className={styles.done}>
-          congratulations you have completed your regestration
+          congratulations you have completed your regestration , just hit the
+          button below
         </div>
       )}
       <div className={styles.buttons}>

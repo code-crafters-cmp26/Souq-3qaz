@@ -9,6 +9,10 @@ router
 
 router
   .route('/stat')
-  .get(authController.protectForEmployee, employeeController.getstats)
+  .get(authController.protectForEmployee, employeeController.getNumOfUsers)
+
+router
+  .route('/avgTrans')
+  .get(authController.protectForEmployee, employeeController.getAvgTrans)
 
 module.exports = router;

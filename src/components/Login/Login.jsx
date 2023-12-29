@@ -42,7 +42,9 @@ function Login() {
         return res.json();
       })
       .then((data) => {
-        if (data.error?.statusCode == 401) {
+        if (data.status != "success") {
+          //{data.error?.statusCode == 401
+          alert(data.message);
           setError(1);
         } else if (data.status === "success") {
           const token = data.token;
@@ -60,6 +62,7 @@ function Login() {
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
   }
   return (
@@ -83,14 +86,15 @@ function Login() {
         </div>
 
         <div className={styles.login__check}>
-          <div className={styles.login__check__group}>
+          {/* <div className={styles.login__check__group}>
             <Checkbox />
             <label className={styles.login__check__label}>Remember me</label>
-          </div>
+          </div> 
 
           <a href="#" className={styles.login__forgot}>
             Forgot Password?
           </a>
+          */}
         </div>
 
         <Button text="Login" type="submit" onClick={handleSubmit} />

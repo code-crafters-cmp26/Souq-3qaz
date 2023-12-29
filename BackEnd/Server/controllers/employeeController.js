@@ -77,13 +77,13 @@ exports.addTech = catchAsync(async (req, res, next) => {
   );
 });
 
-exports.getstats = catchAsync(async (req, res, next) => {
+exports.getNumOfUsers = catchAsync(async (req, res, next) => {
 
   const normal = await db.query(`
     SELECT
     COUNT(CASE WHEN type = 'Normal' THEN 1 END) AS normal,
     (SELECT COUNT(*) FROM customer) - COUNT(CASE WHEN type = 'Normal' THEN 1 END) AS Permium
-FROM
+    FROM
     customer;
   `);
 
@@ -99,6 +99,27 @@ FROM
     normal: normal['rows'][0]['normal'],
     premium: normal['rows'][0]['permium'],
     seller: seller['rows'][0]['seller']
+  })
+
+});
+
+exports.getAvgTrans = catchAsync(async (req, res, next) => {
+
+  const normal = await db.query(`
+    SELECT 
+    MAX(product.price) AS max_price,
+    MIN(product.price) AS min_price,
+    AVG(product.price) AS avg_price
+    FROM 
+    transaction
+    JOIN 
+    product ON transaction.productid = product.id;
+  `);
+
+
+  res.status(200).json({
+    status: "success",
+    normal: normal['rows'][0],
   })
 
 });

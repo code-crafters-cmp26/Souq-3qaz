@@ -18,6 +18,7 @@ function AllBarters() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        //console.log(yourBendingBarters);
         setMyBarters(data.yourBendingBarters);
         setOtherBarters(data.offersToYou);
         setLoading(false);
@@ -35,7 +36,7 @@ function AllBarters() {
             <h1 className={styles.barters_group_title}>
               Your Pending Barters:
             </h1>
-            {myBarters.map((barter) => (
+            {myBarters?.map((barter) => (
               <div key={barter.barterId}>
                 <BarterCard barterData={barter} isMine={true} />
               </div>
@@ -43,7 +44,7 @@ function AllBarters() {
           </div>
           <div className={styles.barters_group}>
             <h1 className={styles.barters_group_title}>Offers to You:</h1>
-            {otherBarters.map((barter) => (
+            {otherBarters?.map((barter) => (
               <div key={barter.barterId}>
                 <BarterCard barterData={barter} isMine={false} />
               </div>

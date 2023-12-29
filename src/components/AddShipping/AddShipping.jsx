@@ -52,8 +52,10 @@ function AddShipping() {
         return res.json();
       })
       .then((data) => {
+        // if (data.status == "success") {
         console.log(data);
         dispatch({ type: "RESET" });
+        alert(data.message);
       })
       .catch((error) => {
         console.log(error.message);

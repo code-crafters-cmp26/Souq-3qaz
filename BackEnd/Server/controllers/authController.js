@@ -39,7 +39,7 @@ const createSendToken = (user, userId, role, statusCode, res) => {
 };
 
 exports.createUser = catchAsync(async (req, res, next) => {
-  const {
+  let {
     FName,
     LName,
     PhoneNumber,
@@ -72,13 +72,16 @@ exports.createUser = catchAsync(async (req, res, next) => {
     !Email ||
     !Password ||
     !Gender ||
-    !ApartmentNumber ||
     !BuildingNumber ||
     !Country ||
     !City ||
     !Street
   ) {
     return next(new AppError("some required Fields are empty", 409));
+  }
+
+  if (!ApartmentNumber) {
+    ApartmentNumber = -1;
   }
 
   if (!User.phoneCheck(PhoneNumber)) {
