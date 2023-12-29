@@ -8,7 +8,7 @@ function Navbar({ children }) {
   const [hovered, setHovered] = useState(false);
   const [opened, setOpened] = useState(false);
 
-  const { isLoggedIn, logout, userType } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   const navigate = useNavigate();
 
@@ -42,21 +42,6 @@ function Navbar({ children }) {
       {children}
 
       <ul className={styles.contents}>
-        {userType == "Seller" && (
-          <li>
-            <Link to="/addproduct">ADD PRODUCT</Link>
-          </li>
-        )}
-        {userType == "Seller" && (
-          <li>
-            <Link to="/myproducts">MY PRODUCTS</Link>
-          </li>
-        )}
-        {userType == "Normal" && (
-          <li>
-            <Link to="/auctions">AUCTIONS</Link>
-          </li>
-        )}
         {!isLoggedIn && (
           <li>
             <Link to="/login">LOGIN</Link>

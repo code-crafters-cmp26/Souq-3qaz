@@ -2,7 +2,7 @@
 {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 20px;
     font-family: "Poppins";
     position: fixed;
@@ -16,19 +16,4 @@
     border-radius: 20px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-.specialImg{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    cursor: pointer;
-}
-.special{
-    display: flex;
-    flex-direction: row;
-}
-.specialSpace{
-    width:80%;
 }
