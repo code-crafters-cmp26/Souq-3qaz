@@ -9,5 +9,9 @@ router
   .post(authController.protectForCustomer, transactionsController.buy)
   .get(authController.protectForSeller, transactionsController.getTranscationsforSeller);
 
+router
+  .route('/getTransCust')
+  .get(authController.protectForCustomer, transactionsController.getTranscationsforCustomer);
+
 
 module.exports = router;
