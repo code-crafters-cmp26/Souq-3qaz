@@ -12,7 +12,6 @@ function ProductsPage({ ofseller }) {
   const minprice = new URLSearchParams(location.search).get("min");
   const maxprice = new URLSearchParams(location.search).get("max");
   const [products, setProducts] = useState([]);
-  const { userData } = useAuth();
 
   useEffect(() => {
     if (ofseller == 1) getProductsOfSeller();

@@ -40,7 +40,7 @@ app.use(cors());
 //   console.log("A user connected", socket.id);
 
 //   const result = await db.query(
-//     `Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';`
+//     Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';
 //   );
 
 //   socket.on("notifyServer", () => {
@@ -71,7 +71,7 @@ app.use("/api/v1/auction", auctionRouter);
 app.use("/api/v1/barter", barterRouter);
 
 app.all("*", (req, res, next) => {
-  next(new AppError(`can\'t find ${req.originalUrl} on this server`, 404));
+  next(new AppError(`can\t find ${req.originalUrl} on this server`, 404));
 });
 
 app.use(globalErrorHandler);
