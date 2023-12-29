@@ -14,11 +14,13 @@ function ProductsList({ products, category, min, max }) {
       : filteredProducts;
   return (
     <div className={styles.products_list}>
-      {filteredpricedProducts?.map((product) => (
-        <div key={product.id}>
-          <ProductCard product={product} />
-        </div>
-      ))}
+      {filteredpricedProducts
+        ?.filter((product) => product.quantity >= 0)
+        .map((product) => (
+          <div key={product.id}>
+            <ProductCard product={product} />
+          </div>
+        ))}
     </div>
   );
 }
