@@ -67,6 +67,11 @@ function Navbar({ children }) {
             <Link to="/addwarehouse">ADD WAREHOUSE</Link>
           </li>
         )}
+        {(userType == "Tech Support" || userType == "Admin") && (
+          <li>
+            <Link to="/addshipping">ADD SHIPPING COMPANY</Link>
+          </li>
+        )}
         {!isLoggedIn && (
           <li>
             <Link to="/login">LOGIN</Link>

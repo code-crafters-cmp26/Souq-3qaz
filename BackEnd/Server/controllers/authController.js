@@ -152,13 +152,12 @@ exports.login = catchAsync(async (req, res, next) => {
     if (data["rowCount"] == 0) {
       return next(new AppError("incorrect email or password", 401));
     }
-    const user = await db.query(
-      `SELECT password FROM "User" WHERE email = '${email}';`
-    );
-    const newUserId = await db.query(
-      `SELECT id FROM "User" WHERE email = '${email}';`
-    );
-    const truePassword = user["rows"][0]["password"] + "";
+    if (data['rows'][0]['banned']) {
+      return next(new AppError('You Are banned', 403));
+    }
+    const user = await db.query(`SELECT password FROM "User" WHERE email = '${email}';`);
+    const newUserId = await db.query(`SELECT id FROM "User" WHERE email = '${email}';`);
+    const truePassword = user['rows'][0]['password'] + '';
     // @ts-ignore
     const correct = await User.checkPassword(password, truePassword);
     if (correct == -1)
@@ -442,5 +441,29 @@ exports.protectFromCustomer = catchAsync(async (req, res, next) => {
   } else {
     req.user = decoded.id;
   }
+  next();
+});
+
+exports.protectFrombanned = catchAsync(async (req, res, next) => {
+  let token;
+  // 1) getting the token and check if its there
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+  if (!token) {
+    return next(new AppError('you are not logged in', 401));
+  }
+
+  // 2) verification of the token
+  // @ts-ignore
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  // 3) check if the user still exist
+  // @ts-ignore
+  let freshUser = await db.query(`SELECT * FROM customer WHERE id = ${decoded.id}`);
+
+  if (freshUser['rows'][0]['banned']) {
+    return next(new AppError('You Are banned', 403));
+  }
+
   next();
 });

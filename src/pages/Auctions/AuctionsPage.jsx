@@ -10,8 +10,15 @@ function AuctionsPage() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setAuctions(data.result);
+        if (data.status == "success") {
+          setAuctions(data.result);
+        } else {
+          alert(data.message);
+        }
         console.log(data.result);
+      })
+      .catch((error) => {
+        alert(error.message);
       });
   }, []);
 

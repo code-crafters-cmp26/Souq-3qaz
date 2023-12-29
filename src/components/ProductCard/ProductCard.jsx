@@ -1,7 +1,9 @@
 import styles from "./ProductCard.module.css";
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
+import { useAuth } from "../AuthProvider/AuthProvider";
 function ProductCard({ product }) {
+  const { userType } = useAuth();
   const handleAddToWishlist = () => {
     fetch(`http://localhost:3000/api/v1/product/${product.id}`, {
       method: "POST",
@@ -28,9 +30,12 @@ function ProductCard({ product }) {
           <img src={product?.image} alt="Iphone" />
         </Link>
 
-        <div className={styles.favicon}>
-          <Button type="button" text="🤍" onClick={handleAddToWishlist} />
-        </div>
+        {(userType == "Normal" || userType == "Premium") && (
+          <div className={styles.favicon}>
+            <Button type="button" text="🤍" onClick={handleAddToWishlist} />
+          </div>
+        )}
+
         {/* <div className={styles.carticon}>
           <Button type="button" text="🛒" />
         </div> */}

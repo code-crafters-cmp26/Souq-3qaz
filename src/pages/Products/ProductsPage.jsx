@@ -22,9 +22,10 @@ function ProductsPage({ ofseller }) {
       // Fetch all products when issearched is empty
       getAllProducts();
     }
-  }, []);
+  }, [userData]);
 
   const getProductsOfSeller = () => {
+    console.log("hola");
     console.log(userData);
     fetch(
       `http://localhost:3000/api/v1/product/searchBySeller/${userData?.id}`,
@@ -34,7 +35,8 @@ function ProductsPage({ ofseller }) {
     )
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.products);
+        if (data.status != "success") alert(data.message);
+        else setProducts(data.products);
         console.log(data.products);
       });
   };
@@ -45,7 +47,8 @@ function ProductsPage({ ofseller }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.products);
+        if (data.status != "success") alert(data.message);
+        else setProducts(data.products);
         console.log("from normal");
       });
   };
@@ -62,8 +65,11 @@ function ProductsPage({ ofseller }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("from search");
-        setProducts(data.products);
+        if (data.status != "success") alert(data.message);
+        else {
+          console.log("from search");
+          setProducts(data.products);
+        }
       });
   };
 

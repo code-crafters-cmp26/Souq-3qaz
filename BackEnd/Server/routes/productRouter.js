@@ -6,14 +6,14 @@ const router = express.Router();
 router
   .route("/")
   .get(productController.getAllProducts)
-  .post(authController.protectForSeller, productController.createProduct);
+  .post(authController.protectFrombanned, authController.protectForSeller, productController.createProduct);
 
 router.route("/searchProduct").post(productController.getProductByName);
 
 router
   .route("/:id")
   .get(productController.getProductById)
-  .post(authController.protectForCustomer, productController.AddToWishList)
+  .post(authController.protectFrombanned, authController.protectForCustomer, productController.AddToWishList)
   .delete(authController.protectFromCustomer, productController.deleteProduct);
 
 router.route("/searchBySeller/:id").get(productController.getProductBySellerId);
