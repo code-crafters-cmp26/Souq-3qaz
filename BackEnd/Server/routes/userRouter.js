@@ -29,15 +29,15 @@ router
 
 router
   .route('/Customer/recharge')
-  .post(authController.protectForCustomer, userController.rechargeBalance);
+  .post(authController.protectFrombanned, authController.protectForCustomer, userController.rechargeBalance);
 
 router
   .route('/updateInfo')
   .post(authController.protect, userController.updateInfo);
 
 router
-  .route('/wishList')
-  .get(authController.protectForCustomer, userController.getWish);
+  .route('/Customer/wishList')
+  .get(authController.protectFrombanned, authController.protectForCustomer, userController.getWish);
 
 router
   .route('/Customer/upgrade')

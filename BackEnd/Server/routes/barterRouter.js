@@ -5,12 +5,12 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(authController.protectForSeller, barterController.getBarter)
-  .post(authController.protectForSeller, barterController.barterProduct);
+  .get(authController.protectFrombanned, authController.protectForSeller, barterController.getBarter)
+  .post(authController.protectFrombanned, authController.protectForSeller, barterController.barterProduct);
 
 router
   .route('/Approve')
-  .post(authController.protectForSeller, barterController.approveBarter);
+  .post(authController.protectFrombanned, authController.protectForSeller, barterController.approveBarter);
 
 
 module.exports = router;
