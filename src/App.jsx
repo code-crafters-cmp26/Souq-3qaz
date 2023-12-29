@@ -26,6 +26,7 @@ import { useEffect } from "react";
 import { io } from "socket.io-client";
 import WishlistPage from "./pages/Wishlist/WishlistPage";
 import AddWarehousePage from "./pages/AddWarehouse/AddWarehousePage";
+import AddShippingPage from "./pages/AddShipping/AddShippingPage";
 function App() {
   const { userType } = useAuth();
   // useEffect(() => {
@@ -92,6 +93,7 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/addwarehouse" element={<AddWarehousePage />} />
+          <Route path="/addshipping" element={<AddShippingPage />} />
           {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
       </BrowserRouter>
