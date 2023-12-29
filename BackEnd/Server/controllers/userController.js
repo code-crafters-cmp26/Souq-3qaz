@@ -158,20 +158,6 @@ exports.getWish = catchAsync(async (req, res) => {
   });
 });
 
-exports.getWish = catchAsync(async (req, res) => {
-  const customerId = req.user["rows"][0]["id"];
-
-  console.log(customerId);
-  const result = await db.query(
-    `SELECT * FROM wishlist WHERE customerid=${customerId};`
-  );
-
-  res.status(200).json({
-    status: "success",
-    result: result["rows"],
-  });
-});
-
 exports.updateInfo = catchAsync(async (req, res, next) => {
   const userId = req.user["rows"][0]["id"];
   const {
