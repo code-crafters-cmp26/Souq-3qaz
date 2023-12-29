@@ -11,13 +11,13 @@ const initialState = {
   password: "",
   confirmpassword: "",
   nationalid: "",
-  gender: "",
+  gender: "Male",
   phonenumber: "",
   country: "",
   city: "",
   street: "",
   buildingnumber: "",
-  apartmentnumber: -1,
+  apartmentnumber: "",
   stage: 0,
 };
 
@@ -110,9 +110,10 @@ function Signup() {
         return res.json();
       })
       .then((data) => {
+        console.log(state.gender);
+        console.log(data);
         if (data.status != "success") alert(data.message);
         else alert("You signed up successfully");
-        console.log(data);
       })
       .catch((error) => {
         console.log(error.message);
@@ -186,13 +187,11 @@ function Signup() {
   gender: "", */}
       {state.stage == 1 && (
         <div className={styles.signup__content}>
-          <Input
-            text="gender"
-            type="text"
-            name="gender"
-            value={state.gender}
-            handlevalue={handleChange}
-          />
+          <label>Gender:</label>
+          <select name="gender" value={state.gender} onChange={handleChange}>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
           <Input
             text="Phone Number"
             type="number"
@@ -240,7 +239,8 @@ function Signup() {
       )}
       {state.stage == 2 && (
         <div className={styles.done}>
-          congratulations you have completed your regestration
+          congratulations you have completed your regestration , just hit the
+          button below
         </div>
       )}
       <div className={styles.buttons}>
