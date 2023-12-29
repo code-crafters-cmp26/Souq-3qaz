@@ -24,7 +24,7 @@ function ProductCard({ product }) {
   return (
     <div className={styles.product_card}>
       <div className={styles.product_img}>
-        <Link to={`${product?.id}`}>
+        <Link to={`/products/${product?.id}`}>
           <img src={product?.image} alt="Iphone" />
         </Link>
 
@@ -35,7 +35,7 @@ function ProductCard({ product }) {
           <Button type="button" text="🛒" />
         </div> */}
       </div>
-      <Link to={`${product?.id}`}>
+      <Link to={`/products/${product?.id}`}>
         <div className={styles.product_description}>
           <p>4.5 🌟🌟🌟🌟⭐</p>
           <h4>{product?.name}</h4>

@@ -40,7 +40,23 @@ function Productpage() {
     navigate(`/addauction/${id}`);
   };
 
-  const handleDeleteProduct = () => {};
+  const handleDeleteProduct = () => {
+    fetch(`http://localhost:3000/api/v1/product/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   const handleGoToBarter = () => {
     navigate(
       `/barter?Sname=${
@@ -101,16 +117,19 @@ function Productpage() {
           )}
           {userType == "Seller" && (
             <>
-              {userData.id == productData.id && (
+              {userData.id == productData.sellerid && (
                 <>
                   <Button text="Add to Auction" onClick={handleAddToAuction} />
                   <Button text="Delete Produt" onClick={handleDeleteProduct} />
                 </>
               )}
-              {userData.id != productData.id && (
+              {userData.id != productData.sellerid && (
                 <Button text="Barter" onClick={handleGoToBarter} />
               )}
             </>
+          )}
+          {(userType == "Tech Support" || userType == "Admin") && (
+            <Button text="Delete Produt" onClick={handleDeleteProduct} />
           )}
         </section>
       </div>

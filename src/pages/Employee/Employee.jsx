@@ -1,5 +1,6 @@
 import styles from "./Employee.module.css";
 import Card from "../../components/Card/Card";
+import AllUsers from "../../components/AllUsers/AllUsers";
 import { useReducer, useState } from "react";
 import Input from "../../components/input/Input";
 import Button from "../../components/Button/Button";
@@ -181,6 +182,21 @@ function Employee() {
             <Button text="Insert Employee" onClick={handleSubmit} />
           </div>
         </div>
+      )}
+
+      {cardnumber === 3 && (
+        <>
+          <Card
+            img="src/pages/Employee/user.svg"
+            title="Users"
+            description="View users"
+            onClick={() => {
+              handleClick(0);
+            }}
+          />
+
+          <AllUsers />
+        </>
       )}
     </div>
   );
