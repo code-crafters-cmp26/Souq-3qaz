@@ -21,9 +21,11 @@ import AuctionsPage from "./pages/Auctions/AuctionsPage";
 import SignupPage from "./pages/Signup/SignupPage";
 import AddProductPage from "./pages/AddProduct/AddProductPage";
 import AddAuctionPage from "./pages/AddAuction/AddAuctionPage";
+import { useAuth } from "./components/AuthProvider/AuthProvider";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 function App() {
+  const { userType } = useAuth();
   // useEffect(() => {
   //   const socket = io("http://127.0.0.1:3000", {
   //     query: {
@@ -57,7 +59,16 @@ function App() {
           <Searchbar />
         </Navbar>
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route
+            path="/"
+            element={
+              userType == "Tech Support" || userType == "Admin" ? (
+                <Employee />
+              ) : (
+                <Homepage />
+              )
+            }
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           {/* <Route path="/product" element={<ProductPage />} /> */}
@@ -76,7 +87,7 @@ function App() {
           <Route path="/addproduct" element={<AddProductPage />} />
           <Route path="/addauction/:id" element={<AddAuctionPage />} />
           <Route path="/myproducts" element={<ProductsPage ofseller={1} />} />
-
+          <Route path="/reports" element={<Reports />} />
           {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
       </BrowserRouter>
