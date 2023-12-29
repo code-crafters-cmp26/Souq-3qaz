@@ -76,7 +76,7 @@ function App() {
           <Route path="/addproduct" element={<AddProductPage />} />
           <Route path="/addauction/:id" element={<AddAuctionPage />} />
           <Route path="/myproducts" element={<ProductsPage ofseller={1} />} />
-
+          <Route path="/reports" element={<Reports />} />
           {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
       </BrowserRouter>
