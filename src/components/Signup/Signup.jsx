@@ -46,7 +46,7 @@ function Signup() {
   const location = useLocation();
   const userType = new URLSearchParams(location.search).get("userType");
 
-  const isFirstStageComplete =
+  let isFirstStageComplete =
     userType == "customer"
       ? Object.values(state)
           .slice(0, 5)
@@ -54,7 +54,14 @@ function Signup() {
       : Object.values(state)
           .slice(0, 6)
           .every((value) => value !== "");
+  isFirstStageComplete =
+    isFirstStageComplete && state.password == state.confirmpassword;
 
+  let isValid = /^[A-Za-z]+$/.test(state.firstname);
+  isFirstStageComplete = isFirstStageComplete && isValid;
+
+  isValid = /^[A-Za-z]+$/.test(state.lastname);
+  isFirstStageComplete = isFirstStageComplete && isValid;
   const isSecondStageComplete = Object.values(state)
     .slice(6, 12)
     .every((value) => value !== "");
@@ -103,6 +110,8 @@ function Signup() {
         return res.json();
       })
       .then((data) => {
+        if (data.status != "success") alert(data.message);
+        else alert("You signed up successfully");
         console.log(data);
       })
       .catch((error) => {
@@ -127,6 +136,8 @@ function Signup() {
             type="text"
             value={state.firstname}
             handlevalue={handleChange}
+            // pattern="[A-Za-z]+"
+            // title="Only alphabetical characters are allowed"
           />
           <Input
             text="Lastname"
