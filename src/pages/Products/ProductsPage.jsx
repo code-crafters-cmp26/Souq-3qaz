@@ -22,12 +22,12 @@ function ProductsPage({ ofseller }) {
       // Fetch all products when issearched is empty
       getAllProducts();
     }
-  }, [issearched]);
+  }, []);
 
   const getProductsOfSeller = () => {
     console.log(userData);
     fetch(
-      `http://localhost:3000/api/v1/product/searchBySeller/${userData.id}`,
+      `http://localhost:3000/api/v1/product/searchBySeller/${userData?.id}`,
       {
         method: "GET",
       }

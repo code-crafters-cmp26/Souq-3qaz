@@ -56,12 +56,11 @@ function Productpage() {
         console.log(error.message);
       });
   };
-
   const handleGoToBarter = () => {
     navigate(
-      `/barter?Sname=${
-        productData.sellerFName + " " + productData.sellerLName
-      }&id=${productData.id}&sellerid=${productData.sellerid}`
+      `/barter?Sname=${productData.firstname + " " + productData.lastname}&id=${
+        productData.id
+      }&sellerid=${productData.sellerid}`
     );
   };
 
