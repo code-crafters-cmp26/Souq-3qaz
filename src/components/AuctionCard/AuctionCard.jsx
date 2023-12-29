@@ -18,6 +18,27 @@ function AuctionCard({ auction }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetch("http://localhost:3000/api/v1/auction/bid", {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        bid: biddingQuantity,
+        auctionId: auction.acutionid,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setBiddingQuantity("");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   const handleViewProduct = () => {
