@@ -7,8 +7,8 @@ const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 
 exports.getAllUsers = catchAsync(async (req, res) => {
-  const customers = await db.query('SELECT u.*, c.type FROM "User" AS u INNER JOIN customer AS c ON u.id = c.id; ');
-  const sellers = await db.query('SELECT u.*, \'Seller\' AS type FROM "User" AS u INNER JOIN seller AS s ON u.id = s.id; ');
+  const customers = await db.query(`SELECT u.*, c.type FROM "User" AS u INNER JOIN customer AS c ON u.id = c.id; `);
+  const sellers = await db.query(`SELECT u.*, 'Seller' AS type FROM "User" AS u INNER JOIN seller AS s ON u.id = s.id; `);
   res.status(200).json({
     status: 'success',
     customers: customers['rows'],
@@ -123,6 +123,18 @@ exports.upgradeToPremium = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
+  });
+});
+
+exports.getWish = catchAsync(async (req, res) => {
+  const customerId = req.user['rows'][0]['id'];
+
+  console.log(customerId);
+  const result = await db.query(`SELECT * FROM wishlist WHERE customerid=${customerId};`);
+
+  res.status(200).json({
+    status: 'success',
+    result: result['rows']
   });
 });
 
