@@ -7,7 +7,7 @@ const router = express.Router();
 router
   .route('/')
   .post(authController.protectForCustomer, transactionsController.buy)
-  .get(authController.protectForSeller, transactionsController.getTranscations);
+  .get(authController.protectForSeller, transactionsController.getTranscationsforSeller);
 
 
 module.exports = router;

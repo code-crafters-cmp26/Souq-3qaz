@@ -203,8 +203,6 @@ exports.protectForSeller = catchAsync(async (req, res, next) => {
 
 // @ts-ignore
 exports.protectForCustomer = catchAsync(async (req, res, next) => {
-
-
   let token;
   // 1) getting the token and check if its there
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
