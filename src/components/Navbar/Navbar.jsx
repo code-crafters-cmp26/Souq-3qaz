@@ -52,12 +52,12 @@ function Navbar({ children }) {
             <Link to="/myproducts">MY PRODUCTS</Link>
           </li>
         )}
-        {userType == "Normal" && (
+        {(userType == "Normal" || userType == "Premieum") && (
           <li>
             <Link to="/auctions">AUCTIONS</Link>
           </li>
         )}
-        {userType == "Normal" && (
+        {(userType == "Normal" || userType == "Premium") && (
           <li>
             <Link to="/wishlist">WISHLIST</Link>
           </li>

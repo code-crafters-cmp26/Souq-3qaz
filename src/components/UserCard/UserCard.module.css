@@ -15,6 +15,20 @@
   font-size: var(--small-font-size);
 }
 
+.user_card button {
+  width: 20%;
+  background-color: #d06b13;
+  color: white;
+  transition: 0.3s;
+}
+
+.user_card button:hover {
+  background-color: #ea8832;
+  text-shadow: 0px 0px 1px white;
+  box-shadow: 0px 0px 10px #ea8832;
+  transition: 0.3s;
+}
+
 .user_card:hover {
   background-color: rgb(232, 232, 232);
   box-shadow: 0px 0px 10px black;
