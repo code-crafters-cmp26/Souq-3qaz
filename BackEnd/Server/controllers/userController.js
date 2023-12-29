@@ -171,11 +171,11 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
 });
 
 exports.banUser = catchAsync(async (req, res, next) => {
-  const userId = req.user['rows'][0]['id'];
+  const userId = req.params.id;
+  // console.log(userId)
+  const updated = await db.query(`UPDATE "User" SET banned = true WHERE id = ${userId} RETURNING *;`)
 
-  const updated = await db.query(`UPDATE "User" SET banned = true WHERE id = ${userId};`)
-
-  if (updated['rowsCount'] == 0) {
+  if (updated['rowCount'] == 0) {
     return next(new AppError('bad request', 400));
   }
 
