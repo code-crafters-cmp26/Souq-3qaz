@@ -5,7 +5,9 @@ const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getAllAuction = catchAsync(async (req, res, next) => {
-  const result = await db.query(`SELECT * FROM auction`);
+  const result = await db.query(
+    `SELECT  a.*,p.name AS productName, u.firstname, u.lastname FROM auction AS a, product AS p, "User" AS u`
+  );
 
   res.status(200).json({
     status: "success",
