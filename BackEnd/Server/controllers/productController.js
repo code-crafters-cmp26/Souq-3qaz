@@ -179,21 +179,3 @@ exports.AddToWishList = catchAsync(async (req, res, next) => {
   });
 
 });
-
-exports.deleteProduct = catchAsync(async (req, res, next) => {
-  const productId = req.params.id;
-
-  const result = await db.query(`UPDATE product SET quantity = -1 WHERE id = ${productId}`);
-
-  if (result['rowCount'] === 0) {
-    res.status(500).json({
-      status: 'fail',
-      message: 'try again later'
-    });
-  }
-
-  res.status(200).json({
-    status: 'success',
-  });
-
-});

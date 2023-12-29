@@ -15,8 +15,7 @@ router
 router
   .route('/:id')
   .get(productController.getProductById)
-  .post(authController.protectForCustomer, productController.AddToWishList)
-  .delete(authController.protectForEmployee, productController.deleteProduct);
+  .post(authController.protectForCustomer, productController.AddToWishList);
 
 router
   .route('/searchBySeller/:id')

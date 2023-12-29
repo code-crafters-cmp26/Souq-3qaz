@@ -8,7 +8,7 @@ function Navbar({ children }) {
   const [hovered, setHovered] = useState(false);
   const [opened, setOpened] = useState(false);
 
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, userType } = useAuth();
 
   const navigate = useNavigate();
 

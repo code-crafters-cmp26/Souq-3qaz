@@ -20,7 +20,7 @@ import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
 import SignupPage from "./pages/Signup/SignupPage";
 import AddProductPage from "./pages/AddProduct/AddProductPage";
-
+import AddAuctionPage from "./pages/AddAuction/AddAuctionPage";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 function App() {
@@ -62,7 +62,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           {/* <Route path="/product" element={<ProductPage />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products" element={<ProductsPage ofseller={0} />} />
           <Route path="/products/:id" element={<ProductPage />} />
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/settings" element={<Settings />} />

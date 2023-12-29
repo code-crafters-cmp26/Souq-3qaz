@@ -1,6 +1,6 @@
-import CategoriesBar from "../../components/CategoriesBar/CategoriesBar";
-import ProductsList from "../../components/ProductsList/ProductsList";
+import AuctionsList from "../../components/AuctionsList/AuctionsList";
 import styles from "./AuctionsPage.module.css";
+import { useState, useEffect } from "react";
 function AuctionsPage() {
   const [auctions, setAuctions] = useState([{}]);
 
@@ -20,11 +20,8 @@ function AuctionsPage() {
   }, [auctions]);
 
   return (
-    <div className={styles.auctions_page}>
-      <CategoriesBar />
-      <div className={styles.all_products}>
-        <ProductsList />
-      </div>
+    <div className={styles.all_auctions}>
+      <AuctionsList auctions={auctions} />
     </div>
   );
 }
