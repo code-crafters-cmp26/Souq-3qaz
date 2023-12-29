@@ -1,6 +1,10 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./CheckoutPage.module.css";
 import Checkout from "../../components/Checkout/Checkout";
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
+import Button from "../../components/Button/Button";
+import { useEffect, useState } from "react";
+import ProductCard from "../../components/ProductCard/ProductCard";
 function CheckoutPage() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -9,21 +13,56 @@ function CheckoutPage() {
   const productName = queryParams.get("name");
   const productPrice = queryParams.get("price");
   const productID = queryParams.get("id");
-  const productShipping = 1;
+  const { userData } = useAuth();
+  const [productData, setProductData] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/v1/product/${productID}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setProductData(...data.products);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, [productID]);
+
+  // const productShipping = 1;
   return (
     <>
       <Checkout
         productName={productName}
         productPrice={productPrice}
         productID={productID}
-        productShipping={productShipping}
+        // productShipping={productShipping}
       />
       <div className={styles.checkoutpage}>
         <h3>1 Shipping address</h3>
+        <p>
+          Your Address: {userData.country} {userData.city} {userData.street}
+        </p>
+        <Button
+          text="Change Your Address in Settings"
+          type="button"
+          onClick={() => {
+            navigate("/settings");
+          }}
+        />
         <hr />
         <h3>2 Payment method</h3>
+        <p>Your Balance: {userData.balance}</p>
         <hr />
         <h3>3 Ordered items</h3>
+        <div className={styles.smallproduct}>
+          <ProductCard product={productData} />
+        </div>
       </div>
     </>
   );

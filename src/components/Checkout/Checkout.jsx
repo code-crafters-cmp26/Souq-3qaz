@@ -1,8 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import styles from "./Checkout.module.css";
-function Checkout({ productName, productPrice, productID, productShipping }) {
+function Checkout({ productName, productPrice, productID }) {
   const [productQuantity, setProductQuantity] = useState("");
+  const [shippings, setShippings] = useState([]);
+  const [productShipping, setProductShipping] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/v1/shipping", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setShippings(data.result);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, []);
   const handleChange = (e) => {
     setProductQuantity(e.target.value);
   };
@@ -42,7 +64,19 @@ function Checkout({ productName, productPrice, productID, productShipping }) {
       <p>items: {productName}</p>
       <p>price: {productPrice}</p>
       <p>Shipping & handling:</p>
-      <p>Fees:</p>
+      <select
+        value={productShipping}
+        onChange={(e) => setProductShipping(e.target.value)}
+      >
+        <option value="" disabled>
+          Select an option
+        </option>
+        {shippings.map((shipping) => (
+          <option key={shipping.id} value={shipping.id}>
+            {shipping.name}
+          </option>
+        ))}
+      </select>
       <hr />
       <input
         required
