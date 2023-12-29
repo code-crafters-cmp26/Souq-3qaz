@@ -36,6 +36,19 @@ function Productpage() {
     );
   };
 
+  const handleAddToAuction = () => {
+    navigate(`/addauction/${id}`);
+  };
+
+  const handleDeleteProduct = () => {};
+  const handleGoToBarter = () => {
+    navigate(
+      `/barter?Sname=${
+        productData.sellerFName + " " + productData.sellerLName
+      }&id=${productData.id}&sellerid=${productData.sellerid}`
+    );
+  };
+
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/product/${id}`, {
       method: "GET",
@@ -80,8 +93,25 @@ function Productpage() {
         </section>
         <section className={styles.purchase}>
           <div className={styles.date}>Date of releasing: {extractedDate}</div>
-          <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
-          <Button text="Buy Now" onClick={handleGoToBuy} />
+          {userType == "Normal" && (
+            <>
+              <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
+              <Button text="Buy Now" onClick={handleGoToBuy} />
+            </>
+          )}
+          {userType == "Seller" && (
+            <>
+              {userData.id == productData.id && (
+                <>
+                  <Button text="Add to Auction" onClick={handleAddToAuction} />
+                  <Button text="Delete Produt" onClick={handleDeleteProduct} />
+                </>
+              )}
+              {userData.id != productData.id && (
+                <Button text="Barter" onClick={handleGoToBarter} />
+              )}
+            </>
+          )}
         </section>
       </div>
       <ReviewsContainer />

@@ -24,8 +24,8 @@ function ProductCard({ product }) {
   return (
     <div className={styles.product_card}>
       <div className={styles.product_img}>
-        <Link to={`${product.id}`}>
-          <img src={product.image} alt="Iphone" />
+        <Link to={`${product?.id}`}>
+          <img src={product?.image} alt="Iphone" />
         </Link>
 
         <div className={styles.favicon}>
@@ -35,21 +35,28 @@ function ProductCard({ product }) {
           <Button type="button" text="🛒" />
         </div> */}
       </div>
-      <Link to={`${product.id}`}>
+      <Link to={`${product?.id}`}>
         <div className={styles.product_description}>
           <p>4.5 🌟🌟🌟🌟⭐</p>
-          <h4>{product.name}</h4>
-          <h4>{product.description}</h4>
-          <p>EGP {product.price}</p>
-          <label>
-            Available{" "}
-            <span
-              style={{ color: product.quantity > 0 ? "rgb(0, 174, 0)" : "red" }}
-            >
-              {product.quantity}
-            </span>{" "}
-            in stock.
-          </label>
+          <h4>{product?.name}</h4>
+          <h4>{product?.description}</h4>
+          <p>EGP {product?.price}</p>
+          {product?.quantity > 0 && (
+            <label>
+              Available{" "}
+              <span
+                style={{
+                  color: "rgb(0, 174, 0)",
+                }}
+              >
+                {product?.quantity}
+              </span>{" "}
+              in stock.
+            </label>
+          )}
+          {product?.quantity == 0 && (
+            <label style={{ color: "red" }}>Out of stock!</label>
+          )}
         </div>
       </Link>
     </div>

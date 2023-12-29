@@ -1,0 +1,120 @@
+.auction_card {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  color: var(--black-color);
+  background-color: var(--white-color);
+  border: 2px solid rgb(208, 207, 207);
+  border-radius: 20px;
+  transition: 0.5s;
+  font-size: var(--small-font-size);
+}
+
+.auction_card_right {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 90%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  height: 90%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auction_card_contents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.auction_card:hover {
+  background-color: rgb(232, 232, 232);
+  box-shadow: 0px 0px 10px black;
+}
+
+.buttons button {
+  margin: auto;
+  width: 30%;
+  padding: 5px;
+  border-radius: 5px;
+  border-width: 0px;
+  background-color: #d06b13;
+  color: white;
+  font-size: var(--normal-font-size);
+  transition: 0.6s;
+  margin: 0;
+}
+.auction_card button:hover {
+  background-color: #ff8f2d;
+  box-shadow: 0px 0px 6px #ff8f2d;
+  text-shadow: 0px 0px 1px white;
+}
+
+.auction_card span {
+  color: rgb(8, 228, 8);
+  font-weight: bolder;
+}
+
+.auction_card img {
+  width: 8%;
+  aspect-ratio: 3/4;
+  border-radius: 10px;
+}
+
+.bidding {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.bidding button {
+  margin: auto;
+  width: 40%;
+  height: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+  border-width: 0px;
+  background-color: #d06b13;
+  color: white;
+  font-size: var(--normal-font-size);
+  transition: 0.6s;
+  margin: 0;
+}
+
+.auction_card input {
+  width: 40%;
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  border-width: 0px;
+  font-size: var(--normal-font-size);
+  transition: 0.3s;
+}
+.auction_card input:focus {
+  box-shadow: 1px 1px 9px #000000;
+}
+
+@media screen and (max-width: 1400px) {
+  .auction_description {
+    font-size: var(--small-font-size);
+  }
+}
