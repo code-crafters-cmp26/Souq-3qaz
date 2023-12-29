@@ -169,3 +169,17 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
     info: updated['rows']
   });
 });
+
+exports.banUser = catchAsync(async (req, res, next) => {
+  const userId = req.user['rows'][0]['id'];
+
+  const updated = await db.query(`UPDATE "User" SET banned = true WHERE id = ${userId};`)
+
+  if (updated['rowsCount'] == 0) {
+    return next(new AppError('bad request', 400));
+  }
+
+  res.status(200).json({
+    status: 'success'
+  });
+});
