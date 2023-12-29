@@ -48,13 +48,7 @@ function CategoriesBar() {
           </div>
         ))}
       </div>
-      <div>
-        <h4>Customer Reviews</h4>
-        <p>🌟🌟🌟🌟⭐ & Up</p>
-        <p>🌟🌟🌟⭐⭐ & Up</p>
-        <p>🌟🌟⭐⭐⭐ & Up</p>
-        <p>🌟⭐⭐⭐⭐& Up</p>
-      </div>
+
       <div>
         <h4>Price</h4>
 

@@ -52,9 +52,24 @@ function Navbar({ children }) {
             <Link to="/myproducts">MY PRODUCTS</Link>
           </li>
         )}
-        {userType == "Normal" && (
+        {(userType == "Normal" || userType == "Premieum") && (
           <li>
             <Link to="/auctions">AUCTIONS</Link>
+          </li>
+        )}
+        {(userType == "Normal" || userType == "Premium") && (
+          <li>
+            <Link to="/wishlist">WISHLIST</Link>
+          </li>
+        )}
+        {(userType == "Tech Support" || userType == "Admin") && (
+          <li>
+            <Link to="/addwarehouse">ADD WAREHOUSE</Link>
+          </li>
+        )}
+        {(userType == "Tech Support" || userType == "Admin") && (
+          <li>
+            <Link to="/addshipping">ADD SHIPPING COMPANY</Link>
           </li>
         )}
         {!isLoggedIn && (

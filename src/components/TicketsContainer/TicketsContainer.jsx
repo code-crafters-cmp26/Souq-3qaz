@@ -1,33 +1,48 @@
-import styles from './TicketsContainer.module.css'
-import { useState } from 'react'
-import Ticket from '../Ticket/Ticket'
-
+import styles from "./TicketsContainer.module.css";
+import { useEffect, useState } from "react";
+import Ticket from "../Ticket/Ticket";
 
 function TicketsContainer() {
-  const [tickets, setTickets] = useState([])
-  // id, title, status, date, reporter, reported, description 
-  const testTickets = [[ "1", "non-legit product", "new", "2021-08-01", "bisy", "bisy", "this is a test ticket"], ["2", "non-legit product", "new", "2021-08-01", "bisy", "bisy", "this is a test ticket"], ["3", "non-legit product", "new", "2021-08-01", "bisy", "bisy", "this is a test ticket"], ["4", "non-legit product", "new", "2021-08-01", "bisy", "bisy", "this is a test ticket"]]
-  function getTickets() {
-    // fetch("http://localhost:3000/api/v1/ticket")
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //     setTickets(data)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
-  }
+  const [tickets, setTickets] = useState([]);
+  // id, title, status, date, reporter, reported, description
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/v1/report", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setTickets(data.reports);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, []);
 
   return (
     <div className={styles.tickets_container}>
-        {testTickets.map((ticket) => {
-          return <Ticket id={ticket[0]} title={ticket[1]} status={ticket[2]} date={ticket[3]} reporter={ticket[4]} reported={ticket[5]} description={ticket[6]} />
-        })}
+      {tickets?.map((t) => {
+        return (
+          <Ticket
+            key={t.id}
+            id={t.reportid}
+            category={t.category}
+            date={t.date}
+            reporter={t.customerid}
+            reported={t.sellerid}
+            description={t.description}
+          />
+        );
+      })}
     </div>
-  )
+  );
 }
 
-export default TicketsContainer
+export default TicketsContainer;

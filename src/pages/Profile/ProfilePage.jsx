@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAuth } from "../../components/AuthProvider/AuthProvider";
 
 function ProfilePage() {
+  //const [isloading, setIsLoading] = useState(true);
   const [points, setPoints] = useState("");
   const [cardnumber, setCardNumber] = useState(0);
   const { userType, userData, setUserData, setUserType } = useAuth();
@@ -27,9 +28,13 @@ function ProfilePage() {
       })
       .then((data) => {
         console.log(data);
-        localStorage.setItem("userData", JSON.stringify(...data.customer));
-        const storedUserData = localStorage.getItem("userData");
-        setUserData(JSON.parse(storedUserData));
+        if (data.status != "success") alert(data.message);
+        else {
+          localStorage.setItem("userData", JSON.stringify(...data.customer));
+          const storedUserData = localStorage.getItem("userData");
+          setUserData(JSON.parse(storedUserData));
+        }
+        //setIsLoading(false);
       })
       .catch((error) => {
         console.log(error.message);
@@ -93,6 +98,7 @@ function ProfilePage() {
 
   return (
     <div className={styles.profile_page}>
+      {/* {!isloading && ( */}
       <div className={styles.profile_page__left_panel}>
         {userType == "Premium" && (
           <h2 className={styles.premiummessage}>
@@ -101,28 +107,28 @@ function ProfilePage() {
         )}
         <img
           className={styles.profile_page__left_panel__profile_pic}
-          src={userData.image}
+          src={userData?.image}
           alt="profile pic"
         />
         <div className={styles.profile_page__left_panel__user_info}>
           <h3>
-            {userData.firstname} {userData.lastname}
+            {userData?.firstname} {userData?.lastname}
           </h3>
           <h6>
-            {userData.street}, {userData.country}, {userData.city}
+            {userData?.street}, {userData?.country}, {userData?.city}
           </h6>
           <h6>
-            <h6>building number: {userData.buildingnumber}</h6>
+            <h6>building number: {userData?.buildingnumber}</h6>
           </h6>
-          {userData.apartmentnumber && (
-            <h6>Apartment number: {userData.apartmentnumber}</h6>
+          {userData?.apartmentnumber && (
+            <h6>Apartment number: {userData?.apartmentnumber}</h6>
           )}
-          <h6>{userData.phonenumber}</h6>
-          <h6> {userData.email} </h6>
+          <h6>{userData?.phonenumber}</h6>
+          <h6> {userData?.email} </h6>
         </div>
         <DrawerItem title="Logout" />
       </div>
-
+      {/* } */}
       <div className={styles.profile_page__cards_grid}>
         {cardnumber === 0 && (
           <>
@@ -158,14 +164,20 @@ function ProfilePage() {
                 handleClick(4);
               }}
             />
+
             <Card
               img="./src/pages/Profile/balance.svg"
-              title="Recharge Balance"
-              description="Here you can recharge your balance"
+              title={
+                userType == "Normal" ? "Recharge Balance" : "Check your balance"
+              }
+              description={
+                userType == "Normal" ? "Here you can recharge your balance" : ""
+              }
               onClick={() => {
                 handleClick(5);
               }}
             />
+
             <Card
               img="./src/pages/Profile/contact.svg"
               title="Contact Us"
@@ -216,22 +228,28 @@ function ProfilePage() {
             </div>
             <Card
               img="./src/pages/Profile/balance.svg"
-              title="Recharge Balance"
-              description="Here you can recharge your balance"
+              title={
+                userType == "Normal" ? "Recharge Balance" : "Check your balance"
+              }
+              description={
+                userType == "Normal" ? "Here you can recharge your balance" : ""
+              }
               onClick={() => {
                 handleClick(0);
               }}
             />
 
-            <div className={styles.recharge_balance}>
-              <input
-                placeholder="Enter The Points"
-                type="number"
-                value={points}
-                onChange={handleChangePoints}
-              ></input>
-              <button onClick={handleRecharge}>Recharge</button>
-            </div>
+            {userType == "Normal" && (
+              <div className={styles.recharge_balance}>
+                <input
+                  placeholder="Enter The Points"
+                  type="number"
+                  value={points}
+                  onChange={handleChangePoints}
+                ></input>
+                <button onClick={handleRecharge}>Recharge</button>
+              </div>
+            )}
           </>
         )}
       </div>

@@ -8,3 +8,15 @@
   flex-direction: column;
   margin-left: 40px;
 }
+
+.checkoutpage button {
+  color: white;
+  background-color: #ce8240;
+  width: 20%;
+  font-size: var(--small-font-size);
+  text-align: center;
+}
+
+.smallproduct {
+  width: 50%;
+}

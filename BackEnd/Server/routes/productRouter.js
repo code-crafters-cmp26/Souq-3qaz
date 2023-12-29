@@ -1,25 +1,21 @@
-const express = require('express');
-const productController = require('../controllers/productController');
-const authController = require('../controllers/authController');
+const express = require("express");
+const productController = require("../controllers/productController");
+const authController = require("../controllers/authController");
 const router = express.Router();
 
 router
-  .route('/')
+  .route("/")
   .get(productController.getAllProducts)
   .post(authController.protectFrombanned, authController.protectForSeller, productController.createProduct);
 
-router
-  .route('/searchProduct')
-  .post(productController.getProductByName);
+router.route("/searchProduct").post(productController.getProductByName);
 
 router
-  .route('/:id')
+  .route("/:id")
   .get(productController.getProductById)
   .post(authController.protectFrombanned, authController.protectForCustomer, productController.AddToWishList)
   .delete(authController.protectFromCustomer, productController.deleteProduct);
 
-router
-  .route('/searchBySeller/:id')
-  .get(productController.getProductBySellerId)
+router.route("/searchBySeller/:id").get(productController.getProductBySellerId);
 
 module.exports = router;

@@ -24,9 +24,11 @@ function Productpage() {
       })
       .then((data) => {
         console.log(data);
+        if (data.status != "success") alert(data.message);
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
   };
 
@@ -40,12 +42,29 @@ function Productpage() {
     navigate(`/addauction/${id}`);
   };
 
-  const handleDeleteProduct = () => {};
+  const handleDeleteProduct = () => {
+    fetch(`http://localhost:3000/api/v1/product/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status != "success") alert(data.message);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        alert(data.message);
+      });
+  };
   const handleGoToBarter = () => {
     navigate(
-      `/barter?Sname=${
-        productData.sellerFName + " " + productData.sellerLName
-      }&id=${productData.id}&sellerid=${productData.sellerid}`
+      `/barter?Sname=${productData.firstname + " " + productData.lastname}&id=${
+        productData.id
+      }&sellerid=${productData.sellerid}`
     );
   };
 
@@ -59,10 +78,12 @@ function Productpage() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setProductData(...data.products);
+        if (data.status != "success") alert(data.message);
+        else setProductData(...data.products);
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
   }, [id]);
 
@@ -93,7 +114,7 @@ function Productpage() {
         </section>
         <section className={styles.purchase}>
           <div className={styles.date}>Date of releasing: {extractedDate}</div>
-          {userType == "Normal" && (
+          {(userType == "Normal" || userType == "Premium") && (
             <>
               <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
               <Button text="Buy Now" onClick={handleGoToBuy} />
@@ -101,16 +122,19 @@ function Productpage() {
           )}
           {userType == "Seller" && (
             <>
-              {userData.id == productData.id && (
+              {userData.id == productData.sellerid && (
                 <>
                   <Button text="Add to Auction" onClick={handleAddToAuction} />
                   <Button text="Delete Produt" onClick={handleDeleteProduct} />
                 </>
               )}
-              {userData.id != productData.id && (
+              {userData.id != productData.sellerid && (
                 <Button text="Barter" onClick={handleGoToBarter} />
               )}
             </>
+          )}
+          {(userType == "Tech Support" || userType == "Admin") && (
+            <Button text="Delete Produt" onClick={handleDeleteProduct} />
           )}
         </section>
       </div>
