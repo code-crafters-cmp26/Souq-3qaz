@@ -39,9 +39,9 @@ io.on("connection", async (socket) => {
   console.log(decoded.id);
   console.log("A user connected", socket.id);
 
-  //   const result = await db.query(
-  //     Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';
-  //   );
+  const result = await db.query(
+    `Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';`
+  );
 
   socket.on("notifyServer", () => {
     console.log("Server received notification from client", socket.id);
