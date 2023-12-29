@@ -128,6 +128,9 @@ function Productpage() {
               )}
             </>
           )}
+          {(userType == "Tech Support" || userType == "Admin") && (
+            <Button text="Delete Produt" onClick={handleDeleteProduct} />
+          )}
         </section>
       </div>
       <ReviewsContainer />
