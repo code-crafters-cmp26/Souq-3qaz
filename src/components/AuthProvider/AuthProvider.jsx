@@ -42,8 +42,6 @@ export const AuthProvider = ({ children }) => {
     // Perform logout logic
     setIsLoggedIn(false);
 
-    setUserType("");
-    setUserData(null);
     // Clear from local storage
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userType");
