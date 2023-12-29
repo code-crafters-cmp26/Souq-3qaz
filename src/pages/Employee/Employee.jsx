@@ -3,6 +3,8 @@ import Card from "../../components/Card/Card";
 import { useReducer, useState } from "react";
 import Input from "../../components/input/Input";
 import Button from "../../components/Button/Button";
+import { useNavigate } from "react-router";
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
 
 const initialState = {
   firstname: "",
@@ -27,8 +29,9 @@ const reducer = (state, action) => {
 function Employee() {
   const [cardnumber, setCardNumber] = useState(0);
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  function handleSubmit(e) {
+  const { userType } = useAuth();
+  const navigate = useNavigate();
+  function handleSubmit() {
     console.log(
       state.firstname,
       state.lastname,
@@ -79,20 +82,23 @@ function Employee() {
       {cardnumber == 0 && (
         <>
           <div className={styles.header}>
-            <h1>Welcome, Employee</h1>
+            <h1>Welcome, {userType == "Admin" ? "Admin" : "Employee"}</h1>
           </div>
           <div className={styles.grid_cont}>
             <Card
               img="src/pages/Employee/report.svg"
               title="Reports"
               description="View reports"
+              onClick={() => navigate("/reports")}
             />
-            <Card
-              img="src/pages/Employee/add.svg"
-              title="Add Employee"
-              description="Add new employee"
-              onClick={() => handleClick(2)}
-            />
+            {userType == "Admin" && (
+              <Card
+                img="src/pages/Employee/add.svg"
+                title="Add Employee"
+                description="Add new employee"
+                onClick={() => handleClick(2)}
+              />
+            )}
             <Card
               img="src/pages/Employee/user.svg"
               title="Users"
@@ -102,6 +108,7 @@ function Employee() {
               img="src/pages/Employee/pro.svg"
               title="Products"
               description="View products"
+              onClick={() => navigate("/products")}
             />
           </div>
         </>

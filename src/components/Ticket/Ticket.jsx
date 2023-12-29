@@ -1,37 +1,27 @@
 import styles from "./Ticket.module.css";
 import { useState } from "react";
 
-function Ticket({
-  id,
-  title,
-  category,
-  date,
-  reporter,
-  reported,
-  description,
-}) {
+function Ticket({ id, category, date, reporter, reported, description }) {
   const [show, setShow] = useState(false);
-  const [status, setStatus] = useState(intitStatus);
-  const [selectedStatus, setSelectedStatus] = useState("new");
+  // const [selectedStatus, setSelectedStatus] = useState("new");
 
   function toggleShow() {
     setShow(!show);
   }
 
-  function handleStatusChange(event) {
-    setSelectedStatus(event.target.value);
-  }
+  // function handleStatusChange(event) {
+  //   setSelectedStatus(event.target.value);
+  // }
 
-  function handleSave() {
-    setStatus(selectedStatus);
-  }
+  // function handleSave() {
+  //   setStatus(selectedStatus);
+  // }
   return (
     <div className={styles.ticket}>
       <div className={styles.ticket__header} onClick={toggleShow}>
-        <h3 className={styles.ticket__id}>{id}</h3>
-        <h3>{title}</h3>
-        <h3>{status}</h3>
-        <h3>{date}</h3>
+        <h3 className={styles.ticket__id}>ID: {id}</h3>
+        <h3>Category: {category}</h3>
+        <h3>Date: {date}</h3>
       </div>
       <div
         className={styles.ticket__body}
@@ -39,9 +29,16 @@ function Ticket({
       >
         <h3>Reporter: {reporter}</h3>
         <h3>Reported: {reported}</h3>
-        <p>{description}</p>
-        <div className={styles.ticket__status_setters}>
-          <select
+        <p>Description: {description}</p>
+      </div>
+    </div>
+  );
+}
+
+export default Ticket;
+
+{
+  /* <select
             name="status"
             id="status"
             value={selectedStatus}
@@ -62,11 +59,7 @@ function Ticket({
             <option value="feedback_requested">Feedback Requested</option>
             <option value="cancelled">Cancelled</option>
           </select>
-          <button onClick={handleSave}>Set Status</button>
-        </div>
-      </div>
-    </div>
-  );
+        <div className={styles.ticket__status_setters}>
+          
+          <button onClick={handleSave}>Set Status</button> */
 }
-
-export default Ticket;

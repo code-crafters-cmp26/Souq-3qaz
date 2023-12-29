@@ -7,7 +7,13 @@ function TicketsContainer() {
   // id, title, status, date, reporter, reported, description
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/report")
+    fetch("http://localhost:3000/api/v1/report", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+    })
       .then((res) => {
         return res.json();
       })
@@ -27,7 +33,6 @@ function TicketsContainer() {
           <Ticket
             key={t.id}
             id={t.reportid}
-            title={t.reportid}
             category={t.category}
             date={t.date}
             reporter={t.customerid}
