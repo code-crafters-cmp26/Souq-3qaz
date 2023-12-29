@@ -101,13 +101,13 @@ function Productpage() {
           )}
           {userType == "Seller" && (
             <>
-              {userData.id == productData.id && (
+              {userData.id == productData.sellerid && (
                 <>
                   <Button text="Add to Auction" onClick={handleAddToAuction} />
                   <Button text="Delete Produt" onClick={handleDeleteProduct} />
                 </>
               )}
-              {userData.id != productData.id && (
+              {userData.id != productData.sellerid && (
                 <Button text="Barter" onClick={handleGoToBarter} />
               )}
             </>
