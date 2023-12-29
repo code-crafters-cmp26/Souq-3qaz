@@ -8,7 +8,7 @@ router.route('/login').post(authController.login);
 
 router
   .route('/')
-  .get(userController.getAllUsers);
+  .get(authController.protectForEmployee, userController.getAllUsers);
 
 router
   .route('/:id')

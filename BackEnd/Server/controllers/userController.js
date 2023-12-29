@@ -7,11 +7,12 @@ const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 
 exports.getAllUsers = catchAsync(async (req, res) => {
-  const x = await db.query('SELECT * FROM  "User"');
+  const customers = await db.query('SELECT u.*, c.type FROM "User" AS u INNER JOIN customer AS c ON u.id = c.id; ');
+  const sellers = await db.query('SELECT u.*, \'Seller\' AS type FROM "User" AS u INNER JOIN seller AS s ON u.id = s.id; ');
   res.status(200).json({
     status: 'success',
-    count: x['rowCount'],
-    users: x['rows']
+    customers: customers['rows'],
+    sellers: sellers['rows']
   });
 });
 

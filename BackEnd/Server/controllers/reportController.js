@@ -20,3 +20,14 @@ exports.addReport = catchAsync(async (req, res, next) => {
   });
 
 });
+
+exports.getAllReport = catchAsync(async (req, res, next) => {
+
+  const reports = await db.query(`SELECT * FROM report;`);
+
+  res.status(200).json({
+    status: 'success',
+    reports: reports['rows'],
+  });
+
+});
