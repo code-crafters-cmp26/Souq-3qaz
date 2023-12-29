@@ -139,15 +139,55 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("incorrect email or password", 401));
   }
 
-  const data = await db.query(`SELECT * FROM "User" WHERE email = '${email}';`);
-  if (data["rowCount"] == 0) {
-    return next(new AppError("incorrect email or password", 401));
-  }
-  const user = await db.query(
-    `SELECT password FROM "User" WHERE email = '${email}';`
+  const employee = await db.query(
+    `SELECT * FROM employee WHERE email = '${email}';`
   );
-  const newUserId = await db.query(
-    `SELECT id FROM "User" WHERE email = '${email}';`
+  if (employee["rowCount"] == 0) {
+    const data = await db.query(
+      `SELECT * FROM "User" WHERE email = '${email}';`
+    );
+    if (data["rowCount"] == 0) {
+      return next(new AppError("incorrect email or password", 401));
+    }
+    const user = await db.query(
+      `SELECT password FROM "User" WHERE email = '${email}';`
+    );
+    const newUserId = await db.query(
+      `SELECT id FROM "User" WHERE email = '${email}';`
+    );
+    const truePassword = user["rows"][0]["password"] + "";
+    // @ts-ignore
+    const correct = await User.checkPassword(password, truePassword);
+    if (correct == -1)
+      return next(new AppError("some thing went wrong try again", 500));
+    // @ts-ignore
+    if (user["rowCount"] == 0 || !correct) {
+      return next(new AppError("incorrect email or password", 401));
+    }
+
+    // @ts-ignore
+    let roole = await db.query(
+      `SELECT * FROM Seller WHERE id = ${newUserId["rows"][0]["id"]};`
+    );
+    if (roole["rowCount"] != 0) {
+      createSendToken(data, newUserId["rows"][0]["id"], "Seller", 200, res);
+    }
+    roole = await db.query(
+      `SELECT type FROM Customer WHERE id = ${newUserId["rows"][0]["id"]};`
+    );
+    if (roole["rowCount"] != 0) {
+      createSendToken(
+        data,
+        newUserId["rows"][0]["id"],
+        roole["rows"][0]["type"],
+        200,
+        res
+      );
+    }
+  }
+  // console.log(email, password);
+  const user = await db.query(
+    `SELECT * FROM employee WHERE email = '${email}';`
   );
   const truePassword = user["rows"][0]["password"] + "";
   // @ts-ignore
@@ -158,26 +198,13 @@ exports.login = catchAsync(async (req, res, next) => {
   if (user["rowCount"] == 0 || !correct) {
     return next(new AppError("incorrect email or password", 401));
   }
-
-  // @ts-ignore
-  let roole = await db.query(
-    `SELECT * FROM Seller WHERE id = ${newUserId["rows"][0]["id"]};`
+  createSendToken(
+    employee,
+    user["rows"][0]["id"],
+    user["rows"][0]["position"],
+    200,
+    res
   );
-  if (roole["rowCount"] != 0) {
-    createSendToken(data, newUserId["rows"][0]["id"], "Seller", 200, res);
-  }
-  roole = await db.query(
-    `SELECT type FROM Customer WHERE id = ${newUserId["rows"][0]["id"]};`
-  );
-  if (roole["rowCount"] != 0) {
-    createSendToken(
-      data,
-      newUserId["rows"][0]["id"],
-      roole["rows"][0]["type"],
-      200,
-      res
-    );
-  }
 });
 
 // @ts-ignore
