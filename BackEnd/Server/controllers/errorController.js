@@ -81,6 +81,11 @@ const handleMoneyIsNegative = err => {
   return new AppError(message, 400);
 };
 
+const handleChatWithSeller = err => {
+  const message = "you cant chat with this user";
+  return new AppError(message, 400);
+};
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -116,6 +121,7 @@ module.exports = (err, req, res, next) => {
   }
   else if (process.env.NODE_ENV === 'production') {
     let error = err;
+    console.log(error);
     if (error.message == 'some required Fields are empty') error = handleFieldsAreEmpty(error);
     else if (error.message == 'duplicate key value violates unique constraint \"unique_email\"') error = handleDublicateEmail(error);
     else if (error.message == 'Phone number must only contain numerical digits"') error = handlePhoneInvalid(error);
@@ -130,6 +136,7 @@ module.exports = (err, req, res, next) => {
     else if (error.message == 'handleMoneyIsNegative') error = handleMoneyIsNegative(error);
     else if (error.message == 'No Review With This Id Found') error = handleNoReviewFound(error);
     else if (error.constraint && error.constraint == 'review_rating_check') error = handleReviewNotInRage(error);
+    else if (error.constraint && error.constraint == 'fk_secondperson_seller') error = handleChatWithSeller(error);
     else if ((error.detail && error.detail.match(/Key \(.+?\) already exists/)) || error.message == 'You Already Have Done This Before') error = handleProductExistInWish(error);
     else if (error.detail && /^Key.*is not present in table "product"\.$/.test(error.detail) || error.message == 'No Product With This Id Found') error = handleNoProductFound(error);
     sendErrorProd(error, res);
