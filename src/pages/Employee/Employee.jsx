@@ -104,6 +104,7 @@ function Employee() {
               img="src/pages/Employee/user.svg"
               title="Users"
               description="View users"
+              onClick={() => handleClick(3)}
             />
             <Card
               img="src/pages/Employee/pro.svg"
