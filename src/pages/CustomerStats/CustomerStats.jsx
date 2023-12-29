@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import BeautifulTable from '../../components/Table/Table';
 
-function CustomerStats() {
+function SellerStats() {
   const [sellerData, setSellerData] = useState([]);
 
   // Define your custom columns for SellerStats
   const sellerColumns = React.useMemo(
     () => [
       { Header: 'Transaction ID', accessor: 'transactionid' },
-      { Header: 'Customer ID', accessor: 'customerid' },
       { Header: 'Product ID', accessor: 'productid' },
       { Header: 'Product Name', accessor: 'name' },
       { Header: 'Product Price', accessor: 'price'},
@@ -24,7 +23,7 @@ function CustomerStats() {
   );
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/buy`, {
+    fetch(`http://localhost:3000/api/v1/buy/getTransCust`, {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('token'),
@@ -63,4 +62,4 @@ function CustomerStats() {
   );
 }
 
-export default CustomerStats;
+export default SellerStats;
