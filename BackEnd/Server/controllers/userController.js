@@ -15,8 +15,8 @@ exports.getAllUsers = catchAsync(async (req, res) => {
   );
   res.status(200).json({
     status: "success",
-    count: x["rowCount"],
-    users: x["rows"],
+    customers: customers["rows"],
+    sellers: sellers["rows"],
   });
 });
 

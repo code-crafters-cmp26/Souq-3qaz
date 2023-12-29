@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "./AllUsers.module.css";
 import UserCard from "../UserCard/UserCard";
 function AllUsers() {
-  const [users, setUsers] = useState([]);
+  const [sellers, setSellers] = useState([]);
+  const [customers, setCustomers] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/user`, {
       method: "GET",
@@ -14,7 +15,8 @@ function AllUsers() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setUsers(data.users);
+        setSellers(data.sellers);
+        setCustomers(data.customers);
       })
       .catch((error) => {
         console.log(error.message);
@@ -22,8 +24,11 @@ function AllUsers() {
   }, []);
   return (
     <div className={styles.all_users}>
-      {users?.map((user) => (
-        <UserCard key={user.id} user={user} />
+      {sellers?.map((seller) => (
+        <UserCard key={seller.id} user={seller} />
+      ))}
+      {customers?.map((customer) => (
+        <UserCard key={customer.id} user={customer} />
       ))}
     </div>
   );
