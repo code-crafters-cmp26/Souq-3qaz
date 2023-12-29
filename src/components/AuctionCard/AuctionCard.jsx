@@ -9,6 +9,12 @@ function AuctionCard({ auction }) {
   const navigate = useNavigate();
 
   const handleChangeViewed = () => {
+    console.log(
+      auction.productid,
+      auction.productname,
+      auction.firstname,
+      auction.lastname
+    );
     setViewed((v) => !v);
   };
 
@@ -50,9 +56,10 @@ function AuctionCard({ auction }) {
       <img src="./src/components/AuctionCard/Iphone.jpeg" />
       <div className={styles.auction_card_right}>
         <div className={styles.auction_card_contents}>
-          <p>Auction: {auction.acutionid}</p>
-          <p>Product: {auction.productid}</p>
-          <p>Seller: {auction.sellerid}</p>
+          <p>Product: {auction.productname}</p>
+          <p>
+            Seller: {auction.firstname} {auction.lastname}
+          </p>
           <p>Date: {auction.date}</p>
           {auction.quantity > 0 && (
             <p>
