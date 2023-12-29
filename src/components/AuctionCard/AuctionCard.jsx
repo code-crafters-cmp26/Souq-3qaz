@@ -25,8 +25,8 @@ function AuctionCard({ auction }) {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        bid: biddingQuantity,
-        auctionId: auction.acutionid,
+        bid: parseInt(biddingQuantity),
+        auctionId: parseInt(auction.acutionid),
       }),
     })
       .then((res) => {
