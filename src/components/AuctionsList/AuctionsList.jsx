@@ -10,7 +10,7 @@ function AuctionsList({ auctions }) {
           <AuctionCard key={auction.acutionid} auction={auction} />
         ))
       ) : (
-        <p>No auctions available</p>
+        <h1 className={styles.message}>No auctions available</h1>
       )}
     </div>
   );

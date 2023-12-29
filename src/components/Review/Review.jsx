@@ -40,12 +40,12 @@ function Review({ review }) {
         <p>{review.comment}</p>
       </div>
       <div className={styles.upvotes}>
-        <img
-          src="src/components/Review/likeB.svg"
+        {/* <img
+          src="https://w7.pngwing.com/pngs/821/97/png-transparent-black-arrow-up-illustration-arrow-desktop-symbol-up-arrow-angle-triangle-sign-thumbnail.png"
           alt="upvote"
-          width="20px"
-          height="20px"
-        />
+          width="30px"
+          height="30px"
+       needs api // />  */}
         <p>{review.upvotes}</p>
         {(userData?.id == review.customerid ||
           userType == "Admin" ||

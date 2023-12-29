@@ -160,14 +160,14 @@ function ProfilePage() {
                 handleClick(3);
               }}
             />
-            <Card
+            {/* <Card
               img="./src/pages/Profile/address.svg"
               title="Addresses"
               description="Here are the addresses you've added"
               onClick={() => {
                 handleClick(4);
               }}
-            />
+            /> */}
 
             <Card
               img="./src/pages/Profile/balance.svg"

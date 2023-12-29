@@ -17,6 +17,13 @@ function ProductCard({ product }) {
       })
       .then((data) => {
         console.log(data);
+        if (
+          data.message ==
+          `duplicate key value violates unique constraint "pk_wishlist"`
+        )
+          alert("You already have this product in your wishlist");
+        else if (data.status != "success") alert(data.message);
+        else alert("Youa added this product to your wishlist");
       })
       .catch((error) => {
         console.log(error.message);
