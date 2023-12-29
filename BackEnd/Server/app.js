@@ -55,19 +55,16 @@ io.on("connection", async (socket) => {
 
   socket.on("event1", async () => {
     console.log("event1 rec");
-    const result = await db.query(`SELECT socketcode FROM "User" WHERE id=22;`);
-    console.log(result["rows"][0]["socketcode"]);
-    io.to(result["rows"][0]["socketcode"]).emit(
-      "eslam",
-      "Hello, client! This is a response."
-    );
+    const result = await db.query(`SELECT socketcode FROM "User" WHERE id=22;`)
+    console.log(result['rows'][0]['socketcode'])
+    io.to(result['rows'][0]['socketcode']).emit('eslam', 'Hello, client! This is a response.');
   });
 
-  //   // Disconnect event
+//   // Disconnect event
   socket.on("disconnect", () => {
     console.log("User disconnected");
   });
-});
+// });
 
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
