@@ -30,6 +30,7 @@ function Searchbar() {
   };
 
   const handleEntered = () => {
+    //navigate(`/products`);
     setOpened(true);
   };
 
