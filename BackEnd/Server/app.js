@@ -12,6 +12,8 @@ const auctionRouter = require("./routes/auctionRouter");
 const barterRouter = require("./routes/barterRouter");
 const employeeRouter = require("./routes/employeeRouter");
 const reportRouter = require("./routes/reportRouter");
+const warehouseRouter = require("./routes/warehouseRouter");
+const shippingRouter = require("./routes/shippingRouter");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const socketIO = require("socket.io");
@@ -73,6 +75,8 @@ app.use("/api/v1/auction", auctionRouter);
 app.use("/api/v1/barter", barterRouter);
 app.use("/api/v1/employee", employeeRouter);
 app.use("/api/v1/report", reportRouter);
+app.use("/api/v1/warehouse", warehouseRouter);
+app.use("/api/v1/shipping", shippingRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`can\'t find ${req.originalUrl} on this server`, 404));

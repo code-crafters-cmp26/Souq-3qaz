@@ -35,6 +35,10 @@ router
   .post(authController.protect, userController.updateInfo);
 
 router
+  .route('/wishList')
+  .get(authController.protectForCustomer, userController.getWish);
+
+router
   .route('/Customer/upgrade')
   .post(authController.protectForCustomer, userController.upgradeToPremium);
 
