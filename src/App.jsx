@@ -17,29 +17,20 @@ import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
 import SignupPage from "./pages/Signup/SignupPage";
 import AddProductPage from "./pages/AddProduct/AddProductPage";
-
-import AddAuctionPage
-
+import AddAuctionPage from "./pages/AddAuction/AddAuctionPage";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 function App() {
   useEffect(() => {
     const socket = io("http://127.0.0.1:3000", {
       query: {
-        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzAzNjk1MTUwLCJleHAiOjE3MTE0NzExNTB9.r68zw0yykBx2L7yzHeLWNa2XlBXb31AMHGz6EYtIydw",
+        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAzNjU3OTczLCJleHAiOjE3MTE0MzM5NzN9.wfje26Seyb0D0r9L8nbIQYyZx5B-LF71skuYa2mhJ6w",
       },
     });
 
     // Handle connection events
     socket.on("connect", () => {
       console.log("Connected to server");
-    });
-
-    // Listen for a custom event from the server
-    socket.on("fetchmessages", (data) => {
-      console.log("Received data:", data);
-      alert("Hello, this is an alert message!");
-      // Handle the data received from the server
     });
 
     socket.on("disconnect", () => {
@@ -68,7 +59,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           {/* <Route path="/product" element={<ProductPage />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products" element={<ProductsPage ofseller={0} />} />
           <Route path="/products/:id" element={<ProductPage />} />
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/settings" element={<Settings />} />
