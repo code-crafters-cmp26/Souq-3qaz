@@ -1,6 +1,6 @@
 import styles from "./Settings.module.css";
 import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import Button from "../../components/Button/Button";
 import { useReducer } from "react";
 import { useAuth } from "../../components/AuthProvider/AuthProvider";
 import { useEffect } from "react";
