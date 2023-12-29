@@ -319,3 +319,35 @@ exports.protectForEmployee = catchAsync(async (req, res, next) => {
   req.user = freshUser;
   next();
 });
+
+exports.protectFromCustomer = catchAsync(async (req, res, next) => {
+
+  let token;
+  // 1) getting the token and check if its there
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+  if (!token) {
+    return next(new AppError('you are not logged in', 401));
+  }
+
+  // 2) verification of the token
+  // @ts-ignore
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  // 3) check if the user still exist
+  // @ts-ignore
+  let freshUser = await db.query(`SELECT * FROM customer WHERE id = ${decoded.id}`);
+
+  if (freshUser['rowCount'] != 0) {
+    return next(new AppError('You are not allowed to do this', 403));
+  }
+  // @ts-ignore
+  freshUser = await db.query(`SELECT * FROM "User" WHERE id = ${decoded.id}`);
+  if (!freshUser['rowCount']) {
+    req.user = -1
+  }
+  else {
+    req.user = decoded.id
+  }
+  next();
+});
