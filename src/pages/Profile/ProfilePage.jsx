@@ -28,9 +28,12 @@ function ProfilePage() {
       })
       .then((data) => {
         console.log(data);
-        localStorage.setItem("userData", JSON.stringify(...data.customer));
-        const storedUserData = localStorage.getItem("userData");
-        setUserData(JSON.parse(storedUserData));
+        if (data.status != "success") alert(data.message);
+        else {
+          localStorage.setItem("userData", JSON.stringify(...data.customer));
+          const storedUserData = localStorage.getItem("userData");
+          setUserData(JSON.parse(storedUserData));
+        }
         //setIsLoading(false);
       })
       .catch((error) => {

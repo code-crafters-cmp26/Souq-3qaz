@@ -17,10 +17,12 @@ function WishlistPage() {
       })
       .then((data) => {
         console.log(data);
-        setProducts(data.result);
+        if (data.status != "success") alert(data.message);
+        else setProducts(data.result);
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
   }, []);
   return (

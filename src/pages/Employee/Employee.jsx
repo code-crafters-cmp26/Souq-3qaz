@@ -63,9 +63,11 @@ function Employee() {
       })
       .then((data) => {
         console.log(data);
+        if (data.status != "success") alert(data.message);
       })
       .catch((error) => {
         console.log(error.message);
+        alert(error.message);
       });
   }
 
