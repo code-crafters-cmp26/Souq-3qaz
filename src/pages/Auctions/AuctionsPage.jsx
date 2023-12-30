@@ -15,6 +15,7 @@ function AuctionsPage() {
         } else {
           alert(data.message);
         }
+        console.log("3mna");
         console.log(data.result);
       })
       .catch((error) => {
