@@ -53,6 +53,8 @@ function Checkout({ productName, productPrice, productID }) {
       .then((data) => {
         console.log(productShipping);
         console.log(data);
+        if (data.status != "success") alert(data.message);
+        else alert("You have completed your transaction");
       })
       .catch((error) => {
         console.log(error.message);

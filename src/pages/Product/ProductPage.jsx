@@ -60,10 +60,10 @@ function Productpage() {
       .then((data) => {
         console.log(data);
         if (data.status != "success") alert(data.message);
+        else alert("You deleted your product :(");
       })
       .catch((error) => {
         console.log(error.message);
-        alert(data.message);
       });
   };
   const handleGoToBarter = () => {

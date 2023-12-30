@@ -1,7 +1,7 @@
 import styles from "./ProfilePage.module.css";
 import DrawerItem from "../../components/DrawerItem/DrawerItem";
 import Card from "../../components/Card/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../components/AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -17,8 +17,32 @@ function ProfilePage() {
     setCardNumber(i);
   };
 
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/v1/user/Customer/${userData?.id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        localStorage.setItem("userData", JSON.stringify(...data.customer));
+        const storedUserData = localStorage.getItem("userData");
+        setUserData(JSON.parse(storedUserData));
+
+        //setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, []);
+
   const updateUserData = () => {
-    fetch(`http://localhost:3000/api/v1/user/Customer/${userData.id}`, {
+    fetch(`http://localhost:3000/api/v1/user/Customer/${userData?.id}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -140,6 +164,10 @@ function ProfilePage() {
               title="Orders"
               description="Here are the orders you've made"
               onClick={() => {
+                userType == "Normal" || userType == "Premium"
+                  ? navigate("/customerstats")
+                  : navigate("/sellerstats");
+
                 handleClick(1);
               }}
             />
@@ -148,6 +176,7 @@ function ProfilePage() {
               title="Wish List"
               description="Here are the items you've added to your wish list"
               onClick={() => {
+                navigate("/wishlist");
                 handleClick(2);
               }}
             />

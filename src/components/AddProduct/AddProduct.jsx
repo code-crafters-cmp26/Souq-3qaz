@@ -42,6 +42,7 @@ function AddProduct() {
     dispatch({ type: "CHANGE", payload: name, value: checked });
   };
 
+  // let isvalid =
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("http://localhost:3000/api/v1/product", {
@@ -67,6 +68,9 @@ function AddProduct() {
       .then((data) => {
         console.log(data);
         dispatch({ type: "RESET" });
+        if (data.status == "success") {
+          alert("you have added your product");
+        } else alert(data.message);
       })
       .catch((error) => {
         console.log(error.message);
@@ -92,7 +96,7 @@ function AddProduct() {
           value={state.image}
           onChange={handleChange}
         />
-        <div className={styles.check}>
+        {/* <div className={styles.check}>
           <label>Prereleased? </label>
           <input
             required
@@ -101,7 +105,7 @@ function AddProduct() {
             checked={state.prerelease}
             onChange={handleChangebool}
           />
-        </div>
+        </div> */}
 
         <input
           placeholder="Price"

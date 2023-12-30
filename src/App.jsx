@@ -17,7 +17,7 @@ import AllBarters from "./pages/AllBarters/AllBarters";
 //import NotFound from "./pages/NotFound/NotFound";
 import SellerStats from "./pages/SellerStats/SellerStats";
 import CustomerStats from "./pages/CustomerStats/CustomerStats";
-import OverallStats from "./pages/OverallStats/OverallStats";
+//import OverallStats from "./pages/OverallStats/OverallStats";
 
 import About from "./pages/About/About";
 import AuctionsPage from "./pages/Auctions/AuctionsPage";
@@ -89,8 +89,8 @@ function App() {
           <Route path="/barter" element={<Barter />} />
           <Route path="/barters" element={<AllBarters />} />
           <Route path="/sellerstats" element={<SellerStats />} />
-          <Route path="/customerstats" element={<CustomerStats />} />
-          <Route path="/overallstats" element={<OverallStats />} />
+          <Route path="/customerstats" element={<CustomerStats />} /> */}
+          {/* <Route path="/overallstats" element={<OverallStats />} /> */}
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/addproduct" element={<AddProductPage />} />
           <Route path="/addauction/:id" element={<AddAuctionPage />} />
