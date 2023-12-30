@@ -48,7 +48,7 @@ function CheckoutPage() {
       <div className={styles.checkoutpage}>
         <h3>1 Shipping address</h3>
         <p>
-          Your Address: {userData.country} {userData.city} {userData.street}
+          Your Address: {userData?.country} {userData?.city} {userData?.street}
         </p>
         <Button
           text="Change Your Address in Settings"
@@ -59,7 +59,7 @@ function CheckoutPage() {
         />
         <hr />
         <h3>2 Payment method</h3>
-        <p>Your Balance: {userData.balance}</p>
+        <p>Your Balance: {userData?.balance}</p>
         <hr />
         <h3>3 Ordered items</h3>
         <div className={styles.smallproduct}>

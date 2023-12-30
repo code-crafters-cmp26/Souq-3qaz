@@ -11,6 +11,7 @@ exports.getAllProducts = async (req, res) => {
   FROM product AS p
   JOIN "User" AS s ON p.sellerid = s.id
   LEFT JOIN review AS r ON r.productid = p.id
+  WHERE p.quantity != -1
   GROUP BY p.id, s.id;
   `);
 
@@ -215,13 +216,15 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.getWish = catchAsync(async (req, res) => {
-  const customerId = req.user['rows'][0]['id'];
+  const customerId = req.user["rows"][0]["id"];
 
   console.log(customerId);
-  const result = await db.query(`SELECT * FROM wishlist WHERE customerid=${customerId};`);
+  const result = await db.query(
+    `SELECT * FROM wishlist WHERE customerid=${customerId};`
+  );
 
   res.status(200).json({
-    status: 'success',
-    result: result['rows']
+    status: "success",
+    result: result["rows"],
   });
 });

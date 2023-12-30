@@ -1,5 +1,10 @@
-.reviews_container{
-    color: #efc53b;
-    width:80%;
-    margin-bottom: 100px;
+.reviews_container {
+  color: #efc53b;
+  width: 80%;
+  margin-bottom: 100px;
+  padding: 40px;
+}
+
+.reviews_container button {
+  background-color: darkgoldenrod;
 }

@@ -51,7 +51,10 @@ function Checkout({ productName, productPrice, productID }) {
         return res.json();
       })
       .then((data) => {
+        console.log(productShipping);
         console.log(data);
+        if (data.status != "success") alert(data.message);
+        else alert("You have completed your transaction");
       })
       .catch((error) => {
         console.log(error.message);
@@ -69,7 +72,7 @@ function Checkout({ productName, productPrice, productID }) {
         onChange={(e) => setProductShipping(e.target.value)}
       >
         <option value="" disabled>
-          Select an option
+          Select shipping company
         </option>
         {shippings.map((shipping) => (
           <option key={shipping.id} value={shipping.id}>

@@ -15,12 +15,12 @@ function Homepage() {
           <Button text="Shop Now" />
         </Link>
       </div>
-      <div className={styles.categ}>
+      {/* <div className={styles.categ}>
         <div>first</div>
         <div>second</div>
         <div>third</div>
         <div>fourth</div>
-      </div>
+      </div> */}
     </div>
   );
 }

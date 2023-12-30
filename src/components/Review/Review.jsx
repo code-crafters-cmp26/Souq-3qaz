@@ -40,21 +40,21 @@ function Review({ review }) {
         <p>{review.comment}</p>
       </div>
       <div className={styles.upvotes}>
-        <img
-          src="src/components/Review/likeB.svg"
+        {/* <img
+          src="https://w7.pngwing.com/pngs/821/97/png-transparent-black-arrow-up-illustration-arrow-desktop-symbol-up-arrow-angle-triangle-sign-thumbnail.png"
           alt="upvote"
-          width="20px"
-          height="20px"
-        />
-        <p>{review.upvotes}</p>
+          width="30px"
+          height="30px"
+       needs api // />  */}
+        {/* <p>{review.upvotes}</p> */}
         {(userData?.id == review.customerid ||
           userType == "Admin" ||
           userType == "Tech Support") && (
           <img
-            src="src/components/Review/del.svg"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQupei2BVvuo4wbPCRS6jkhuIRyV53_q1bUT6o68Taxtw&s"
             alt="delete"
-            width="20px"
-            height="20px"
+            width="40px"
+            height="40px"
             onClick={deleteReview}
           />
         )}
