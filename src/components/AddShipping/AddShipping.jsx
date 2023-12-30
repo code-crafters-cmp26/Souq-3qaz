@@ -30,36 +30,48 @@ function AddShipping() {
     dispatch({ type: "CHANGE", payload: name, value });
   };
 
+  var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  //   if (emailRegex.test(emailInput)) {
+  //     alert('Valid email address!');
+  // } else {
+  //     alert('Invalid email address. Please enter a valid email.');
+  // }
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:3000/api/v1/shipping", {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        email: state.email,
-        name: state.Name,
-        priceperkm: parseInt(state.priceperkm),
-        buildingnumber: parseInt(state.buildingnumber),
-        country: state.country,
-        city: state.city,
-        street: state.street,
-      }),
-    })
-      .then((res) => {
-        return res.json();
+    if (emailRegex.test(state.email)) {
+      e.preventDefault();
+      fetch("http://localhost:3000/api/v1/shipping", {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: state.email,
+          name: state.Name,
+          priceperkm: parseInt(state.priceperkm),
+          buildingnumber: parseInt(state.buildingnumber),
+          country: state.country,
+          city: state.city,
+          street: state.street,
+        }),
       })
-      .then((data) => {
-        // if (data.status == "success") {
-        console.log(data);
-        dispatch({ type: "RESET" });
-        alert(data.message);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          // if (data.status == "success") {
+          console.log(data);
+          dispatch({ type: "RESET" });
+          if (data.status != "success") alert(data.message);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    } else {
+      alert("enter a valid email");
+    }
   };
 
   return (

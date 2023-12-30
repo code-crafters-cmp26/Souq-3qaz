@@ -6,7 +6,8 @@ const catchAsync = require("../utils/catchAsync");
 
 exports.getAllAuction = catchAsync(async (req, res, next) => {
   const result = await db.query(
-    `SELECT  a.*,p.name AS productName, u.firstname, u.lastname FROM auction AS a, product AS p, "User" AS u`
+    `SELECT  a.*,p.name AS productName, u.firstname, u.lastname FROM auction AS a, product AS p, "User" AS u
+    WHERE a.sellerid = u.id AND a.productid = p.id`
   );
 
   res.status(200).json({
