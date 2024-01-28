@@ -1,0 +1,40 @@
+.chat {
+  color: black;
+  display: flex;
+  height: 90vh;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  border: 2px solid #37211d;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.sentmessage {
+  margin-top: auto;
+  width: 80%;
+}
+
+.chat input {
+  padding: 20px;
+  margin: auto;
+  outline: none;
+  background-color: rgb(201, 201, 201);
+  border-radius: 30px;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.chat img {
+  width: 33px;
+  height: 33px;
+  border-radius: 100%;
+  position: fixed;
+  right: 350px;
+  bottom: 37px;
+}
+
+.chat img:hover {
+  cursor: pointer;
+}

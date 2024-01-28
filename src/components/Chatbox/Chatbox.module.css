@@ -1,87 +1,91 @@
-.chatbox{
-    position: fixed;
-    bottom: 10px;
-    right: 340px;
-    width: 300px;
-    height: 400px;
-    border-radius: 20px;
-    padding: 10px;
-    padding-top:0;
-    background-color: #37211d;  
-    box-shadow: 0 0 10px #efc53b;
-    z-index: 100;
-    transition: all 0.3s ease-in-out;
-    overflow-y: scroll;
+.chatbox {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  border-radius: 20px;
+  padding: 10px;
+  padding-top: 0;
+  background-color: #37211d;
+  box-shadow: 0 0 10px #efc53b;
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+  overflow-y: scroll;
 }
 /* make header fixed at the top even when scrolled */
-.chatbox .header{
-    height: 80px;
-    display: flex;
-    flex-direction: row;
-    justify-items: space-between;
-    align-items: center;
-    gap : 5px;
-    position: sticky;
-    top: 0;
-    z-index: 105;
-    background-color: #37211d;
-    
+.chatbox .header {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-items: space-between;
+  align-items: center;
+  gap: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 105;
+  background-color: #37211d;
 }
 
 .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 106;
-    cursor: pointer;
-    width: 20px;
-    height: auto;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 106;
+  cursor: pointer;
+  width: 20px;
+  height: auto;
 }
 
-.profile_pic{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 10px;
-    cursor: pointer;
+.profile_pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
 }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 3px;
-    
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: orange;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: red;
-  }
-
-
-.chatbox .input{
-    width: 100%;
-    height: 40px;
-    border-radius: 20px;
-    border: 1px solid #aaa;
-    padding: 10px;
-    outline: none;
-    font-size: 1rem;
-    background-color: #37211d69;
-    color: #efc53b;
-}
-.chatbox .input:focus{
-    border: 1px solid #efc53b;
+  width: 3px;
 }
 
-.chatbox .input_container{
-    position: sticky;
-    bottom: 1;
-    z-index: 106;
+/* Track */
+::-webkit-scrollbar-track {
+  background: orange;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red;
+}
+
+.chatbox .input {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid #aaa;
+  padding: 10px;
+  outline: none;
+  font-size: 1rem;
+  background-color: #37211d69;
+  color: #efc53b;
+
+  bottom: 10;
+}
+.chatbox .input:focus {
+  border: 1px solid #efc53b;
+}
+
+.chatbox .input_container {
+  position: sticky;
+  bottom: 1;
+  z-index: 106;
+}
+
+.chatbox button {
+  width: fit-content;
 }

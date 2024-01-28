@@ -4,6 +4,7 @@ import styles from "./Productpage.module.css";
 import { useEffect, useState } from "react";
 import ReviewsContainer from "../../components/ReviewsContainer/ReviewsContainer";
 import { useAuth } from "../../components/AuthProvider/AuthProvider";
+import { Link } from "react-router-dom";
 
 function Productpage() {
   const { id } = useParams();
@@ -74,6 +75,10 @@ function Productpage() {
     );
   };
 
+  const handleChat = () => {
+    navigate("/chat");
+  };
+
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/product/${id}`, {
       method: "GET",
@@ -124,6 +129,9 @@ function Productpage() {
             <>
               <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
               <Button text="Buy Now" onClick={handleGoToBuy} />
+              <Link to={`/chat?${productData.sellerid}`}>
+                <Button text="Chat with the seller" onClick={handleChat} />
+              </Link>
             </>
           )}
           {userType == "Seller" && (

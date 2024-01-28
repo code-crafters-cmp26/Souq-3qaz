@@ -50,10 +50,14 @@ io.on("connection", async (socket) => {
     `Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';`
   );
 
-  socket.on("notifyServer", () => {
+  socket.on("notifyServer", (data) => {
     console.log("Server received notification from client");
+    console.log(data);
 
     // Notify all connected clients
+
+    io.to
+
     io.emit(
       "notification",
       "Hello, clients! Something happened on the server!"
