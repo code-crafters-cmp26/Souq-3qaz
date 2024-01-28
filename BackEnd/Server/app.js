@@ -50,10 +50,14 @@ io.on("connection", async (socket) => {
     `Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';`
   );
 
-  socket.on("notifyServer", () => {
+  socket.on("notifyServer", async () => {
     console.log("Server received notification from client");
+    const receiverid = socket.handshake.query.target;
+    let result = await db.query(`SELECT * FROM "User" Where id = ${receiverid};`)
 
     // Notify all connected clients
+    io.to(result['rows'][0]['socketcode']).emit('eslam', 'Hello, client! This is a response.');
+
     io.emit(
       "notification",
       "Hello, clients! Something happened on the server!"
