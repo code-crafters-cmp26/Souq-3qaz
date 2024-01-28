@@ -30,34 +30,39 @@ import { io } from "socket.io-client";
 import WishlistPage from "./pages/Wishlist/WishlistPage";
 import AddWarehousePage from "./pages/AddWarehouse/AddWarehousePage";
 import AddShippingPage from "./pages/AddShipping/AddShippingPage";
+import ChatPage from "./pages/Chat/ChatPage";
+
 function App() {
-  const { userType } = useAuth();
-  // useEffect(() => {
-  //   const socket = io("http://127.0.0.1:3000", {
-  //     query: {
-  //       jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAzNjU3OTczLCJleHAiOjE3MTE0MzM5NzN9.wfje26Seyb0D0r9L8nbIQYyZx5B-LF71skuYa2mhJ6w",
-  //     },
-  //   });
+  const { userType, setSocket, chatOpened } = useAuth();
 
-  //   // Handle connection events
-  //   socket.on("connect", () => {
-  //     console.log("Connected to server");
-  //   });
+  useEffect(() => {
+    const socket = io("http://127.0.0.1:3000", {
+      query: {
+        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImlhdCI6MTcwNjQ1NDg0MywiZXhwIjoxNzE0MjMwODQzfQ.ivlQTd1MWxma1Z0MJKFNgiXG9qd5zbh18Y6kbGrO7Nw",
+      },
+    });
+    setSocket(socket);
+    // Handle connection events
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
+    console.log("testemitting");
+    socket.emit("notifyServer", { message: "hola first emit" });
 
-  //   socket.on("disconnect", () => {
-  //     console.log("Disconnected from server");
-  //   });
+    socket.on("disconnect", () => {
+      console.log("Disconnected from server");
+    });
 
-  //   // Listen for custom events from the server
-  //   socket.on("serverResponse", () => {
-  //     console.log("rec data");
-  //   });
+    // Listen for custom events from the server
+    socket.on("serverResponse", () => {
+      console.log("rec data");
+    });
 
-  //   // Clean up the socket connection when the component unmounts
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
+    // Clean up the socket connection when the component unmounts
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   return (
     <>
       <BrowserRouter>
@@ -90,7 +95,7 @@ function App() {
           <Route path="/barters" element={<AllBarters />} />
           <Route path="/sellerstats" element={<SellerStats />} />
           <Route path="/customerstats" element={<CustomerStats />} />
-          <Route path="/overallstats" element={<OverallStats />} />
+          {/* <Route path="/overallstats" element={<OverallStats />} /> */}
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/addproduct" element={<AddProductPage />} />
           <Route path="/addauction/:id" element={<AddAuctionPage />} />
@@ -99,11 +104,11 @@ function App() {
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/addwarehouse" element={<AddWarehousePage />} />
           <Route path="/addshipping" element={<AddShippingPage />} />
+          <Route path="/chat/:id" element={<ChatPage />} />
           {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
+        {/* {chatOpened && <Chatbox />} */}
       </BrowserRouter>
-      {/* <ChatsNav />
-      <Chatbox /> */}
     </>
   );
 }

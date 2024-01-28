@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
   const [userData, setUserData] = useState(null);
+  const [socket, setSocket] = useState(null);
   const categories = ["Electronics", "Health", "Cosmetics", "Fashion"];
 
   // Check local storage on component mount
@@ -62,6 +63,8 @@ export const AuthProvider = ({ children }) => {
         userData,
         setUserData,
         categories,
+        setSocket,
+        socket,
       }}
     >
       {children}

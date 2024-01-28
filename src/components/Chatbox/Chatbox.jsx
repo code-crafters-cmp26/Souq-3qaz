@@ -1,14 +1,20 @@
 import styles from "./Chatbox.module.css";
 import Message from "../Message/Message";
 import { useEffect, useState } from "react";
+import { useAuth } from "../AuthProvider/AuthProvider";
+import Button from "../Button/Button";
 
 function Chatbox() {
   const [ChatOpened, SetChatOpened] = useState(1);
+
+  const { socket } = useAuth();
+
   useEffect(() => {
     document
       .querySelector(`.${styles.input}`)
       .addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
+          console.log("is working");
           handleSend();
         }
       });
@@ -17,6 +23,9 @@ function Chatbox() {
   function handleSend() {
     const input = document.querySelector(`.${styles.input}`);
     const message = input.value;
+
+    socket.emit("eslam", { message: "hola first emit" });
+    console.log("is working");
     input.value = "";
     if (message !== "") {
       let messageElement = (
@@ -56,66 +65,6 @@ function Chatbox() {
       </div>
       <div className={styles.messages}>
         <Message
-          color="#685b1c"
-          message="Hello"
-          drection="left"
-          time="12:00 pm"
-        />
-        <Message
-          color="#dbcb7c"
-          message="Hi"
-          drection="right"
-          time="12:01 pm"
-        />
-        <Message
-          color="#685b1c"
-          message="How are you?"
-          drection="left"
-          time="12:02 pm"
-        />
-        <Message
-          color="#dbcb7c"
-          message="Good, you?"
-          drection="right"
-          time="12:03 pm"
-        />
-        <Message
-          color="#685b1c"
-          message="I'm good too"
-          drection="left"
-          time="12:04 pm"
-        />
-        <Message
-          color="#685b1c"
-          message="You Wouldn't belive what Ibrahim the White did today"
-          drection="left"
-          time="12:04 pm"
-        />
-        <Message
-          color="#dbcb7c"
-          message="What?"
-          drection="right"
-          time="12:05 pm"
-        />
-        <Message
-          color="#685b1c"
-          message="He rode a dino to Zarzor territory and killed Shiba the skinny"
-          drection="left"
-          time="12:05 pm"
-        />
-        <Message
-          color="#dbcb7c"
-          message="Nice"
-          drection="right"
-          time="12:05 pm"
-        />
-        <Message
-          color="#685b1c"
-          message="Bye"
-          drection="left"
-          time="12:06 pm"
-        />
-        <Message
           color="#dbcb7c"
           message="Bye"
           drection="right"
@@ -128,6 +77,11 @@ function Chatbox() {
           type="text"
           placeholder="Type a message..."
         />
+      </div>
+      <div>
+        <Button text="Send message" onClick={handleSend}>
+          HOla
+        </Button>
       </div>
     </div>
   );
