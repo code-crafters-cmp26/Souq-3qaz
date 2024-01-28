@@ -75,10 +75,6 @@ function Productpage() {
     );
   };
 
-  const handleChat = () => {
-    navigate("/chat");
-  };
-
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/product/${id}`, {
       method: "GET",
@@ -129,8 +125,8 @@ function Productpage() {
             <>
               <Button text="Add to Wishlist" onClick={handleAddToWishlist} />
               <Button text="Buy Now" onClick={handleGoToBuy} />
-              <Link to={`/chat?${productData.sellerid}`}>
-                <Button text="Chat with the seller" onClick={handleChat} />
+              <Link to={`/chat/${productData.sellerid}`}>
+                <Button text="Chat with the seller" />
               </Link>
             </>
           )}

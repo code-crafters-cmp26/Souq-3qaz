@@ -50,9 +50,10 @@ io.on("connection", async (socket) => {
     `Update "User" Set socketCode = '${socket.id}' WHERE id = '${decoded.id}';`
   );
 
-  socket.on("notifyServer", async () => {
+  socket.on("notifyServer", async function (data) {
     console.log("Server received notification from client");
-    const receiverid = socket.handshake.query.target;
+    console.log(data);
+    const receiverid = data.id;
     let result = await db.query(
       `SELECT * FROM "User" Where id = ${receiverid};`
     );

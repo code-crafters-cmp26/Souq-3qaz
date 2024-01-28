@@ -104,7 +104,7 @@ function App() {
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/addwarehouse" element={<AddWarehousePage />} />
           <Route path="/addshipping" element={<AddShippingPage />} />
-          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/chat/:id" element={<ChatPage />} />
           {/* <Route path="*" element={<AddProductPage />} /> */}
         </Routes>
         {/* {chatOpened && <Chatbox />} */}

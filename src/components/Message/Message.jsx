@@ -1,13 +1,28 @@
-import React from 'react';
+import React from "react";
 import styles from "./Message.module.css";
 
-function Message({ color, message, drection, time }) {
-    return (
-        <div className={styles.message} style={{ backgroundColor: color, marginLeft: drection === "left" ? "0px" : "auto", marginRight: drection === "right" ? "0px" : "auto" }}>
-            <p style={{ textAlign: drection }}>{message}</p>
-            <span className={styles.time} style={{ left: drection === "left" ? "0px" : "auto", right: drection === "right" ? "0px" : "auto" }}>{time}</span>
-        </div>
-    );
+function Message({ color, message, direction, time }) {
+  return (
+    <div
+      className={styles.message}
+      style={{
+        backgroundColor: color,
+        marginLeft: direction === "left" ? "0px" : "auto",
+        marginRight: direction === "right" ? "0px" : "auto",
+      }}
+    >
+      <p style={{ textAlign: direction }}>{message}</p>
+      <span
+        className={styles.time}
+        style={{
+          left: direction === "left" ? "0px" : "auto",
+          right: direction === "right" ? "0px" : "auto",
+        }}
+      >
+        {time}
+      </span>
+    </div>
+  );
 }
 
 export default Message;
