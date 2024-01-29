@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Homepage() {
   return (
     <div className={styles.homepage}>
-      <img src="./src/pages/Homepage/black-friday.jpg" />
+      <img src="https://img.freepik.com/free-photo/black-friday-elements-assortment_23-2149074076.jpg?w=1060&t=st=1706557562~exp=1706558162~hmac=7f4efbe5da42cbb35686b7e6b2f04163081a09fa61f5a3945f80ea4721b1975f" />
       <div className={styles.overlay_text}>
         Sales <span>20%</span> Off On Everything
       </div>
