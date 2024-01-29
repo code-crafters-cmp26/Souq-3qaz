@@ -28,7 +28,7 @@ function ProductsPage({ ofseller }) {
     console.log("hola");
     console.log(userData);
     fetch(
-      `http://localhost:3000/api/v1/product/searchBySeller/${userData?.id}`,
+      `https://my-backend-2l7i.onrender.com/api/v1/product/searchBySeller/${userData?.id}`,
       {
         method: "GET",
       }
@@ -42,7 +42,7 @@ function ProductsPage({ ofseller }) {
   };
 
   const getAllProducts = () => {
-    fetch("http://localhost:3000/api/v1/product", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/product", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -54,7 +54,7 @@ function ProductsPage({ ofseller }) {
   };
 
   const getSearchedProducts = () => {
-    fetch(`http://localhost:3000/api/v1/product/searchProduct`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/product/searchProduct`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

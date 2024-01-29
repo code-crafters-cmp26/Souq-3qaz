@@ -42,7 +42,7 @@ function Employee() {
       state.gender,
       state.startdate
     );
-    fetch("http://localhost:3000/api/v1/employee", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/employee", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),

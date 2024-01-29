@@ -7,7 +7,7 @@ function Checkout({ productName, productPrice, productID }) {
   const [productShipping, setProductShipping] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/shipping", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/shipping", {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -31,7 +31,7 @@ function Checkout({ productName, productPrice, productID }) {
   const handleBuy = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/api/v1/buy", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/buy", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),

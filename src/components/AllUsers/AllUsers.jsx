@@ -5,7 +5,7 @@ function AllUsers() {
   const [sellers, setSellers] = useState([]);
   const [customers, setCustomers] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/user`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/user`, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),

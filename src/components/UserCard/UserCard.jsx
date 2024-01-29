@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 function UserCard({ user }) {
   const handleBan = () => {
-    fetch(`http://localhost:3000/api/v1/user/${user.id}`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/user/${user.id}`, {
       method: "PATCH",
       headers: {
         Authorization: localStorage.getItem("token"),

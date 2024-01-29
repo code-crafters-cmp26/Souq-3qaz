@@ -5,13 +5,16 @@ import { useAuth } from "../AuthProvider/AuthProvider";
 function Review({ review }) {
   const { userData, userType } = useAuth();
   function deleteReview() {
-    fetch(`http://localhost:3000/api/v1/review/${review.reviewid}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://my-backend-2l7i.onrender.com/api/v1/review/${review.reviewid}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.status == "success") {

@@ -18,12 +18,15 @@ function ProfilePage() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/user/Customer/${userData?.id}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://my-backend-2l7i.onrender.com/api/v1/user/Customer/${userData?.id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -42,12 +45,15 @@ function ProfilePage() {
   }, []);
 
   const updateUserData = () => {
-    fetch(`http://localhost:3000/api/v1/user/Customer/${userData?.id}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://my-backend-2l7i.onrender.com/api/v1/user/Customer/${userData?.id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -68,16 +74,19 @@ function ProfilePage() {
 
   const navigate = useNavigate();
   const handleRecharge = () => {
-    fetch("http://localhost:3000/api/v1/user/Customer/recharge", {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        money: points,
-      }),
-    })
+    fetch(
+      "https://my-backend-2l7i.onrender.com/api/v1/user/Customer/recharge",
+      {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          money: points,
+        }),
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -92,16 +101,19 @@ function ProfilePage() {
 
   const handleUpgrade = () => {
     if (userType != "Premium") {
-      fetch("http://localhost:3000/api/v1/user/Customer/upgrade", {
-        method: "POST",
-        headers: {
-          Authorization: localStorage.getItem("token"),
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          money: points,
-        }),
-      })
+      fetch(
+        "https://my-backend-2l7i.onrender.com/api/v1/user/Customer/upgrade",
+        {
+          method: "POST",
+          headers: {
+            Authorization: localStorage.getItem("token"),
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            money: points,
+          }),
+        }
+      )
         .then((res) => {
           return res.json();
         })

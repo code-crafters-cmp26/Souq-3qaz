@@ -85,7 +85,7 @@ function Signup() {
 
     const role = userType === "seller" ? "Seller" : "Customer";
 
-    fetch("http://localhost:3000/api/v1/user/signup", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/user/signup", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

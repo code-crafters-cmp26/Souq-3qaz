@@ -7,7 +7,7 @@ function TicketsContainer() {
   // id, title, status, date, reporter, reported, description
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/report", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/report", {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),

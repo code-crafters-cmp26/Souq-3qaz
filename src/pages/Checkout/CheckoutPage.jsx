@@ -18,7 +18,7 @@ function CheckoutPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/product/${productID}`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/product/${productID}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",

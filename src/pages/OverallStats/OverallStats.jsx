@@ -17,7 +17,7 @@ function OverallStats() {
   const [loading2, setloading2] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/employee/stat", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/employee/stat", {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -41,7 +41,7 @@ function OverallStats() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/employee/avgTrans", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/employee/avgTrans", {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),

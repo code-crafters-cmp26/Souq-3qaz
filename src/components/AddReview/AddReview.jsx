@@ -28,7 +28,7 @@ function AddReview({ isSuccessfulSubmit }) {
       alert("Please enter a comment");
       return;
     }
-    fetch(`http://localhost:3000/api/v1/review/${id}`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/review/${id}`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),

@@ -13,13 +13,16 @@ function Productpage() {
   const { userType, userData } = useAuth();
 
   const handleAddToWishlist = () => {
-    fetch(`http://localhost:3000/api/v1/product/${productData.id}`, {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://my-backend-2l7i.onrender.com/api/v1/product/${productData.id}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -50,7 +53,7 @@ function Productpage() {
   };
 
   const handleDeleteProduct = () => {
-    fetch(`http://localhost:3000/api/v1/product/${id}`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/product/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -76,7 +79,7 @@ function Productpage() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/product/${id}`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/product/${id}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",

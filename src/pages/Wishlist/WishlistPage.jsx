@@ -5,13 +5,16 @@ function WishlistPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/user/Customer/wishList`, {
-      method: "GET",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://my-backend-2l7i.onrender.com/api/v1/user/Customer/wishList`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         return res.json();
       })

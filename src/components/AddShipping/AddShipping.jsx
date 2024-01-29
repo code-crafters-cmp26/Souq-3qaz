@@ -41,7 +41,7 @@ function AddShipping() {
   const handleSubmit = (e) => {
     if (emailRegex.test(state.email)) {
       e.preventDefault();
-      fetch("http://localhost:3000/api/v1/shipping", {
+      fetch("https://my-backend-2l7i.onrender.com/api/v1/shipping", {
         method: "POST",
         headers: {
           Authorization: localStorage.getItem("token"),

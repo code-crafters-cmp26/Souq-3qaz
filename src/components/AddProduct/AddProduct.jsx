@@ -45,7 +45,7 @@ function AddProduct() {
   // let isvalid =
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/api/v1/product", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/product", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),

@@ -28,7 +28,7 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log("clicked");
-    fetch("http://localhost:3000/api/v1/user/login", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/user/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

@@ -30,7 +30,7 @@ function AddWarehouse() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/api/v1/Warehouse", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/Warehouse", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),

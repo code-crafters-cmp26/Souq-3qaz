@@ -86,12 +86,15 @@ function Settings() {
   };
 
   const updateUserSettings = () => {
-    fetch(`http://localhost:3000/api/v1/user/Customer/${userData.id}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://my-backend-2l7i.onrender.com/api/v1/user/Customer/${userData.id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -118,7 +121,7 @@ function Settings() {
     e.preventDefault();
     console.log(state);
     //send post request to backend
-    fetch("http://localhost:3000/api/v1/user/updateInfo", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/user/updateInfo", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),

@@ -12,7 +12,7 @@ function BarterCard({ barterData, isMine }) {
   const [otherProduct, setOtherProduct] = useState(null);
   useEffect(() => {
     fetch(
-      `http://localhost:3000/api/v1/product/${barterData.offeredproductid}`,
+      `https://my-backend-2l7i.onrender.com/api/v1/product/${barterData.offeredproductid}`,
       {
         method: "GET",
         headers: {
@@ -37,7 +37,7 @@ function BarterCard({ barterData, isMine }) {
       });
 
     fetch(
-      `http://localhost:3000/api/v1/product/${barterData.requistedproductid}`,
+      `https://my-backend-2l7i.onrender.com/api/v1/product/${barterData.requistedproductid}`,
       {
         method: "GET",
         headers: {
@@ -64,7 +64,7 @@ function BarterCard({ barterData, isMine }) {
   const handleAcceptBarter = () => {
     {
       if (barterData.donetrading == false) {
-        fetch(`http://localhost:3000/api/v1/barter/Approve`, {
+        fetch(`https://my-backend-2l7i.onrender.com/api/v1/barter/Approve`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",

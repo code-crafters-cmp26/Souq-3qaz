@@ -15,7 +15,7 @@ function ChatPage() {
   };
 
   const handlesend = () => {
-    fetch(`http://localhost:3000/api/v1/message/${id}`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/message/${id}`, {
       method: "Post",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -42,7 +42,7 @@ function ChatPage() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/message/${id}`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/message/${id}`, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),

@@ -8,7 +8,7 @@ function AllBarters() {
   const [myBarters, setMyBarters] = useState([]);
   const [otherBarters, setOtherBarters] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/barter/`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/barter/`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",

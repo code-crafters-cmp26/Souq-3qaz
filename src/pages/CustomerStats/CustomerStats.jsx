@@ -23,7 +23,7 @@ function SellerStats() {
   );
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/buy/getTransCust`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/buy/getTransCust`, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),

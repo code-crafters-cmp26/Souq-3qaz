@@ -7,7 +7,7 @@ function Searchbar() {
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/product/searchProduct`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/product/searchProduct`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

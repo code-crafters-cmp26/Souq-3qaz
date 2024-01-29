@@ -5,7 +5,7 @@ import { useAuth } from "../AuthProvider/AuthProvider";
 function ProductCard({ product }) {
   const { userType } = useAuth();
   const handleAddToWishlist = () => {
-    fetch(`http://localhost:3000/api/v1/product/${product.id}`, {
+    fetch(`https://my-backend-2l7i.onrender.com/api/v1/product/${product.id}`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),

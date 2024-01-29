@@ -24,7 +24,7 @@ function AuctionCard({ auction }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/api/v1/auction/bid", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/auction/bid", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),

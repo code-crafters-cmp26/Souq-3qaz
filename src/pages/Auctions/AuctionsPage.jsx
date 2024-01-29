@@ -5,7 +5,7 @@ function AuctionsPage() {
   const [auctions, setAuctions] = useState([{}]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/auction", {
+    fetch("https://my-backend-2l7i.onrender.com/api/v1/auction", {
       method: "GET",
     })
       .then((res) => res.json())
