@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import styles from "./Productpage.module.css";
+import styles from "./ProductPage.module.css";
 import { useEffect, useState } from "react";
 import ReviewsContainer from "../../components/ReviewsContainer/ReviewsContainer";
 import { useAuth } from "../../components/AuthProvider/AuthProvider";

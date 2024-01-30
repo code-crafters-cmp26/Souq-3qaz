@@ -1,6 +1,6 @@
 import styles from "./Login.module.css";
 import Input from "../input/Input";
-import Register from "../register/Register";
+import Register from "../Register/Register";
 import Button from "../Button/Button";
 import Checkbox from "../Checkbox/Checkbox";
 import { useState } from "react";
