@@ -1,1100 +1,135 @@
-# SOUQ 3QAZ (API DOC)
+# Souq 3okaz
 
-## All Apis starts with http://127.0.0.1:3000
+![Souq 3okaz Logo](/images/logo.png)
 
-# =====================================
 
-## Get All Products
 
-### Api Route
+Welcome to Souq 3okaz, your one-stop solution for a revolutionary e-commerce experience! 🚀
 
-`Endpoint : 'GET /api/v1/product'`
-`Authorization: No Auth Needed`
+## Introduction
 
-### Request Example:
+The Souq 3okaz app addresses the challenges of traditional retail, providing a convenient and accessible shopping platform for users worldwide. With a focus on diverse product selections, seamless transactions, and doorstep delivery, Souq 3okaz aims to transform the retail landscape.
 
-```json
-No Body Needed
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "count": 1,
-  "products": [
-    {
-            "id": 16,
-            "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-            "name": "fdd",
-            "prerelease": true,
-            "price": 4561.5,
-            "description": "elsisi r2esy",
-            "quantity": 212,
-            "sellerid": 13,
-            "putdate": "2023-12-22T23:54:07.000Z",
-            "category": "Health",
-            "storedin": 2,
-            "firstname": "new",
-            "lastname": "newF",
-            "num_ratings": "0",
-            "avg_rating": -1
-        },
-        {
-            "id": 3,
-            "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-            "name": "mfmdslkfnhj",
-            "prerelease": true,
-            "price": 4561.5,
-            "description": "elsisi r2esy",
-            "quantity": 2,
-            "sellerid": 3,
-            "putdate": "2023-12-13T09:01:13.000Z",
-            "category": "Health",
-            "storedin": 1,
-            "firstname": "new",
-            "lastname": "newF",
-            "num_ratings": "0",
-            "avg_rating": -1
-        }
-          ]
-}
-```
-
-## Get Product By Id
-
-### Api Route
-
-`Endpoint : 'GET /api/v1/product/{id}'
-Authorization: No Auth Needed`
-`Authorization: No Auth Needed`
-
-### Request Example:
-
-`Endpoint Ex: 'GET /api/v1/product/7'`
-
-```json
-No Body Needed
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "products": [
-    {
-      "id": 5,
-      "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-      "name": "mfmdslkbbfnhj",
-      "prerelease": true,
-      "price": 4561.5,
-      "description": "elsisi r2esy",
-      "quantity": 1,
-      "sellerid": 3,
-      "putdate": "2023-12-15T05:28:17.000Z",
-      "category": "Health",
-      "storedin": 1,
-      "sellerFName": "new",
-      "sellerLName": "newF"
-    }
-  ]
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "no product found by this id"
-}
-```
-
-## SignUp user
-
-### Api Route
-
-`Endpoint : 'Post /api/v1/user/signup'`
-`Authorization: No auth needed`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/user/signup'`
-
-### Headers
-
-```json
-headers
-{
-}
-```
-
-### Body
-
-```json
-{
-  "FName": "new",
-  "LName": "newF",
-  "PhoneNumber": "01204747568",
-  "Email": "one@g.c",
-  "Password": "Password123456",
-  "Gender": "Male",
-  "ApartmentNumber": 1,
-  "BuildingNumber": 1,
-  "Country": "om eldonia",
-  "City": "cairo",
-  "Street": "shoubra",
-  "role": "Customer", //enum of {'Seller','Customer'}
-  "NId": "189465" // is required only in case of Customer
-}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzgsImlhdCI6MTcwMjA4MDQxMiwiZXhwIjoxNzA5ODU2NDEyfQ.BfQ9aocaz_SKkeCj8ZUwyM-eyuGTUYdPpzDJuAyCADY",
-  "user": {
-    "id": 78,
-    "firstname": "new",
-    "lastname": "newF",
-    "phonenumber": "01204747568",
-    "image": "default address",
-    "balance": 0,
-    "email": "onebgbfbi@g.c",
-    "password": "$2b$12$1WzBorVdAY2xIVPfXd/f5u7XEk7ZDtDM/v16rxhsL0d48F6I2YE5C",
-    "theme": "Light",
-    "banned": false,
-    "gender": "Male",
-    "apartmentnumber": 1,
-    "buildingnumber": 1,
-    "country": "om eldonia",
-    "city": "cairo",
-    "street": "shoubra",
-    "passwordchangedat": "2023-12-09T00:06:52.000Z",
-    "passwordresettoken": "3165494",
-    "passwordresetexpires": "2023-12-09T00:06:52.000Z"
-  }
-}
-```
-
-### OR
-
-```json
-{
-    "status": "fail",
-    "message": "some required Fields are empty"
-}
-{
-    "status": "fail",
-    "message": "You Already Have Done This Before"
-}
-{
-    "status": "fail",
-    "message": "Phone number must only contain numerical digits"
-}
-```
-
-## LogIn User
-
-### Api Route
-
-`Endpoint : 'Post /api/v1/user/login'`
-`Authorization: No auth needed`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/user/login'`
-
-### Headers
-
-```json
-headers
-{
-}
-```
-
-### Body
-
-```json
-{
-  "email": "bishoy@gmail.com",
-  "password": "Password123456"
-}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODcsImlhdCI6MTcwMjA4NDgzNiwiZXhwIjoxNzA5ODYwODM2fQ.5AYXchGt1dIYMmplY_fX3jyuYlHMGcieJaFWB-twKG4",
-  "user": {
-    "id": 12,
-    "firstname": "new",
-    "lastname": "newF",
-    "phonenumber": "01204747568",
-    "image": "default address",
-    "balance": 0,
-    "email": "customerrkn@ggfdv.com",
-    "password": "$2b$12$DtnLXRcP7JPD0yX4oRW5f.l7QU9GoCp1LBM60PWeYeTmI9D7Pow56",
-    "theme": "Light",
-    "banned": false,
-    "gender": "Male",
-    "appartmentnumber": -1,
-    "buildingnumber": 1,
-    "country": "om eldonia",
-    "city": "cairo",
-    "street": "shoubra",
-    "passwordchangedat": "2023-12-22T23:00:37.000Z",
-    "passwordresettoken": "3165494",
-    "passwordresetexpires": "2023-12-22T23:00:37.000Z"
-  },
-  "role": "Customer"
-}
-```
-
-### OR
-
-```json
-{
-    "status": "fail",
-    "message": "incorrect email or password"
-}
-{
-    "status": "fail",
-    "message": "please provide email & password"
-}
-{
-    "status": "error",
-    "message": "something went wrong"
-}
-```
-
-## Add Product
-
-### Api Route
-
-`Endpoint : 'Post /api/v1/product'`
-`Authorization: Bearer JWT (for a Seller not Customer)  As a Header in Req`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/product'`
-
-### Headers
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-### Body
-
-```json
-{
-  "Name": "mfmdslkfnhj",
-  "Image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-  "PreRelease": true,
-  "Price": 4561.5,
-  "Description": "elsisi r2esy",
-  "Quantity": 1,
-  "Category": "Health"
-}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "product": [
-    {
-      "id": 5,
-      "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-      "name": "mfmdslkbbfnhj",
-      "prerelease": true,
-      "price": 4561.5,
-      "description": "elsisi r2esy",
-      "quantity": 1,
-      "sellerid": 3,
-      "putdate": "2023-12-15T05:28:17.000Z",
-      "category": "Health",
-      "storedin": 1
-    }
-  ]
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "Need Seller Auth"
-}
-```
-
-## Add Product To WishList
-
-### Api Route
-
-`Endpoint : 'Post /api/v1/product/id'`
-`Authorization: Bearer JWT (for a Customer)  As a Header in Req`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/product/3'`
-
-### Headers
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-### Body
-
-```json
-{}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "You Already Have Done This Before"
-}
-```
-
-## Add Review To Product
-
-### Api Route
-
-`Endpoint : 'Post /api/v1/review/id'`
-`Authorization: Bearer JWT (for a Customer)  As a Header in Req`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/review/3'`
-
-### Headers
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-### Body
-
-```json
-{
-  "rating": 4.3,
-  "comment": "very good from api"
-}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "You Already Have Done This Before"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "rating must be between 0 and 5"
-}
-```
-
-### OR
-
-````json
-{
-    "status": "fail",
-    "message": "This Action Need Customer Auth"
-}```
-
-
-## Delete Review By Id
-### Api Route
-`
-Endpoint : 'Delete /api/v1/review/id'
-`
-`
-Authorization: Bearer JWT (for the owner of the review)  As a Header in Req
-`
-### Request Example:
-``
-Endpoint Ex: 'Delete /api/v1/review/3'
-``
-### Headers
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-````
-
-### Body
-
-```json
-{}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "You Already Have Done This Before"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "No Review With This Id Found"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "only review owner can delete it"
-}
-```
-
-## Buy Products
-
-### Api Route
-
-`Endpoint : 'Post /api/v1/buy'`
-`Authorization: Bearer JWT (for a customer)  As a Header in Req`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/buy'`
-
-### Headers
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-### Body
-
-```json
-{
-  "cart": [
-    {
-      "productId": 15,
-      "Quantity": 3,
-      "shippedvia": 1
-    },
-    {
-      "productId": 13,
-      "Quantity": 1,
-      "shippedvia": 1
-    }
-  ]
-}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "not enough money in your balance"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "bad request"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "No Product With This Id Found"
-}
-```
-
-## Recharge Balance
-
-### Api Route
-
-`Endpoint : 'Post /api/v1/user/Customer/recharge'`
-`Authorization: Bearer JWT (for a customer)  As a Header in Req`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/user/Customer/recharge'`
-
-### Headers
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-### Body
-
-```json
-{
-  "money": 5
-}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "Money is required"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "Money money must be positive"
-}
-```
-
-## upgrade to permium
-
-### Api Route
-
-`Endpoint : 'Post /api/v1/user/Customer/upgrade'`
-`Authorization: Bearer JWT (for a customer and normal not permium)  As a Header in Req`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/user/Customer/upgrade'`
-
-### Headers
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-### Body
-
-```json
-{}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "You Already Have Done This Before"
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "not enough money in your balance"
-}
-```
-
-## get all reviews of product
-
-### Api Route
-
-`Endpoint : 'GET /api/v1/review/productid'`
-`Authorization: no need`
-
-### Request Example:
-
-`Endpoint Ex: 'Post /api/v1/review/5'`
-
-### Headers
-
-```json
-headers
-{
-}
-```
-
-### Body
-
-```json
-{}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "reviews": [
-    {
-      "reviewid": 45,
-      "customerid": 12,
-      "productid": 5,
-      "date": "2023-12-23T14:23:10.000Z",
-      "rating": 4,
-      "comment": "very good good from api",
-      "upvotes": 0
-    },
-    {
-      "reviewid": 49,
-      "customerid": 22,
-      "productid": 5,
-      "date": "2023-12-23T14:26:50.000Z",
-      "rating": 4,
-      "comment": "very good good from api",
-      "upvotes": 0
-    }
-  ]
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "No Product With This Id Found"
-}
-```
-
-## Get Product By name
-
-### Api Route
-
-`Endpoint : 'POST /api/v1/product/searchProduct'
-Authorization: No Auth Needed`
-`Authorization: No Auth Needed`
-
-### Request Example:
-
-`Endpoint Ex: 'POST /api/v1/product/searchProduct'`
-
-```json
-No Body Needed
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "products": [
-    {
-      "id": 5,
-      "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-      "name": "mfmdslkbbfnhj",
-      "prerelease": true,
-      "price": 4561.5,
-      "description": "elsisi r2esy",
-      "quantity": 1,
-      "sellerid": 3,
-      "putdate": "2023-12-15T05:28:17.000Z",
-      "category": "Health",
-      "storedin": 1,
-      "sellerFName": "new",
-      "sellerLName": "newF"
-    },
-    {
-      "id": 10,
-      "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-      "name": "mfmdfnhj",
-      "prerelease": true,
-      "price": 4561.5,
-      "description": "elsisi r2esy",
-      "quantity": 1,
-      "sellerid": 5,
-      "putdate": "2023-12-15T05:50:53.000Z",
-      "category": "Health",
-      "storedin": 1
-    },
-    {
-      "id": 3,
-      "image": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/05/08/2096631-814127042.jpg?itok=RZmIbcc9",
-      "name": "mfmdslkfnhj",
-      "prerelease": true,
-      "price": 4561.5,
-      "description": "elsisi r2esy",
-      "quantity": 2,
-      "sellerid": 3,
-      "putdate": "2023-12-13T09:01:13.000Z",
-      "category": "Health",
-      "storedin": 1
-    }
-  ]
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "no product found by this name"
-}
-```
-
-## update user info
-
-### Api Route
-
-`Endpoint : 'POST /api/v1/user/updateInfo'`
-`Authorization: Bearer JWT As a Header in Req`
-
-### Request Example:
-
-`Endpoint Ex: 'POST /api/v1/user/updateInfo'`
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-```json
-{
-       "FName": "customizedesllllam",
-        "LName": "newF",
-        "PhoneNumber": "01204747568",
-        "theme": "Light",
-        "image": "/,bvisdlvndl",
-        "Gender": "Male",
-        "ApartmentNumber": -1,
-        "BuildingNumber":1,
-        "Country":"om eldonia",
-        "City":"cairo",
-        "Street":"shoubra""
-}
-```
+## Key Features
 
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "info": [
-    {
-      "id": 23,
-      "firstname": "customizedesllllam",
-      "lastname": "newF",
-      "phonenumber": "01204747568",
-      "image": "/,bvisdlvndl",
-      "balance": 0,
-      "email": "skjgmbn@ggfdv.com",
-      "password": "$2b$12$Me9ckJ5Zv6QHP/axJkq/SOWsIkSc7N5UryrlEHL39xdNoKGRpdYzy",
-      "theme": "Light",
-      "banned": false,
-      "gender": "Male",
-      "appartmentnumber": -1,
-      "buildingnumber": 1,
-      "country": "om eldonia",
-      "city": "cairo",
-      "street": "shoubra",
-      "passwordchangedat": "2023-12-23T18:52:40.000Z",
-      "passwordresettoken": "3165494",
-      "passwordresetexpires": "2023-12-23T18:52:40.000Z"
-    }
-  ]
-}
-```
-
-### OR
-
-```json
-{
-  "status": "fail",
-  "message": "something went wrong"
-}
-```
-
-## add new auction
-
-### Api Route
-
-`Endpoint : 'POST /api/v1/auction/'`
-`Authorization: Bearer JWT(Seller) As a Header in Req`
+### For Customers:
 
-### Request Example:
-
-`Endpoint Ex: 'POST /api/v1/auction/'`
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-```json
-{
-  "productId": 18,
-  "quantity": 2,
-  "intialPrice": 1500
-}
-```
-
-### Response Example:
-
-```json
-{
-  "status": "success"
-}
-```
+- *Buy Items:* Explore and purchase a wide range of products effortlessly.
+- *Rate Products:* Share your experiences and contribute to our community.
+- *Wishlist Management:* Curate your favorite items and receive personalized recommendations.
+- *Efficient Product Search:* Find what you need quickly and easily.
+- *Easy Returns:* Hassle-free return process for a stress-free shopping experience.
+- *Balance Recharge:* Keep your transactions swift with a balance recharge option.
+- *24/7 Support:* Chat with our technical support team anytime for assistance.
+- *Upgrade to Premium:* Enjoy exclusive benefits as a premium member.
 
-### OR
+### Premium Perks:
 
-```json
-{
-  "status": "fail",
-  "message": "Product Quantity Is Not Enough"
-}
-```
+- *Direct Seller Chat:* Communicate directly with sellers for a personalized experience.
+- *Participate in Auctions:* Bid on unique items and elevate your shopping experience.
+- *Access Pre-release Products:* Be the first to get your hands on the latest products.
 
-### OR
+### For Sellers:
 
-```json
-{
-  "status": "fail",
-  "message": "You Must Have The Product To Use It"
-}
-```
+- *Add/Remove Products:* Easily manage your product listings.
+- *Manage Auctions:* Control and monitor auction activities seamlessly.
+- *Chat with Customers:* Engage directly with your customer base.
+- *Easy Withdrawal:* Withdraw your earnings effortlessly.
+- *Bartering Options:* Explore alternative trade options for flexibility.
 
-## get all auctions
+### Tech Support Superpowers:
 
-### Api Route
+- *Swift Communication:* Instantly address customer and seller inquiries.
+- *Platform Integrity:* Maintain a secure and reliable shopping environment.
+- *Seamless Experience:* Ensure a smooth and enjoyable user journey.
+- *Community Guidelines:* Enforce fair play and positive interactions.
 
-`Endpoint : 'GET /api/v1/auction/'`
-`Authorization: NO Need`
+### Backend development:
+In the backend, we've employed normalization and functional dependencies principles to meticulously design our database structure, ensuring efficiency and data integrity. Our routing pipeline is fortified with robust route protection mechanisms. For user authentication and privilege management, we've implemented comprehensive authorization and authentication protocols. Real-time chatting capabilities are seamlessly facilitated through the integration of Socket.IO. Database password storage is fortified with encryption for heightened security. Our API is meticulously crafted using REST concepts, promoting scalability and interoperability. The backend architecture adheres to the MVC paradigm, fostering modularity and maintainability.
 
-### Request Example:
+### Frontend development:
+In our frontend project, we've embraced a robust architecture centered around state management, leveraging the power of components composition and a variety of React hooks. Our implementation includes essential hooks such as useState, useReducer, useLocation, useSearchParams, and useEffect. These hooks play a pivotal role in seamlessly managing and updating state, handling component lifecycles, and facilitating navigation.
 
-`Endpoint Ex: 'GET /api/v1/auction/'`
+Additionally, we've harnessed the versatility of the Context API to streamline the flow of data across our application, enabling efficient communication between components. This approach not only enhances code organization but also promotes reusability and maintainability.
 
-```json
-headers
-{
-}
-```
+Our commitment to employing these cutting-edge React features ensures a scalable and maintainable codebase, providing a solid foundation for the dynamic and responsive user interface of our project.
 
-```json
-body
-{
-}
-```
+## Team and Acknowledgments
 
-### Response Example:
-
-```json
-{
-  "status": "success",
-  "result": [
-    {
-      "acutionid": 1,
-      "sellerid": 5,
-      "productid": 18,
-      "date": "2023-12-24T03:55:25.000Z",
-      "intialprice": 1500,
-      "quantity": 2
-    }
-  ]
-}
-```
+A special thanks to our amazing team for their dedication and hard work in making Souq 3okaz a reality!
 
-## make barter
+## Installation and Usage
 
-### Api Route
+To run Souq 3okaz locally, follow these simple steps:
 
-`Endpoint : 'Post /api/v1/barter/'`
-`Authorization: Bearer JWT(Seller) AS a Header in Req`
+### Prerequisites
 
-### Request Example:
+Make sure you have Node.js and npm installed on your machine. You can download them from [nodejs.org](https://nodejs.org/).
 
-`Endpoint Ex: 'Post /api/v1/barter/'`
+### Clone the Repository
 
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
+```bash
+git clone https://github.com/your-username/souq-3okaz.git
+cd souq-3okaz
 ```
 
-```json
-body
-{
-    "requestedSellerlD":5,
-    "offeredProductlD":19,
-    "requestedProductlD":20,
-    "offeredProductQuantity":5,
-    "requestedProductQuantity":5
-}
+### Install Dependencies
+```bash
+npm install
 ```
 
-### Response Example:
-
-```json
-{
-  "status": "success"
-}
+### Start the Development Server
+```bash
+npm run dev
 ```
-
-OR
 
-```json
-{
-    "status": "fail"
-    "message": "bad request"
-}
+### Install Dependencies for Backend
+```bash
+npm install
 ```
 
-OR
-
-```json
-{
-    "status": "fail"
-    "message": "Product Quantity Is Not Enough"
-}
+### Start the backend server
+```bash
+node server.js
 ```
-
-## get Barters
-
-### Api Route
-
-`Endpoint : 'GET /api/v1/barter/'`
-`Authorization: Bearer JWT(Seller) AS a Header in Req`
 
-### Request Example:
+<h3 align="center">Languages and Tools:</h3>
+<p align="center"> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a><a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a>  <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a><a href="https://www.postgres.com/" target="_blank" rel="noreferrer"> <img src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="postgres" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://express.org" target="_blank" rel="noreferrer"> <img src="https://camo.githubusercontent.com/9a7ab76e5dc3321235fbf1e3bffbd20b2e819bd46ac5ca31ad5ccff369bf921d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f457870726573732e6a732d3430344435393f7374796c653d666f722d7468652d6261646765" alt="express" width="80" height="40"/> </a> </p>
 
-`Endpoint Ex: 'GET /api/v1/barter/'`
-
-```json
-headers
-{
-	Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAyNjE3NDQ2LCJleHAiOjE3MTAzOTM0NDZ9.YWVqIJYKigR5VQG19PyUw6OyZBzSjpZQb5_WCEP76HM"
-}
-```
-
-```json
-body
-{
-}
-```
 
-### Response Example:
-
-````json
-{
-    "status": "success",
-    "yourBendingBarters": [
-        {
-            "barterid": 1,
-            "requestingsellerid": 3,
-            "requestedsellerid": 5,
-            "offeredproductid": 19,
-            "requistedproductid": 20,
-            "date": "2023-12-24T05:12:02.000Z",
-            "offeredproductidquantity": 5,
-            "requistedproductidquantity": 5
-        }
-    ],
-    "offersToYou": []
-}```
-OR
-```json
-{
-    "status": "fail"
-    "message": "bad request"
-}
-````
+## Team: 
+<table align='center'>
+<tr>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/eslamwageh>
+            <img src=https://avatars.githubusercontent.com/u/53353517?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px">
+            <br />
+            <sub style="font-size:14px"><b>Eslam Wageh</b></sub>
+        </a>
+    </td>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/Ashraf-Bahy>
+            <img src=https://avatars.githubusercontent.com/u/111181298?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px">
+            <br />
+            <sub style="font-size:14px"><b>Ashraf Bahy</b></sub>
+        </a>
+    </td>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/Adham-hussin>
+            <img src=https://avatars.githubusercontent.com/u/67987638?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px">
+            <br />
+            <sub style="font-size:14px"><b>Adham hussin</b></sub>
+        </a>
+    </td>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/Bishoywadea>
+            <img src=https://avatars.githubusercontent.com/u/108888519?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px">
+            <br />
+            <sub style="font-size:14px"><b>Bishoy Wadea</b></sub>
+        </a>
+    </td>
+</tr>
+</table>
+<br />
+Happy shopping with Souq 3okaz! 🛒🌟
+<br />
