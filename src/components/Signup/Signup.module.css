@@ -3,6 +3,23 @@
   font-family: var(--body-font);
 }
 
+.signup__form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid var(--white-color);
+  background: none;
+  border-radius: 20px;
+  height: 40px;
+  padding-left: 10px;
+  color: white;
+  outline: none;
+}
+
+.signup__form option {
+  color: black;
+}
+
 .signup__form input {
   border: none;
   outline: none;

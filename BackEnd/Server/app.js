@@ -54,15 +54,16 @@ io.on("connection", async (socket) => {
     console.log("Server received notification from client");
     console.log(data);
     const receiverid = data.id;
-    let result = await db.query(
-      `SELECT * FROM "User" Where id = ${receiverid};`
-    );
-
-    // Notify all connected clients
-    io.to(result["rows"][0]["socketcode"]).emit(
-      "eslam",
-      "Hello, client! This is a response."
-    );
+    console.log(receiverid);
+    let result;
+    if (receiverid) {
+      result = await db.query(`SELECT * FROM "User" Where id = ${receiverid};`);
+      // Notify all connected clients
+      io.to(result["rows"][0]["socketcode"]).emit(
+        "eslam",
+        "Hello, client! This is a response."
+      );
+    }
 
     io.emit(
       "notification",
